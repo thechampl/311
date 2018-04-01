@@ -9,6 +9,8 @@ const apiRoutes = require("./routes/apiRoutes.js");
 const port = process.env.PORT || 8080;
 const app = express();
 
+app.use(express.static("public"));
+
 // Body Parser Middle ware
 app.use(bodyParser.urlencoded({ extended: false })) 
 app.use(bodyParser.json())
