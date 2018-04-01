@@ -1,0 +1,43 @@
+<main class='container'>
+    <h1 class='text-center'>Register Account</h1>
+    <form class='text-center'>
+        <div class="form-group text-left">
+            <label for="nameInput">Name:</label>
+            <input type="email" class="form-control" id="nameInput" aria-describedby="emailHelp" placeholder="Enter email">
+        </div>
+        <div class="form-group text-left">
+            <label for="emailInput">Email address:</label>
+            <input type="email" class="form-control" id="emailInput" aria-describedby="emailHelp" placeholder="Enter email">
+            <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+        </div>
+        <div class="form-group text-left">
+            <label for="passwordInput">Password:</label>
+            <input type="password" class="form-control" id="passwordInput" placeholder="Password">
+        </div>
+        <button type="submit" class="btn btn-outline-success">Submit</button>
+    </form>
+</main>
+
+<script>
+
+    function userInput () {
+        const userName = document.querySelector("#nameInput").value.trim();
+        const userEmail = document.querySelector("#emailInput").value.trim();
+        const userPassword = document.querySelector("#passwordInput").value.trim();
+
+        const data = {
+            userName,
+            userEmail,
+            userPassword
+        };
+
+        return data;
+    }
+
+    // add event listener to button that will get all of our input data.
+    // use xhr to send data to server wrapped in an object
+    // allow 
+
+    module.exports{userInput}
+
+</script>
