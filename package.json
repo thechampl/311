@@ -19,13 +19,13 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/thechampl/GroupProject2.git"
+    "url": "git+https://github.com/thechampl/311.git"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/thechampl/GroupProject2/issues"
+    "url": "https://github.com/thechampl/311/issues"
   },
-  "homepage": "https://github.com/thechampl/GroupProject2#readme"
+  "homepage": "https://github.com/thechampl/311#readme"
 }
