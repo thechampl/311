@@ -1,5 +1,4 @@
 const button = document.querySelector("#submitButton");
-console.log(button);
 button.addEventListener("click", postUserInput);
 
 function userInput(event) {
@@ -31,8 +30,10 @@ function postUserInput() {
             console.log(this.responseText);
         }
     }
+    // defines the content type. Else req.body will be empty after the request
+    xhr.setRequestHeader("Content-type", "application/json");
     // send data
-    xhr.send(userData);
+    xhr.send(JSON.stringify(userData));
 }
 
 
