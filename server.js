@@ -21,7 +21,7 @@ app.set('view engine', 'handlebars');
 app.use(apiRoutes);
 
 
-
+// For sequelize we will need to wrap app.listen in db.Sync() and use a .then() promise
 app.listen(port, () => {
     console.log(`Server Listening on port ${port}`);
 })
