@@ -10,6 +10,14 @@
 firebase.initializeApp(config);
 
 
+// on sign up
+// Create Promise 
+
+// hit firebase auth to make a new user
+// .then
+// send 
+
+
 // DOM hooks
 const loginButton = document.querySelector("#loginButton");
 const signUpButton = document.querySelector("#signUpButton");
@@ -85,7 +93,6 @@ firebase.auth().onAuthStateChanged(currentUser => {
 //     const data = {
 //         userName,
 //         userEmail,
-//         userPassword
 //     };
 
 //     return data;
