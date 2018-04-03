@@ -14,6 +14,9 @@ const apiRoutes = require("./routes/apiRoutes.js");
 const port = process.env.PORT || 8080;
 const app = express();
 
+// Requiring our models for syncing
+var db = require("./models");
+
 app.use(express.static("public"));
 
 // Body Parser Middle ware
@@ -32,8 +35,8 @@ app.use(apiRoutes);
 
 // For sequelize we will need to wrap app.listen in db.Sync() and use a .then() promise
 
-// db.sequelize.sync().then(function() {
-app.listen(port, () => {
-    console.log(`Server Listening on port ${port}`);
+db.sequelize.sync({ force: true }).then(function() {
+    app.listen(port, () => {
+        console.log(`Server Listening on port ${port}`);
+    });
 });
-// });
