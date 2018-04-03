@@ -9,6 +9,9 @@ module.exports = function(sequelize, DataTypes) {
         Request.hasMany(models.Ticket, {
             onDelete: "cascade"
         });
+        Request.hasMany(models.Question, {
+            onDelete: "cascade"
+        });
         Request.belongsTo(models.Department, {
             foreignKey: {
               allowNull: false

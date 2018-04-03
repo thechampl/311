@@ -22,6 +22,9 @@ module.exports = function(sequelize, DataTypes) {
               allowNull: false
             }
         });
+        Ticket.hasMany(models.Answer, {
+            onDelete: "cascade"
+        });
     };
 
     return Ticket;

@@ -14,6 +14,9 @@ module.exports = function(sequelize, DataTypes) {
         Departnment.hasMany(models.Admin, {
           onDelete: "cascade"
         });
+        Departnment.hasMany(models.Request, {
+            onDelete: "cascade"
+        });
     };
 
     return Departnment;
