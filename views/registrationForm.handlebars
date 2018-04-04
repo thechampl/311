@@ -1,21 +1,35 @@
 <main class='container'>
     <h1 class='text-center'>Register Account</h1>
-    <form class='text-center'>
-        <div class="form-group text-left">
-            <label for="nameInput">Name:</label>
-            <input type="text" class="form-control" id="nameInput" aria-describedby="emailHelp" placeholder="Enter name">
+    <form id='registerForm' class='text-center'>
+        <div class="row">
+            <div class="col">
+                <input id='firstName' type="text" class="form-control" placeholder="First name">
+            </div>
+            <div class="col">
+                <input id='lastName' type="text" class="form-control" placeholder="Last name">
+            </div>
         </div>
         <div class="form-group text-left">
-            <label for="emailInput">Email address:</label>
-            <input type="email" class="form-control" id="emailInput" aria-describedby="emailHelp" placeholder="Enter email">
+            <input type="text" class="form-control" id="phoneNum" placeholder="Phone Number">
+        </div>
+        <div class="form-group text-left">
+            <input type="email" class="form-control" id="emailInput" aria-describedby="emailHelp" placeholder="Email Address">
             <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
         </div>
         <div class="form-group text-left">
-            <label for="passwordInput">Password:</label>
             <input type="password" class="form-control" id="passwordInput" placeholder="Password">
         </div>
-        <button id='submitButton' class="btn btn-outline-success">Submit</button>
+        <div class="row">
+            <div class="col">
+                <input id='county' type="text" class="form-control" placeholder="County">
+            </div>
+            <div class="col">
+                <input id='zip' type="text" class="form-control" placeholder="Zip Code">
+            </div>
+        </div>
+        <button id='loginButton' class="btn btn-outline-primary">Login</button>
+        <button id ='signUpButton' class='btn btn-outline-success'>Sign Up</button>
     </form>
 </main>
 
-<script src="/JavaScript/registrationForm.js"></script>
+<script src="assets/js/registrationForm.js"></script>

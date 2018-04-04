@@ -1,5 +1,5 @@
 {
-  "name": "GroupProject2",
+  "name": "311",
   "version": "1.0.0",
   "description": "",
   "main": "connection.js",
@@ -21,8 +21,8 @@
     "type": "git",
     "url": "git+https://github.com/thechampl/311.git"
   },
-  "keywords": [],
-  "author": "",
+  "keywords": ["Express", "Handlebars", "MySQL", "Node.js", "Sequelize"],
+  "author": "Luke Champ, Jessi Cord, Maddie Deming, Will Garvin, Alex Harris",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/thechampl/311/issues"
