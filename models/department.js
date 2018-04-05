@@ -1,24 +1,24 @@
-module.exports = function(sequelize, DataTypes) {
-    var Departnment = sequelize.define("Department", {
+"use strict";
+module.exports = (sequelize, DataTypes) => {
+    // Table Definition
+    var Department = sequelize.define("Department", {
         name: {
             type: DataTypes.STRING,
-            allowedNull: false,
-            validate: {
-                len: [1, 255]
-            }
+            allowedNull: false
         }
-        
-    });
-
-    Departnment.associate = function(models) {
-        Departnment.hasMany(models.Admin, {
-          onDelete: "cascade"
+    }, {});
+    // Define Relationships
+    Department.associate = function(models){
+        // Parent of Admins Table
+        Department.hasMany(models.Admin, {
+            targetKey: "departmentId",
+            onDelete: "CASCADE"
         });
-        Departnment.hasMany(models.Request, {
-            onDelete: "cascade"
+        // Parent of Requests Table
+        Department.hasMany(models.Request, {
+            targetKey: "departmentId",
+            onDelete: "CASCADE"
         });
     };
-
-    return Departnment;
+    return Department;
 };
-
