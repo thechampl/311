@@ -1,23 +1,29 @@
-module.exports = function(sequelize, DataTypes) {
-    var Request = sequelize.define("Request", {
-        name: {
-            type: DataTypes.STRING
-        }
-    });
-
-    Request.associate = function(models) {
+'use strict';
+module.exports = (sequelize, DataTypes) => {
+    // Table Definition
+    var Request = sequelize.define('Request', {
+        name: DataTypes.STRING
+    }, {});
+    // Define Relationships
+    Request.associate = function(models){
+        // Parent of Tickets Table
         Request.hasMany(models.Ticket, {
-            onDelete: "cascade"
+            foreignKey: "requestId",
+            onDelete: "CASCADE"
         });
+        // Parent of Questions Table
         Request.hasMany(models.Question, {
-            onDelete: "cascade"
+            foreignKey: "requestId",
+            onDelete: "CASCADE"
         });
+        // Child of Departments Table
         Request.belongsTo(models.Department, {
             foreignKey: {
-              allowNull: false
+                allowNull: false,
+                foreignKey: "departmentId",
+                onDelete: "CASCADE"
             }
         });
     };
-
     return Request;
 };

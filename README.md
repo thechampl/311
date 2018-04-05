@@ -15,6 +15,7 @@
 * mocha
 * mysql2
 * sequelize
+* sequelize-cli
 ## Installation
 ### Install Locally
 ```
@@ -34,6 +35,23 @@ npm install
   }
 ```
 2. Edit any of the values in the brackets above to coordinate with your MySQL Database.
+### Setup Database
+1. Drop Database
+```
+sequelize db:drop
+```
+2. Add Database
+```
+sequelize db:create
+```
+3. Add Tables
+```
+sequelize db:migrate
+```
+4. Add Seed Data
+```
+sequelize db:seed:all
+```
 ### Command
 `node server.js`
 ## Requirements
