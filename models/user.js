@@ -52,7 +52,7 @@ module.exports = function(sequelize, DataTypes) {
             allowedNull: false
         },
         zip: {
-            type: DataTypes.INTEGER,
+            type: DataTypes.STRING,
             allowedNull: false,
             validate: {
                 len: [4,5]

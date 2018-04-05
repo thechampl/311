@@ -8,6 +8,21 @@ module.exports = function(sequelize, DataTypes) {
         votes: {
             type: DataTypes.INTEGER,
             defaultValue: 0
+        },
+        comments: {
+            type: DataTypes.TEXT
+        },
+        street: {
+            type: DataTypes.STRING
+        },
+        city: {
+            type: DataTypes.STRING
+        },
+        state: {
+            type: DataTypes.STRING
+        },
+        zip: {
+            type: DataTypes.STRING
         }
     });
 

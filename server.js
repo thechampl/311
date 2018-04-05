@@ -16,6 +16,7 @@ const app = express();
 
 // Requiring our models for syncing
 var db = require("./models");
+var seeds = require("./public/assets/js/seeds.js")
 
 app.use(express.static("public"));
 
@@ -36,6 +37,7 @@ app.use(apiRoutes);
 // For sequelize we will need to wrap app.listen in db.Sync() and use a .then() promise
 
 db.sequelize.sync({ force: true }).then(function() {
+    seeds();
     app.listen(port, () => {
         console.log(`Server Listening on port ${port}`);
     });

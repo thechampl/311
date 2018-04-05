@@ -8,8 +8,10 @@ module.exports = function(sequelize, DataTypes) {
         },
         choices: {
             type: DataTypes.STRING
-        }
-        
+        },
+        required: {
+            type: DataTypes.BOOLEAN
+        }      
     });
 
     Question.associate = function(models) {
