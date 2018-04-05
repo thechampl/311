@@ -19,6 +19,5 @@ const PORT = process.env.PORT || 8080;
 const db = require("./models");
 const seeds = require("./public/assets/js/seeds.js");
 db.sequelize.sync().then(() => 
-    //seeds(), 
     app.listen(PORT, () => console.log(`Server Listening on Port ${PORT}`))
 );
