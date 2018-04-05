@@ -1,4 +1,4 @@
-'use strict';
+"use strict";
 module.exports = {
   up: (queryInterface, Sequelize) => {
     return queryInterface.createTable("Answers", {
@@ -11,16 +11,16 @@ module.exports = {
         ticketId: {
             type: Sequelize.INTEGER,
             references: {
-                model: 'Tickets',
-                key: 'id'
+                model: "Tickets",
+                key: "id"
             },
             allowNull: false
         },
         questionId: {
             type: Sequelize.INTEGER,
             references: {
-                model: 'Questions',
-                key: 'id'
+                model: "Questions",
+                key: "id"
             },
             allowNull: false
         },

@@ -1,7 +1,7 @@
-'use strict';
+"use strict";
 module.exports = (sequelize, DataTypes) => {
     // Table Definition
-    var Admin = sequelize.define('Admin', {}, {});
+    var Admin = sequelize.define("Admin", {}, {});
     // Define Relationships
     Admin.associate = function(models){
         // Child of Users Table

@@ -11,23 +11,23 @@ module.exports = {
         userId: {
             type: Sequelize.INTEGER,
             references: {
-                model: 'Users',
-                key: 'id'
+                model: "Users",
+                key: "id"
             },
             allowNull: false
         },
         requestId: {
             type: Sequelize.INTEGER,
             references: {
-                model: 'Requests',
-                key: 'id'
+                model: "Requests",
+                key: "id"
             },
             allowNull: false
         },
         status: {
             type: Sequelize.ENUM,
-            values: ['new', 'in progress', 'closed'],
-            default: 'new'
+            values: ["new", "in progress", "closed"],
+            default: "new"
         },
         votes: {
             type: Sequelize.INTEGER,

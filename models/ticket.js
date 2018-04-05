@@ -1,11 +1,11 @@
-'use strict';
+"use strict";
 module.exports = (sequelize, DataTypes) => {
     // Table Definition
-    var Ticket = sequelize.define('Ticket', {
+    var Ticket = sequelize.define("Ticket", {
         status: {
             type: DataTypes.ENUM,
-            values: ['new', 'in progress', 'closed'],
-            default: 'new'
+            values: ["new", "in progress", "closed"],
+            default: "new"
         },
         votes: {
             type: DataTypes.INTEGER,

@@ -1,4 +1,4 @@
-'use strict';
+"use strict";
 module.exports = (sequelize, DataTypes) => {
     // Table Definition
     var Answer = sequelize.define('Answer', {

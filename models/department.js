@@ -1,7 +1,7 @@
-'use strict';
+"use strict";
 module.exports = (sequelize, DataTypes) => {
     // Table Definition
-    var Department = sequelize.define('Department', {
+    var Department = sequelize.define("Department", {
         name: {
             type: DataTypes.STRING,
             allowedNull: false

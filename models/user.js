@@ -1,7 +1,7 @@
-'use strict';
+"use strict";
 module.exports = (sequelize, DataTypes) => {
     // Table Definition
-    var User = sequelize.define('User', {
+    var User = sequelize.define("User", {
         firstName: DataTypes.STRING,
         lastName: DataTypes.STRING,
         userType: DataTypes.STRING,
