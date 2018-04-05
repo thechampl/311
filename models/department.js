@@ -11,12 +11,12 @@ module.exports = (sequelize, DataTypes) => {
     Department.associate = function(models){
         // Parent of Admins Table
         Department.hasMany(models.Admin, {
-            foreignKey: "departmentId",
+            targetKey: "departmentId",
             onDelete: "CASCADE"
         });
         // Parent of Requests Table
         Department.hasMany(models.Request, {
-            foreignKey: "departmentId",
+            targetKey: "departmentId",
             onDelete: "CASCADE"
         });
     };

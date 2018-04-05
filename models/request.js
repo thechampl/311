@@ -8,20 +8,19 @@ module.exports = (sequelize, DataTypes) => {
     Request.associate = function(models){
         // Parent of Tickets Table
         Request.hasMany(models.Ticket, {
-            foreignKey: "requestId",
+            targetKey: "requestId",
             onDelete: "CASCADE"
         });
         // Parent of Questions Table
         Request.hasMany(models.Question, {
-            foreignKey: "requestId",
+            targetKey: "requestId",
             onDelete: "CASCADE"
         });
         // Child of Departments Table
         Request.belongsTo(models.Department, {
             foreignKey: {
                 allowNull: false,
-                foreignKey: "departmentId",
-                onDelete: "CASCADE"
+                foreignKey: "departmentId"
             }
         });
     };

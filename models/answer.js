@@ -10,16 +10,14 @@ module.exports = (sequelize, DataTypes) => {
         Answer.belongsTo(models.Ticket, {
             foreignKey: {
                 allowNull: false,
-                foreignKey: "ticketId",
-                onDelete: "CASCADE"
+                foreignKey: "ticketId"
             }
         });
         // Child of Questions Table
         Answer.belongsTo(models.Question, {
             foreignKey: {
                 allowNull: false,
-                foreignKey: "questionId",
-                onDelete: "CASCADE"
+                foreignKey: "questionId"
             }
         });
     };

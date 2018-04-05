@@ -8,16 +8,14 @@ module.exports = (sequelize, DataTypes) => {
         Admin.belongsTo(models.User, {
             foreignKey: {
                 allowNull: false,
-                foreignKey: "userId",
-                onDelete: "CASCADE"
+                foreignKey: "userId"
             }
         });
         // Child of Departments Table
         Admin.belongsTo(models.Department, {
             foreignKey: {
                 allowNull: false,
-                foreignKey: "departmentId",
-                onDelete: "CASCADE"
+                foreignKey: "departmentId"
             }
         });
     };

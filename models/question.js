@@ -13,8 +13,7 @@ module.exports = (sequelize, DataTypes) => {
         Question.belongsTo(models.Request, {
             foreignKey: {
                 allowNull: false,
-                foreignKey: "departmentId",
-                onDelete: "CASCADE"
+                foreignKey: "departmentId"
             }
         });
     };

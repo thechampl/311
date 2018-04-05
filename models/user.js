@@ -16,11 +16,11 @@ module.exports = (sequelize, DataTypes) => {
     // Define Relationships
     User.associate = function(models) {
         User.hasMany(models.Admin, {
-            foreignKey: "userId",
+            targetKey: "userId",
             onDelete: "CASCADE"
         });
         User.hasMany(models.Ticket, {
-            foreignKey: "userId"          
+            targetKey: "userId"          
         });
     };
     return User;

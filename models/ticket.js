@@ -23,21 +23,19 @@ module.exports = (sequelize, DataTypes) => {
         Ticket.belongsTo(models.User, {
             foreignKey: {
                 allowNull: false,
-                foreignKey: "userId",
-                onDelete: "CASCADE"
+                foreignKey: "userId"
             }
         });
         // Child of Requests Table
         Ticket.belongsTo(models.Request, {
             foreignKey: {
                 allowNull: false,
-                foreignKey: "requestId",
-                onDelete: "CASCADE"
+                foreignKey: "requestId"
             }
         });
         // Parent of Answers Table
         Ticket.hasMany(models.Answer, {
-            foreignKey: "ticketId",
+            targetKey: "ticketId",
             onDelete: "CASCADE"
         });
     };
