@@ -1,4 +1,5 @@
-  // Initialize Firebase
+// 'use strict';
+// Initialize Firebase
 const config = {
     apiKey: "AIzaSyDUKEzdKpJQ3aCrue8FDXIHolQV6iQC_EM",
     authDomain: "project2-d7753.firebaseapp.com",
@@ -8,6 +9,7 @@ const config = {
     messagingSenderId: "92644411279"
 };
 firebase.initializeApp(config);
+const auth = firebase.auth();
 
 // To Dos in this file
 
@@ -22,30 +24,41 @@ firebase.initializeApp(config);
 // DOM hooks
 const loginButton = document.querySelector("#loginButton");
 const signUpButton = document.querySelector("#signUpButton");
+const resetPassButton = document.querySelector("#emailReset");
 const form = document.querySelector("#registerForm");
+const email = document.querySelector('#emailInput');
+const password = document.querySelector("#passwordInput");
+const firstName = document.querySelector('#firstName');
+const lastName = document.querySelector('#lastName');
+const street = document.querySelector('#street');
+const state = document.querySelector('#state');
+const city = document.querySelector('#city');
+const zip = document.querySelector('#zip');
+const homePhone = document.querySelector('#homePhone');
+const workPhone = document.querySelector('#workPhone');
+
+// Modal DOM hooks
+const modal = document.getElementById('modal');
+const passResetEmailButton = document.getElementById('passResetEmail');
+const closeButton = document.getElementById('close');
+const modalEmail = document.getElementById('modalEmailAddress');
 
 // Button created for logged in users
 const signOutButton = document.createElement("button");
 const buttonText = document.createTextNode("Sign Out");
 
+// Firebase detects if a users is currently logged in
 const currentUser = firebase.auth().currentUser;
 
-const email = document.querySelector('#emailInput');
-const password = document.querySelector("#passwordInput");
-const firstName = document.querySelector('#firstName');
-const lastName = document.querySelector('#lastName');
-const county = document.querySelector('#county');
-const zip = document.querySelector('#zip');
-const phoneNum = document.querySelector('#phoneNum');
 
-const inputElements = [email, firstName, lastName, county, zip, phoneNum, password];
+const inputElements = [email, firstName, lastName, street, state, city, zip, homePhone, workPhone, password];
+
 inputElements.forEach((element) => {
     element.style.borderColor = 'red';
     element.addEventListener('input', inputValidator);
 })
 
 function inputValidator() {
-    // not sure if need to pass event as param
     if (this.value === '') {
         this.style.borderColor = 'red';
     } else {
@@ -56,8 +69,8 @@ function inputValidator() {
 // Refactor this ugly shit
 loginButton.addEventListener('click', e => {
     e.preventDefault();
-    const auth = firebase.auth();
     const emailVal = email.value.trim();
+    console.log(email);
     const passwordVal = password.value.trim();
     const promise = auth.signInWithEmailAndPassword(emailVal, passwordVal);
     promise.catch(e => console.log(e.message));
@@ -69,8 +82,7 @@ loginButton.addEventListener('click', e => {
 // Sign up function
 signUpButton.addEventListener('click', e => {
     e.preventDefault();
-    const auth = firebase.auth();
-    const inputElements = [email, password, firstName, lastName, county, zip, phoneNum];
+    const inputElements = [email, password, firstName, lastName, street, state, zip, homePhone, workPhone];
     const undefinedElements = [];
     const definedElements = [];
     for(var i = 0; i < inputElements.length; i++) {
@@ -80,17 +92,18 @@ signUpButton.addEventListener('click', e => {
             definedElements.push(inputElements[i].value.trim());
         }
     }
+    console.log(definedElements);
     [emailVal, passwordVal, firstNameVal, lastNameVal, countyVal, zipVal, phoneNumVal] = definedElements;
     if (undefinedElements.length === 0) {
         const data = {
             emailVal,
-            name: `${firstNameVal} ${lastNameVal}`,
+            firstNameVal,
+            lastNameVal,
             countyVal,
             zipVal, 
             phoneNumVal
         };
 
-        // destructer the definedEles array and get the email and password
         const promise = auth.createUserWithEmailAndPassword(emailVal, passwordVal)
             .then(() => {
                 postUserInput(data);
@@ -125,7 +138,7 @@ firebase.auth().onAuthStateChanged(currentUser => {
     }
 });
 
-
+// Send the user data back to our database for website usage and notifications
 function postUserInput(data) {
     const xhr = new XMLHttpRequest();
     xhr.open("POST", "/userData", true);
@@ -136,5 +149,38 @@ function postUserInput(data) {
     }
     xhr.setRequestHeader("Content-type", "application/json");
     xhr.send(JSON.stringify(data));
+}
+
+// reset email address
+
+resetPassButton.addEventListener('click', (e) => {
+    e.preventDefault();
+    createModal();
+})
+
+const createModal = (e) => {
+    modal.style.display = "block";
+    closeButton.addEventListener('click', closeModal);
+    passResetEmailButton.addEventListener('click', submitEmail);
+}
+
+const closeModal = (e) => {
+    e.preventDefault();
+    modal.style.display = "none";
+}
+
+const submitEmail = (e) => {
+    e.preventDefault();
+    const emailVal = modalEmail.value.trim();
+    let emailPromise = new Promise(() => (resolve, reject) => {
+        () => resolve(emailVal);
+    }).then(
+        auth.sendPasswordResetEmail(emailVal).then(function() {
+            alert(`A reset email has been sent to ${emailVal}`);
+          }).catch(function(error) {
+            alert(error);
+          }),
+          modal.style.display = "none"
+    )
 }
 

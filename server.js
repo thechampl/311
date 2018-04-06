@@ -9,8 +9,6 @@ const apiRoutes = require("./routes/apiRoutes.js");
 // are const supposed to be all CAPS?
 
 
-
-
 const port = process.env.PORT || 8080;
 const app = express();
 
