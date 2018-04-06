@@ -1,26 +1,21 @@
-module.exports = function(sequelize, DataTypes) {
+"use strict";
+module.exports = (sequelize, DataTypes) => {
+    // Table Definition
     var Question = sequelize.define("Question", {
-        label: {
-            type: DataTypes.STRING,
-        },
-        type: {
-            type: DataTypes.STRING
-        },
-        choices: {
-            type: DataTypes.STRING
-        },
-        required: {
-            type: DataTypes.BOOLEAN
-        }      
-    });
-
-    Question.associate = function(models) {
+        label: DataTypes.STRING,
+        type: DataTypes.STRING,
+        choices: DataTypes.STRING,
+        required: DataTypes.BOOLEAN
+    }, {});
+    // Define Relationships
+    Question.associate = function(models){
+        // Child of Requests Table
         Question.belongsTo(models.Request, {
             foreignKey: {
-              allowNull: false
+                allowNull: false,
+                foreignKey: "departmentId"
             }
         });
     };
-
     return Question;
 };

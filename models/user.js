@@ -1,71 +1,27 @@
-module.exports = function(sequelize, DataTypes) {
+"use strict";
+module.exports = (sequelize, DataTypes) => {
+    // Table Definition
     var User = sequelize.define("User", {
-        firstName: {
-            type: DataTypes.STRING,
-            allowedNull: false,
-            validate: {
-                len: [1, 255]
-            }
-        },
-        lastName: {
-            type: DataTypes.STRING,
-            allowedNull: false,
-            validate: {
-                len: [1, 255]
-            }
-        },
-        userType: {
-            type: DataTypes.STRING,
-            allowedNull: false
-        },
-        homePhone: {
-            type: DataTypes.INTEGER,
-            allowedNull: false,
-            validate: {
-                len: [10]
-            }
-        },
-        workPhone: {
-            type: DataTypes.INTEGER,
-            allowedNull: true,
-            validate: {
-                len: [10]
-            }
-        },
-        email: {
-            type: DataTypes.STRING,
-            allowedNull: false,
-            validate: {
-                isEmail: true
-            }
-        },
-        street: {
-            type: DataTypes.STRING,
-            allowedNull: false
-        },
-        city: {
-            type: DataTypes.STRING,
-            allowedNull: false
-        },
-        state: {
-            type: DataTypes.STRING,
-            allowedNull: false
-        },
-        zip: {
-            type: DataTypes.STRING,
-            allowedNull: false,
-            validate: {
-                len: [4,5]
-            }     
-        }
-    });
-
+        firstName: DataTypes.STRING,
+        lastName: DataTypes.STRING,
+        userType: DataTypes.STRING,
+        homePhone: DataTypes.INTEGER,
+        workPhone: DataTypes.INTEGER,
+        email: DataTypes.STRING,
+        street: DataTypes.STRING,
+        city: DataTypes.STRING,
+        state: DataTypes.STRING,
+        zip: DataTypes.STRING
+    }, {});
+    // Define Relationships
     User.associate = function(models) {
         User.hasMany(models.Admin, {
-          onDelete: "cascade"
+            targetKey: "userId",
+            onDelete: "CASCADE"
         });
-        User.hasMany(models.Ticket, {});
+        User.hasMany(models.Ticket, {
+            targetKey: "userId"          
+        });
     };
-
     return User;
 };
