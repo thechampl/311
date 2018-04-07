@@ -15,7 +15,7 @@ router.get("/", (req,res) => res.render('index'));
 
 
 // POST-USER TICKET
-router.post("/userTickets", (req,res) => console.log(req.body));
+router.post("/userTickets", (req,res) => console.log(req.body))
 
 
 // POST - User Data
