@@ -13,12 +13,12 @@ const auth = firebase.auth();
 
 // To Dos in this file
 
-    // =======
+// =======
 
-    // make function and invoke within the signup and log in funcs
-    // on successful signup / login remove values within
-    // probably just redirect the user to the home page with a 
-    // get request to a route
+// make function and invoke within the signup and log in funcs
+// on successful signup / login remove values within
+// probably just redirect the user to the home page with a 
+// get request to a route
 
 
 // DOM hooks
@@ -79,7 +79,7 @@ signUpButton.addEventListener('click', e => {
     // const inputElements = [email, password, firstName, lastName, street, state, city, zip, homePhone, workPhone];
     const undefinedElements = [];
     const definedElements = [];
-    for(var i = 0; i < inputElements.length; i++) {
+    for (var i = 0; i < inputElements.length; i++) {
         if (inputElements[i].value === "") {
             undefinedElements.push(inputElements[i]);
         } else {
@@ -87,7 +87,8 @@ signUpButton.addEventListener('click', e => {
         }
     }
     console.log(definedElements);
-    [emailVal, passwordVal, firstNameVal, lastNameVal, cityVal, streetVal, stateVal, zipVal, phoneNumVal, workPhoneVal] = definedElements;
+    [emailVal, firstNameVal, lastNameVal, streetVal, stateVal, cityVal, zipVal, homePhoneVal, workPhoneVal, passwordVal] = definedElements;
+    // [emailVal, passwordVal, firstNameVal, lastNameVal, cityVal, streetVal, stateVal, zipVal, phoneNumVal, workPhoneVal] = definedElements;
     if (undefinedElements.length === 0) {
         const data = {
             emailVal,
@@ -96,8 +97,8 @@ signUpButton.addEventListener('click', e => {
             cityVal,
             streetVal,
             stateVal,
-            zipVal, 
-            phoneNumVal,
+            zipVal,
+            homePhoneVal,
             workPhoneVal
         };
 
@@ -139,7 +140,7 @@ firebase.auth().onAuthStateChanged(currentUser => {
 function postUserInput(data) {
     const xhr = new XMLHttpRequest();
     xhr.open("POST", "/userData", true);
-    xhr.onload = function() {
+    xhr.onload = function () {
         if (this.status === 200) {
             console.log(this.responseText);
         }
@@ -179,12 +180,12 @@ const submitEmail = e => {
     let emailPromise = new Promise(() => (resolve, reject) => {
         () => resolve(emailVal);
     }).then(
-        auth.sendPasswordResetEmail(emailVal).then(function() {
+        auth.sendPasswordResetEmail(emailVal).then(function () {
             alert(`A reset email has been sent to ${emailVal}`);
-          }).catch(function(error) {
+        }).catch(function (error) {
             alert(error);
-          }),
-          modal.style.display = "none"
+        }),
+        modal.style.display = "none"
     )
 }
 
