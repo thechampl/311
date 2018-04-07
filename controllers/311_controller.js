@@ -6,10 +6,10 @@ const db = require("../models");
 router.get("/", (req,res) => res.render('registrationForm'));
 
 //GET - Form Data
-router.get("/api/departments", function(req, res) {
-    db.Department.findAll({
-    }).then(function(dbDepartment) {
-      res.json(dbDepartment);
+router.get("/new-request", function(req, res) {
+    db.Department.findAll({}).then(function(data) {
+        var departments = { departments: data };
+      res.render('index', departments);
     });
 });
 
@@ -19,8 +19,8 @@ router.get("/api/departments/:id", function(req, res) {
         id: req.params.id
       },
       include: [db.Request]
-    }).then(function(dbDepartment) {
-      res.json(dbDepartment);
+    }).then(function(data) {
+      res.json(data);
     });
 });
 
