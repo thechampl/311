@@ -58,13 +58,7 @@ inputElements.forEach((element) => {
     element.addEventListener('input', inputValidator);
 })
 
-function inputValidator() {
-    if (this.value === '') {
-        this.style.borderColor = 'red';
-    } else {
-        this.style.borderColor = '#ced4da';
-    }
-}
+
 
 // Refactor this ugly shit
 loginButton.addEventListener('click', e => {
@@ -151,6 +145,13 @@ function postUserInput(data) {
     xhr.send(JSON.stringify(data));
 }
 
+function inputValidator() {
+    if (this.value === '') {
+        this.style.borderColor = 'red';
+    } else {
+        this.style.borderColor = '#ced4da';
+    }
+}
 // reset email address
 
 resetPassButton.addEventListener('click', (e) => {
@@ -158,18 +159,18 @@ resetPassButton.addEventListener('click', (e) => {
     createModal();
 })
 
-const createModal = (e) => {
+const createModal = e => {
     modal.style.display = "block";
     closeButton.addEventListener('click', closeModal);
     passResetEmailButton.addEventListener('click', submitEmail);
 }
 
-const closeModal = (e) => {
+const closeModal = e => {
     e.preventDefault();
     modal.style.display = "none";
 }
 
-const submitEmail = (e) => {
+const submitEmail = e => {
     e.preventDefault();
     const emailVal = modalEmail.value.trim();
     let emailPromise = new Promise(() => (resolve, reject) => {
