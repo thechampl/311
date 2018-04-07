@@ -49,10 +49,10 @@ router.get("/", (req, res) => res.render('index'));
 router.post("/userData", function (req, res) {
     // const userToAdd = req.body.
     db.User.create({
-        firstName: req.body.firstNameval,
+        firstName: req.body.firstNameVal,
         lastName: req.body.lastNameVal,
         userType: req.body.userType,
-        homePhone: req.body.phoneNumVal,
+        homePhone: req.body.homePhoneVal,
         workPhone: req.body.workPhoneVal,
         email: req.body.emailVal,
         street: req.body.streetVal,
