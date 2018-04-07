@@ -87,7 +87,7 @@ signUpButton.addEventListener('click', e => {
         }
     }
     console.log(definedElements);
-    [emailVal, passwordVal, firstNameVal, lastNameVal, streetVal, stateVal, zipVal, phoneNumVal] = definedElements;
+    [emailVal, passwordVal, firstNameVal, lastNameVal, streetVal, stateVal, zipVal, phoneNumVal, workPhoneVal] = definedElements;
     if (undefinedElements.length === 0) {
         const data = {
             emailVal,
@@ -96,7 +96,8 @@ signUpButton.addEventListener('click', e => {
             streetVal,
             stateVal,
             zipVal, 
-            phoneNumVal
+            phoneNumVal,
+            workPhoneVal
         };
 
         const promise = auth.createUserWithEmailAndPassword(emailVal, passwordVal)
