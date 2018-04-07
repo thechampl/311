@@ -3,7 +3,6 @@ const express = require("express");
 const router = express.Router();
 const db = require("../models");
 // GET - Registration Form
-<<<<<<< HEAD
 router.get("/", (req,res) => res.render('registrationForm'));
 
 //GET - Form Data
@@ -35,7 +34,6 @@ router.get("/api/questions/:id", function(req, res) {
     });
 });
 
-=======
 router.get("/register", (req, res) => res.render('registrationForm'));
 
 // GET - Landing Page
@@ -46,16 +44,14 @@ router.get("/", (req, res) => res.render('index'));
 
 // GET - SETTINGS
 // router.get("/settings", (req,res) => res.render('settings'));
->>>>>>> origin/master
 
 // POST - User Data
 router.post("/userData", function (req, res) {
     // const userToAdd = req.body.
     db.User.create({
-        createdAt: new Date(), updatedAt: 0,
         firstName: req.body.firstNameval,
         lastName: req.body.lastNameVal,
-        userType: "Citizen",
+        userType: req.body.userType,
         homePhone: req.body.phoneNumVal,
         workPhone: req.body.workPhoneVal,
         email: req.body.emailVal,
@@ -71,12 +67,27 @@ router.post("/userTicket", function (req, res) {
     // const userToAdd = req.body.
     db.Ticket.create({
         createdAt: new Date(), updatedAt: 0,
-        comments: req.body.commentsVal,
-        street: req.body.streetVal,
-        city: req.body.cityVal,
-        state: req.body.stateVal,
-        zip: req.body.zipVal
-    }).then(res.redirect("/"))
+        comments: req.body.comments,
+        street: req.body.street,
+        city: req.body.city,
+        state: req.body.state,
+        zip: req.body.zip,
+        UserId: req.body.UserId,
+        RequestId: req.body.RequestId
+
+    }).then(function(data) {
+        var answers = req.body.answers;
+        console.log(answers);
+        answers.forEach(function(answer) {
+            db.Answer.create({
+                TicketId: data.id,
+                QuestionId: answer.question,
+                value: answer.answer
+            })
+        })
+
+        res.json(data);
+    })
 
 });
 

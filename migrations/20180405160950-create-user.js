@@ -18,10 +18,10 @@ module.exports = {
             type: Sequelize.STRING
         },
         homePhone: {
-            type: Sequelize.INTEGER
+            type: Sequelize.STRING
         },
         workPhone: {
-            type: Sequelize.INTEGER
+            type: Sequelize.STRING
         },
         email: {
             type: Sequelize.STRING
