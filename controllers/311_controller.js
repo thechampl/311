@@ -14,10 +14,6 @@ router.get("/", (req, res) => res.render('index'));
 // GET - SETTINGS
 // router.get("/settings", (req,res) => res.render('settings'));
 
-
-
-
-
 // POST - User Data
 router.post("/userData", function (req, res) {
     // const userToAdd = req.body.
@@ -112,8 +108,6 @@ router.put("/userData", function (req, res) {
 //       res.json(dbPost);
 //     });
 //   });
-
-
 
 // Export Router
 module.exports = router;
