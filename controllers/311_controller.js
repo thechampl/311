@@ -15,15 +15,19 @@ router.get("/", (req,res) => res.render('index'));
 
 
 // POST-USER TICKET
-router.post("/userTickets", (req,res) => console.log(req.body));
+router.post("/userTickets", (req,res) => {
+  console.log(req.body);
+});
 
 
 // POST - User Data
-router.post("/userData", (req,res) => console.log(req.body));
+router.post("/userData", (req,res) => {
+  console.log(req.body);
+});
 
 
   // PUT route for updating posts
-  app.put("/userTickets", function(req, res) {
+  router.put("/userTickets", function(req, res) {
     db.Post.update(
       req.body,
       {
@@ -37,7 +41,7 @@ router.post("/userData", (req,res) => console.log(req.body));
 
 
   // DELETE route for deleting tickets
-  app.delete("/userTickets:id", function(req, res) {
+  router.delete("/userTickets:id", function(req, res) {
     db.Post.destroy({
       where: {
         id: req.params.id

@@ -76,7 +76,7 @@ loginButton.addEventListener('click', e => {
 // Sign up function
 signUpButton.addEventListener('click', e => {
     e.preventDefault();
-    const inputElements = [email, password, firstName, lastName, street, state, zip, homePhone, workPhone];
+    // const inputElements = [email, password, firstName, lastName, street, state, city, zip, homePhone, workPhone];
     const undefinedElements = [];
     const definedElements = [];
     for(var i = 0; i < inputElements.length; i++) {
@@ -87,16 +87,18 @@ signUpButton.addEventListener('click', e => {
         }
     }
     console.log(definedElements);
-    [emailVal, passwordVal, firstNameVal, lastNameVal, streetVal, stateVal, zipVal, phoneNumVal] = definedElements;
+    [emailVal, passwordVal, firstNameVal, lastNameVal, cityVal, streetVal, stateVal, zipVal, phoneNumVal, workPhoneVal] = definedElements;
     if (undefinedElements.length === 0) {
         const data = {
             emailVal,
             firstNameVal,
             lastNameVal,
+            cityVal,
             streetVal,
             stateVal,
             zipVal, 
-            phoneNumVal
+            phoneNumVal,
+            workPhoneVal
         };
 
         const promise = auth.createUserWithEmailAndPassword(emailVal, passwordVal)
