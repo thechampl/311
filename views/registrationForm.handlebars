@@ -1,6 +1,6 @@
-<main class="container">
-    <h1 class="text-center">Register Account</h1>
-    <form id="registerForm" class="text-center">
+<main class='container jumbotron'>
+    <h1 class='text-center'>Register Account</h1>
+    <form id='registerForm' class='text-center'>
         <div class="row">
             <div class="col">
                 <input id="firstName" type="text" class="form-control" placeholder="First name">
@@ -9,9 +9,15 @@
                 <input id="lastName" type="text" class="form-control" placeholder="Last name">
             </div>
         </div>
-        <div class="form-group text-left">
-            <input type="text" class="form-control" id="phoneNum" placeholder="Phone Number">
+        <div class='row'>
+            <div class="col">
+                <input type="text" class="form-control" id="homePhone" placeholder="Home Phone">
+            </div>
+            <div class="col">
+                <input type="text" class="form-control" id="workPhone" placeholder="Work Phone">
+            </div>
         </div>
+        
         <div class="form-group text-left">
             <input type="email" class="form-control" id="emailInput" aria-describedby="emailHelp" placeholder="Email Address">
             <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
@@ -21,15 +27,32 @@
         </div>
         <div class="row mb-2">
             <div class="col">
-                <input id="county" type="text" class="form-control" placeholder="County">
+                <input id='street' type="text" class="form-control" placeholder="Street">
+            </div>
+            <div class="col">
+                <input id='city' type="text" class="form-control" placeholder="City">
+            </div>
+            <div class="col">
+                <input id='state' type="text" class="form-control" placeholder="State">
             </div>
             <div class="col">
                 <input id="zip" type="text" class="form-control" placeholder="Zip Code">
             </div>
             <button id="currentLocation" class="btn btn-outline-info" type="button"><i class="fas fa-location-arrow"></i></button>
         </div>
-        <button id="loginButton" class="btn btn-outline-primary">Login</button>
-        <button id="signUpButton" class="btn btn-outline-success">Sign Up</button>
+        <button id='loginButton' class="btn btn-outline-primary">Login</button>
+        <button id ='signUpButton' class='btn btn-outline-success'>Sign Up</button>
+        <button id ='emailReset' class='btn btn-outline-warning'>Reset Email Password</button>
+        
+        {{!-- This section is hidden by default and is used as the modal for password reset --}}
+         <section id='modal' class='modal'>
+            <div id='modal-content' class='modal-content container text-center'>
+                <p>Type your email address below. You will then recieve an email to reset your accounts password.</p>
+                <input id='modalEmailAddress' class='form-control' type='email' placeholder='Email Address'>
+                <button id='passResetEmail' class='btn btn-success'>Submit</button>
+                <button id="close" class="btn btn-danger">Close</button>
+            </div>
+        </section>
     </form>
 </main>
 <script src="assets/js/registrationForm.js"></script>
