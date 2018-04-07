@@ -87,13 +87,14 @@ signUpButton.addEventListener('click', e => {
         }
     }
     console.log(definedElements);
-    [emailVal, passwordVal, firstNameVal, lastNameVal, countyVal, zipVal, phoneNumVal] = definedElements;
+    [emailVal, passwordVal, firstNameVal, lastNameVal, streetVal, stateVal, zipVal, phoneNumVal] = definedElements;
     if (undefinedElements.length === 0) {
         const data = {
             emailVal,
             firstNameVal,
             lastNameVal,
-            countyVal,
+            streetVal,
+            stateVal,
             zipVal, 
             phoneNumVal
         };
