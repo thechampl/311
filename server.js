@@ -1,4 +1,7 @@
+"use strict";
+// Setup Express
 const express = require("express");
+<<<<<<< HEAD
 const bodyParser = require("body-parser");
 const expHandBars = require("express-handlebars");
 // Not sure if we need Path but instantiating it regardless :^)
@@ -10,28 +13,24 @@ const apiRoutes = require("./routes/apiRoutes.js");
 
 
 const port = process.env.PORT || 8080;
+=======
+>>>>>>> 19805208e3eb4bdf8e5d0b87039419b9be2402c3
 const app = express();
-
 app.use(express.static("public"));
-
-// Body Parser Middle ware
-app.use(bodyParser.urlencoded({ extended: false })) 
-app.use(bodyParser.json())
-
-// set up handlebars engine
-app.engine('handlebars', expHandBars({defaultLayout: 'main'}));
-app.set('view engine', 'handlebars');
-
-
- 
-
-app.use(apiRoutes);
-
-
-// For sequelize we will need to wrap app.listen in db.Sync() and use a .then() promise
-
-// db.sequelize.sync().then(function() {
-app.listen(port, () => {
-    console.log(`Server Listening on port ${port}`);
-});
-// });
+// Setup Body Parser
+const bodyparser = require("body-parser");
+app.use(bodyparser.urlencoded({extended: false}));
+app.use(bodyparser.json());
+// Setup Handlebars Engine
+const exphandbars = require("express-handlebars");
+app.engine("handlebars", exphandbars({defaultLayout: "main"}));
+app.set("view engine", "handlebars");
+// Import Routes
+const routes = require("./controllers/311_controller");
+app.use("/", routes);
+// Setup Database
+const PORT = process.env.PORT || 8080;
+const db = require("./models");
+db.sequelize.sync().then(() => 
+    app.listen(PORT, () => console.log(`Server Listening on Port ${PORT}`))
+);
