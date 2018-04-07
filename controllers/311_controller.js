@@ -156,3 +156,13 @@ router.put("/userData", function (req, res) {
 
 // Export Router
 module.exports = router;
+
+//click new ticket
+//opens modal but also makes an ajax call that gets the departments and then adds those departemnts to the department dropdown
+//on dropdown change (department dropdown) make another ajax request which gives the department id and returns "REQuests"
+//the requrest drop down becomes enabled with all the requests loaded into the dropdown
+//on change of request dropdown, we make an ajax call to get the questions passing request id
+//on return we render the questions and input boxes
+//makes a post request to create a ticket, userid, requestid, comment from comment box and then (still on the server side) now we have a ticket, we also sent over the answers
+//if validation errors show errors in modal
+//then reload the page/rerender the page
