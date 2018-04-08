@@ -9,7 +9,7 @@ router.get("/", (req,res) => res.render('index'));
 //GET - Form Data
 router.get("/api/departments", function (req, res) {
     db.Department.findAll({}).then(function (data) {
-        res.JSON(data);
+        res.json(data);
     });
 });
 
