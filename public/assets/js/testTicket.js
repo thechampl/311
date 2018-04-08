@@ -33,7 +33,7 @@ function getDepts() {
 function getReqs() {
     //AJAX call GET /api/departments/:id
     $.ajax({
-        url: "/api/departments/:id",
+        url: "/api/departments/" + this.value,
         method: "GET"
     }).done(function(response){
         console.log(response);
@@ -43,7 +43,7 @@ function getReqs() {
 function getQuestions() {
     //AJAX call /api/questions/:id
     $.ajax({
-        url: "/api/questions/:id",
+        url: "/api/questions/" + this.value,
         method: "GET"
     }).done(function(response){
         console.log(response);
