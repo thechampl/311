@@ -12,7 +12,7 @@ app.use(express.static("public"));
 
 const bodyparser = require("body-parser");
 
-app.use(bodyparser.urlencoded({extended: false}));
+app.use(bodyparser.urlencoded({ extended: false }));
 
 app.use(bodyparser.json());
 
@@ -20,7 +20,7 @@ app.use(bodyparser.json());
 
 const exphandbars = require("express-handlebars");
 
-app.engine("handlebars", exphandbars({defaultLayout: "main"}));
+app.engine("handlebars", exphandbars({ defaultLayout: "main" }));
 
 app.set("view engine", "handlebars");
 
@@ -36,7 +36,7 @@ const PORT = process.env.PORT || 8080;
 
 const db = require("./models");
 
-db.sequelize.sync().then(() => 
+db.sequelize.sync().then(() =>
 
     app.listen(PORT, () => console.log(`Server Listening on Port ${PORT}`))
 
