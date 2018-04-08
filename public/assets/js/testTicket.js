@@ -72,7 +72,8 @@ $(document).ready(function () {
             method: "GET"
         }).done(function (response) {
             $("#deptDefault").nextAll("option").remove();
-            response.forEach(function(dept) {
+
+            response.forEach(function (dept) {
                 var option = $("<option>").attr("value", dept.id).text(dept.name);
 
                 $("#deptDropdown").append(option);
@@ -88,7 +89,8 @@ $(document).ready(function () {
         }).done(function (response) {
             $("#reqDropdown").removeAttr("disabled");
             $("#reqDefault").nextAll("option").remove();
-            response.Requests.forEach(function(req) {
+
+            response.Requests.forEach(function (req) {
                 var option = $("<option>").attr("value", req.id).text(req.name);
 
                 $("#reqDropdown").append(option);
@@ -102,17 +104,43 @@ $(document).ready(function () {
             url: "/api/questions/" + this.value,
             method: "GET"
         }).done(function (response) {
-            console.log(response);
-            //Loop through questions
-            //If type=text, If type=select
-            //If select, loop through choices and create options
-            //Display question.label in placeholder
-            response.forEach(function(question) {
-                var questionField = $("<input>").attr("placeholder", question.label);
+            var ticketQuestions = $("#ticketQuestions");
+            ticketQuestions.empty();
 
-                $("#ticketQuestions").append(questionField);
+            response.forEach(function (question) {
+                var formGroup = $("<div>").addClass("form-group");
+
+                if (question.type === "text") {
+                    var questionField = $("<input>").attr({
+                        "type": "text",
+                        "class": "form-control",
+                        "data-question": question.id,
+                        "placeholder": question.label
+                    });
+                } else if (question.type === "select") {
+                    var selectChoices = question.choices.split(",");
+
+                    var questionField = $("<select>").addClass("form-control");
+                    var dropDefault = $("<option>").prop({
+                        "disabled": true,
+                        "selected": true
+                    }).text(question.label);
+
+                    questionField.append(dropDefault);
+
+                    selectChoices.forEach(function (choice) {
+                        var dropField = $("<option>").attr({
+                            "data-question": question.id,
+                        }).text(choice);
+
+                        questionField.append(dropField);
+                    })
+                }
+
+                formGroup.append(questionField);
+                ticketQuestions.append(formGroup);
             })
-            
+
         });
     }
 });
