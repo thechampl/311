@@ -60,9 +60,9 @@ $(document).ready(function () {
 
     $("#open-ticket").on("click", getDepts);
 
-    $("#deptDropdown").on("change", function () {
-        console.log($(this).val());
-    });
+    $("#deptDropdown").on("change", getReqs);
+
+    $("#reqDropdown").on("change", getQuestions);
 
 
     function getDepts() {
@@ -71,7 +71,12 @@ $(document).ready(function () {
             url: "/api/departments",
             method: "GET"
         }).done(function (response) {
-            console.log(response);
+            $("#deptDefault").nextAll("option").remove();
+            response.forEach(function(dept) {
+                var option = $("<option>").attr("value", dept.id).text(dept.name);
+
+                $("#deptDropdown").append(option);
+            })
         });
     }
 
@@ -81,7 +86,13 @@ $(document).ready(function () {
             url: "/api/departments/" + this.value,
             method: "GET"
         }).done(function (response) {
-            console.log(response);
+            $("#reqDropdown").removeAttr("disabled");
+            $("#reqDefault").nextAll("option").remove();
+            response.Requests.forEach(function(req) {
+                var option = $("<option>").attr("value", req.id).text(req.name);
+
+                $("#reqDropdown").append(option);
+            })
         });
     }
 
@@ -92,6 +103,16 @@ $(document).ready(function () {
             method: "GET"
         }).done(function (response) {
             console.log(response);
+            //Loop through questions
+            //If type=text, If type=select
+            //If select, loop through choices and create options
+            //Display question.label in placeholder
+            response.forEach(function(question) {
+                var questionField = $("<input>").attr("placeholder", question.label);
+
+                $("#ticketQuestions").append(questionField);
+            })
+            
         });
     }
 });

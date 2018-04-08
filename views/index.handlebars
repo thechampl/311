@@ -243,22 +243,19 @@
         <div class="modal-body">
           <form>
             <div class="form-group">
-              <select class="form-control" id="exampleFormControlSelect1">
-                <option value="" selected>Choose Department</option>
-                {{#each departments}}
-                <option value="{{id}}">{{name}}</option>
-                {{/each}}
+              <select class="form-control" id="deptDropdown">
+                <option id="deptDefault" value="" selected>Choose Department</option>
               </select>
             </div>
             <div class="form-group">
-              <input type="text" class="form-control" id="ticketCity" placeholder="City">
+              <select class="form-control" id="reqDropdown" disabled>
+                <option id="reqDefault" value="" selected>Choose Request</option>
+              </select>
             </div>
-            <div class="form-group">
-              <input type="text" class="form-control" id="ticketState" placeholder="State">
+            <div class="form-group" id="ticketQuestions">
+
             </div>
-            <div class="form-group">
-              <input type="text" class="form-control" id="ticketZip" placeholder="Zip Code">
-            </div>
+            
             <textarea name="" class="w-100" id="ticketComments" rows="10" placeholder="Explain your ticket request"></textarea>
             <p>Characters Remaining
               <span id="remainingChars">255</span>
