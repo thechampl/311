@@ -6,6 +6,12 @@ const db = require("../models");
 // router.get("/", (req,res) => res.render('registrationForm'));
 router.get("/", (req,res) => res.render('index'));
 
+// router.get("/", function (req, res) {
+//     db.Department.findAll({}).then(function (data) {
+//         res.render("index", { departments: data })
+//     });
+// });
+
 //GET - Form Data
 router.get("/new-request", function (req, res) {
     db.Department.findAll({}).then(function (data) {

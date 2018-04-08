@@ -5,12 +5,14 @@
 
     <ul class="navbar-nav ml-auto">
       <li class="active">
+        <a class="nav-link" href="#" data-toggle="modal" data-target="#ticket-test">Test Ticket</a>
+      </li>
+      <li class="active">
         <a class="nav-link" href="#" data-toggle="modal" data-target="#ticket-modal" id="createTicket">Create Ticket</a>
       </li>
       <li class="active">
         <a class="nav-link" href="#" data-toggle="modal" data-target="#login-modal">Log In</a>
       </li>
-
       <li class="active">
         <a class="nav-link" href="#" data-toggle="modal" data-target="#register-modal">Register</a>
       </li>
@@ -213,7 +215,53 @@
               <input type="text" class="form-control" id="ticketZip" placeholder="Zip Code">
             </div>
             <textarea name="" id="ticketComments" cols="30" rows="10" placeholder="Explain your ticket request" style="height: 100%; width: 100%;"></textarea>
-            <p>Characters Remaining <span id="remainingChars">254</span></p>
+            <p>Characters Remaining
+              <span id="remainingChars">254</span>
+            </p>
+          </form>
+          <button id="ticketSubmit" type="button" class="btn btn-dark btn-block">Submit Ticket</button>
+        </div>
+
+        <div class="modal-footer">
+        </div>
+      </div>
+    </div>
+  </div>
+
+  {{!-- Will's ticket modal --}}
+  <div class="modal fade" id="ticket-test" tabindex="-1" role="dialog" aria-labelledby="ticket-modal-title" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content">
+        <div class="modal-header bg-dark">
+          <h5 class="modal-title text-light" id="login-modal-title">Create a Ticket</h5>
+          <button type="button" class="close text-light" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+
+        <div class="modal-body">
+          <form>
+            <div class="form-group">
+              <select class="form-control" id="exampleFormControlSelect1">
+                <option value="" selected>Choose Department</option>
+                {{#each departments}}
+                <option value="{{id}}">{{name}}</option>
+                {{/each}}
+              </select>
+            </div>
+            <div class="form-group">
+              <input type="text" class="form-control" id="ticketCity" placeholder="City">
+            </div>
+            <div class="form-group">
+              <input type="text" class="form-control" id="ticketState" placeholder="State">
+            </div>
+            <div class="form-group">
+              <input type="text" class="form-control" id="ticketZip" placeholder="Zip Code">
+            </div>
+            <textarea name="" class="w-100" id="ticketComments" rows="10" placeholder="Explain your ticket request"></textarea>
+            <p>Characters Remaining
+              <span id="remainingChars">255</span>
+            </p>
           </form>
           <button id="ticketSubmit" type="button" class="btn btn-dark btn-block">Submit Ticket</button>
         </div>
@@ -230,7 +278,7 @@
       <div class="modal-content">
         <div class="modal-header bg-dark">
           <h5 class="modal-title text-light" id="login-modal-title">Log In</h5>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <button type="button" class="close text-light" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
           </button>
         </div>
@@ -270,7 +318,7 @@
       <div class="modal-content">
         <div class="modal-header bg-dark">
           <h5 class="modal-title text-light" id="register-modal-title">Register</h5>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <button type="button" class="close text-light" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
           </button>
         </div>
@@ -310,7 +358,7 @@
 
               <div class="form-group col-md-3">
                 <select class="form-control">
-                  <option selected>State</option>
+                  <option value="" selected>State</option>
                   <option value="AK">AK</option>
                   <option value="AL">AL</option>
                   <option value="AR">AR</option>
@@ -390,3 +438,4 @@
   </div>
 </div>
 <script type="text/javascript" src="assets/js/createTicket.js"></script>
+<script type="text/javascript" src="assets/js/testTicket.js"></script>
