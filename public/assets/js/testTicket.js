@@ -14,9 +14,42 @@ const ticketSubmit = document.querySelector("#ticketSubmit");
 // Events
 ticketSubmit.addEventListener("click", postTicket);
 ticketComments.addEventListener("keyup", remainingChars);
+//Test Ticket button listener
+//Dept dropdown select
+//Req dropdown select
 
 
 // Functions
+function getDepts() {
+    //AJAX call GET /api/departments
+    $.ajax({
+        url: "/api/departments",
+        method: "GET"
+    }).done(function(response){
+        console.log(response);
+    });
+}
+
+function getReqs() {
+    //AJAX call GET /api/departments/:id
+    $.ajax({
+        url: "/api/departments/:id",
+        method: "GET"
+    }).done(function(response){
+        console.log(response);
+    });
+}
+
+function getQuestions() {
+    //AJAX call /api/questions/:id
+    $.ajax({
+        url: "/api/questions/:id",
+        method: "GET"
+    }).done(function(response){
+        console.log(response);
+    });
+}
+
 function postTicket() {
     const ticketData = {
         comments: ticketComments.value.trim(),

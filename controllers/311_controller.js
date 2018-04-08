@@ -6,17 +6,10 @@ const db = require("../models");
 // router.get("/", (req,res) => res.render('registrationForm'));
 router.get("/", (req,res) => res.render('index'));
 
-// router.get("/", function (req, res) {
-//     db.Department.findAll({}).then(function (data) {
-//         res.render("index", { departments: data })
-//     });
-// });
-
 //GET - Form Data
-router.get("/new-request", function (req, res) {
+router.get("/api/departments", function (req, res) {
     db.Department.findAll({}).then(function (data) {
-        var departments = { departments: data };
-        res.render('index', departments);
+        res.JSON(data);
     });
 });
 
@@ -36,8 +29,8 @@ router.get("/api/questions/:id", function (req, res) {
         where: {
             requestId: req.params.id
         }
-    }).then(function (dbQuestion) {
-        res.json(dbQuestion);
+    }).then(function (data) {
+        res.json(data);
     });
 });
 
