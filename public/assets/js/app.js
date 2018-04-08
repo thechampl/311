@@ -9,4 +9,8 @@ $(document).ready(function () {
     $("#register-modal").modal("hide");
     $("#login-modal").modal("show");
   });
+
+  $("#createTicket").on('click', () => {
+    $("#ticket-modal").modal("show");
+  })
 });
