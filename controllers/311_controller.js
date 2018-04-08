@@ -65,7 +65,7 @@ router.post("/userData", function (req, res) {
 });
 
 router.post("/userTicket", function (req, res) {
-    // const userToAdd = req.body.
+    console.log(req.body);
     db.Ticket.create({
         createdAt: new Date(), updatedAt: 0,
         comments: req.body.comments,
