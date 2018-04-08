@@ -1,6 +1,5 @@
 $(document).ready(function () {
   $("#sign-up").on("click", function () {
-    console.log()
     $("#login-modal").modal("hide");
     $("#register-modal").modal("show");
   });
@@ -9,4 +8,8 @@ $(document).ready(function () {
     $("#register-modal").modal("hide");
     $("#login-modal").modal("show");
   });
+
+  $("#createTicket").on('click', () => {
+    $("#ticket-modal").modal("show");
+  })
 });
