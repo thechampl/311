@@ -55,7 +55,7 @@ router.post("/userData", function (req, res) {
         homePhone: req.body.homePhoneVal,
         workPhone: req.body.workPhoneVal,
         email: req.body.emailVal,
-        street: req.body.streetVal,
+        street: req.body.addressVal,
         city: req.body.cityVal,
         state: req.body.stateVal,
         zip: req.body.zipVal
