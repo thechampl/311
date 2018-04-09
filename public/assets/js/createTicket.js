@@ -27,7 +27,7 @@ function nameLater() {
         state: ticketState.value.trim(),
         zip: ticketZip.value.trim()
     };
-    inputValidation(ticketData);
+    ticketValidation(ticketData);
 }
 
 
