@@ -38,7 +38,7 @@ signUpButton.addEventListener('click', e => {
     e.preventDefault();
     const definedElements = [];
     inputElements.forEach( element => definedElements.push(element.value.trim()));
-    [emailVal, firstNameVal, lastNameVal, addressVal, stateVal, cityVal, zipVal, phoneVal, passwordVal] = definedElements;
+    [emailVal, firstNameVal, lastNameVal, addressVal, stateVal, cityVal, zipVal, homePhoneVal, passwordVal] = definedElements;
     
     const data = {
         emailVal,
