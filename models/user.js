@@ -6,12 +6,12 @@ module.exports = (sequelize, DataTypes) => {
         lastName: DataTypes.STRING,
         userType: DataTypes.STRING,
         homePhone: DataTypes.INTEGER,
-        workPhone: DataTypes.INTEGER,
         email: DataTypes.STRING,
         street: DataTypes.STRING,
         city: DataTypes.STRING,
         state: DataTypes.STRING,
-        zip: DataTypes.STRING
+        zip: DataTypes.STRING,
+        firebaseId: DataTypes.UUID
     }, {});
     // Define Relationships
     User.associate = function(models) {
