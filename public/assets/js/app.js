@@ -1,6 +1,5 @@
 $(document).ready(function () {
   $("#sign-up").on("click", function () {
-    console.log()
     $("#login-modal").modal("hide");
     $("#register-modal").modal("show");
   });
@@ -12,5 +11,10 @@ $(document).ready(function () {
 
   $("#createTicket").on('click', () => {
     $("#ticket-modal").modal("show");
-  })
+  });
+  
+  $("#resetPassword").on("click", function () {
+    $("#login-modal").modal("hide");
+    $("#reset-modal").modal("show");
+  });
 });
