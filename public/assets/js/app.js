@@ -1,3 +1,5 @@
+
+
 $(document).ready(function () {
   $("#sign-up").on("click", function () {
     $("#login-modal").modal("hide");
@@ -18,3 +20,9 @@ $(document).ready(function () {
     $("#reset-modal").modal("show");
   });
 });
+
+if (currentUser){
+  $("#createTicket").attr("style", "display:none");
+  
+
+}
