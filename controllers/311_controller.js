@@ -3,41 +3,41 @@ const express = require("express");
 const router = express.Router();
 const db = require("../models");
 // GET - Registration Form
-router.get("/", (req,res) => res.render('registrationForm'));
+// router.get("/", (req,res) => res.render('registrationForm'));
+router.get("/", (req,res) => res.render('index'));
 
 //GET - Form Data
-router.get("/new-request", function(req, res) {
-    db.Department.findAll({}).then(function(data) {
-        var departments = { departments: data };
-      res.render('index', departments);
+router.get("/api/departments", function (req, res) {
+    db.Department.findAll({}).then(function (data) {
+        res.json(data);
     });
 });
 
-router.get("/api/departments/:id", function(req, res) {
+router.get("/api/departments/:id", function (req, res) {
     db.Department.findOne({
-      where: {
-        id: req.params.id
-      },
-      include: [db.Request]
-    }).then(function(data) {
-      res.json(data);
+        where: {
+            id: req.params.id
+        },
+        include: [db.Request]
+    }).then(function (data) {
+        res.json(data);
     });
 });
 
-router.get("/api/questions/:id", function(req, res) {
+router.get("/api/questions/:id", function (req, res) {
     db.Question.findAll({
-      where: {
-        requestId: req.params.id
-      }
-    }).then(function(dbQuestion) {
-      res.json(dbQuestion);
+        where: {
+            requestId: req.params.id
+        }
+    }).then(function (data) {
+        res.json(data);
     });
 });
 
-router.get("/register", (req, res) => res.render('registrationForm'));
+// router.get("/register", (req, res) => res.render('registrationForm'));
 
 // GET - Landing Page
-router.get("/", (req, res) => res.render('index'));
+// router.get("/", (req, res) => res.render('index'));
 
 // GET - Dashboard
 // router.get("/dashboard", (req,res) => res.render('dashboard'));
@@ -64,7 +64,7 @@ router.post("/userData", function (req, res) {
 });
 
 router.post("/userTicket", function (req, res) {
-    // const userToAdd = req.body.
+    console.log(req.body);
     db.Ticket.create({
         createdAt: new Date(), updatedAt: 0,
         comments: req.body.comments,
@@ -75,10 +75,10 @@ router.post("/userTicket", function (req, res) {
         UserId: req.body.UserId,
         RequestId: req.body.RequestId
 
-    }).then(function(data) {
+    }).then(function (data) {
         var answers = req.body.answers;
         console.log(answers);
-        answers.forEach(function(answer) {
+        answers.forEach(function (answer) {
             db.Answer.create({
                 TicketId: data.id,
                 QuestionId: answer.question,
