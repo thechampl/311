@@ -38,15 +38,10 @@ signUpButton.addEventListener('click', e => {
     e.preventDefault();
     const definedElements = [];
     inputElements.forEach( element => definedElements.push(element.value.trim()));
-<<<<<<< HEAD
-    [emailVal, firstNameVal, lastNameVal, addressVal, stateVal, cityVal, zipVal, homePhoneVal, passwordVal] = definedElements;
-=======
-<<<<<<< HEAD
-    [emailVal, firstNameVal, lastNameVal, addressVal, stateVal, cityVal, zipVal, homePhoneVal, passwordVal] = definedElements;
-=======
+
+    
     [emailVal, firstNameVal, lastNameVal, addressVal, stateVal, cityVal, zipVal, passwordVal] = definedElements;
->>>>>>> master
->>>>>>> 80680d2bbb458dd410f01340ba83d7adce8e9075
+
     
     const data = {
         emailVal,
