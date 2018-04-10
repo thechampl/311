@@ -2,17 +2,17 @@
 const express = require("express");
 const router = express.Router();
 const db = require("../models");
-// GET - Registration Form
-// router.get("/", (req,res) => res.render('registrationForm'));
-router.get("/", (req,res) => res.render('index'));
 
-//GET - Form Data
+let userId = "";
+// GET: index.handlebars
+router.get("/", (req,res) => res.render('index'));
+// GET: Departments
 router.get("/api/departments", function (req, res) {
     db.Department.findAll({}).then(function (data) {
         res.json(data);
     });
 });
-
+// GET: Department
 router.get("/api/departments/:id", function (req, res) {
     db.Department.findOne({
         where: {
@@ -23,7 +23,7 @@ router.get("/api/departments/:id", function (req, res) {
         res.json(data);
     });
 });
-
+// Get Question Id
 router.get("/api/questions/:id", function (req, res) {
     db.Question.findAll({
         where: {
@@ -33,22 +33,29 @@ router.get("/api/questions/:id", function (req, res) {
         res.json(data);
     });
 });
+// Get Question Id
+router.get("/api/user/:uid", function (req, res) {
+    db.User.find({
+        where: {
+            firebaseId: req.params.uid
+        }
+    }).then(function (data) {
+        userId = data.id;
+        res.json(data);
+    });
+});
 
+// MADDIE: ARE THESE ROUTES COMMENTED OUT BELOW STILL NEEDED?
 // router.get("/register", (req, res) => res.render('registrationForm'));
-
 // GET - Landing Page
 // router.get("/", (req, res) => res.render('index'));
-
 // GET - Dashboard
 // router.get("/dashboard", (req,res) => res.render('dashboard'));
-
 // GET - SETTINGS
 // router.get("/settings", (req,res) => res.render('settings'));
 
-// POST - User Data
+// POST: User Data
 router.post("/userData", function (req, res) {
-    // const userToAdd = req.body.
-    console.log("hi");
     console.log(req.body);
     db.User.create({
         firstName: req.body.firstNameVal,
@@ -60,41 +67,38 @@ router.post("/userData", function (req, res) {
         city: req.body.cityVal,
         state: req.body.stateVal,
         zip: req.body.zipVal,
-        firebaseId: req.body.firebaseId
+        //firebaseId: req.body.firebaseId
     }).then(res.redirect("/"))
 
 });
-
+// POST: User Ticket
 router.post("/userTicket", function (req, res) {
     console.log(req.body);
-    db.Ticket.create({
-        createdAt: new Date(), updatedAt: 0,
-        comments: req.body.comments,
-        street: req.body.street,
-        city: req.body.city,
-        state: req.body.state,
-        zip: req.body.zip,
-        UserId: req.body.UserId,
-        RequestId: req.body.RequestId
-
-    }).then(function (data) {
-        var answers = req.body.answers;
-        console.log(answers);
-        answers.forEach(function (answer) {
-            db.Answer.create({
-                TicketId: data.id,
-                QuestionId: answer.question,
-                value: answer.answer
+    db.User.find({ where: { id: userId} }).then(function(userResults){
+        db.Ticket.create({
+            createdAt: new Date(), updatedAt: 0,
+            comments: req.body.comments,
+            street: userResults.street,
+            city: userResults.city,
+            state: userResults.state,
+            zip: userResults.zip,
+            status: "New",
+            UserId: userResults.id,
+            RequestId: req.body.requestId
+        }).then(function (data) {
+            var answers = req.body.answers;
+            answers.forEach(function (answer) {
+                db.Answer.create({
+                    TicketId: data.id,
+                    QuestionId: answer.question,
+                    value: answer.answer
+                })
             })
+            res.json(data);
         })
-
-        res.json(data);
-    })
-
+    });
 });
-
-
-// PUT route for updating tickets
+// PUT: User Tickets (Admin)
 router.put("/userTickets", function (req, res) {
     db.Ticket.update(
         { status: req.body.status, updatedAt: new Date() }, {
@@ -105,9 +109,7 @@ router.put("/userTickets", function (req, res) {
             res.json(dbTicket);
         });
 });
-
-
-// PUT route for changing UPVOTE on tickets
+// PUT: User Tickets (Non-Admin)
 router.put("/userTickets", function (req, res) {
     db.Ticket.update(
         { votes: { votes: sequelize.literal('votes + 1') }, updatedAt: new Date() }, {
@@ -118,8 +120,7 @@ router.put("/userTickets", function (req, res) {
             res.json(dbTicket);
         });
 });
-
-// PUT route for updating user (need to make a settings page?)
+// PUT: User Data
 router.put("/userData", function (req, res) {
     db.User.update(
         {
@@ -143,19 +144,6 @@ router.put("/userData", function (req, res) {
             res.json(dbPost);
         });
 });
-
-
-//   // DELETE route for deleting tickets NOT SURE IF WE WILL NEED THIS
-//  router.delete("/userTickets:id", function(req, res) {
-//     db.Post.destroy({
-//       where: {
-//         id: req.params.id
-//       }
-//     }).then(function(dbPost) {
-//       res.json(dbPost);
-//     });
-//   });
-
 // Export Router
 module.exports = router;
 
