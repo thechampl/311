@@ -1,22 +1,42 @@
+<div id="testDiv"></div>
+
 <!-- navbar -->
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
   <div class="container">
     <a class="navbar-brand" href="#">SIMPL311</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+      aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
 
-    <ul class="navbar-nav ml-auto">
-      <li class="active">
-        <a class="nav-link" id="open-ticket" href="#" data-toggle="modal" data-target="#ticket-test">Test Ticket</a>
-      </li>
-      <li class="active">
-        <a class="nav-link" href="#" data-toggle="modal" data-target="#ticket-modal" id="createTicket">Create Ticket</a>
-      </li>
-      <li class="active">
-        <a class="nav-link" href="#" data-toggle="modal" data-target="#login-modal">Log In</a>
-      </li>
-      <li class="active">
-        <a class="nav-link" href="#" data-toggle="modal" data-target="#register-modal">Register</a>
-      </li>
-    </ul>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto">
+        <li class="active">
+          <a class="nav-link" id="open-ticket" href="#" data-toggle="modal" data-target="#ticket-test">Test Ticket</a>
+        </li>
+        <li class="active">
+          <a class="nav-link" href="#" data-toggle="modal" data-target="#ticket-modal" id="createTicket">Create Ticket</a>
+        </li>
+        <li class="active">
+          <a class="nav-link" href="#" data-toggle="modal" data-target="#login-modal">Log In</a>
+        </li>
+        <li class="active">
+          <a class="nav-link" href="#" data-toggle="modal" data-target="#register-modal">Register</a>
+        </li>
+        <li class="nav-item dropdown mr-auto">
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true"
+            aria-expanded="false">
+            Dropdown
+          </a>
+          <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+            <a class="dropdown-item text-right" href="#">Action</a>
+            <a class="dropdown-item text-right" href="#">Another action</a>
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item text-right" href="#">Something else here</a>
+          </div>
+        </li>
+      </ul>
+    </div>
   </div>
 </nav>
 
@@ -190,8 +210,7 @@
   </div>
 
   {{!-- Ticket Modal --}} {{!--
-  <div class="modal fade" id="ticket-modal" tabindex="-1" role="dialog" aria-labelledby="ticket-modal-title"
-    aria-hidden="true">
+  <div class="modal fade" id="ticket-modal" tabindex="-1" role="dialog" aria-labelledby="ticket-modal-title" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered" role="document">
       <div class="modal-content">
         <div class="modal-header bg-dark">
@@ -227,9 +246,7 @@
         </div>
       </div>
     </div>
-  </div> --}}
-
-  {{!-- Will's ticket modal --}}
+  </div> --}} {{!-- Will's ticket modal --}}
   <div class="modal fade" id="ticket-test" tabindex="-1" role="dialog" aria-labelledby="ticket-modal-title" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered" role="document">
       <div class="modal-content">
@@ -255,7 +272,7 @@
             <div class="form-group" id="ticketQuestions">
 
             </div>
-            
+
             <textarea name="" class="w-100" id="ticketComments" rows="10" placeholder="Explain your ticket request"></textarea>
             <p>Characters Remaining
               <span id="remainingChars">255</span>
@@ -435,5 +452,6 @@
     </div>
   </div>
 </div>
-{{!-- <script type="text/javascript" src="assets/js/createTicket.js"></script> --}}
-{{!-- <script type="text/javascript" src="assets/js/testTicket.js"></script> --}}
+{{!--
+<script type="text/javascript" src="assets/js/createTicket.js"></script> --}} {{!--
+<script type="text/javascript" src="assets/js/testTicket.js"></script> --}}

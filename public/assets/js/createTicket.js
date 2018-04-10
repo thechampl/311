@@ -58,12 +58,22 @@
 
 $(document).ready(function () {
 
+	var source = document.getElementById("entry-template");
+
+	console.log(source);
+
 	$("#open-ticket").on("click", getDepts);
 
 	$("#deptDropdown").on("change", getReqs);
 
 	$("#reqDropdown").on("change", getQuestions);
 
+	var template;
+	
+	$.get('assets/js/templates/test1.handlebars', function (data) {
+		template = Handlebars.compile(data);
+		// $(target).html(template(jsonData));
+	}, 'html')
 
 	function getDepts() {
 		//AJAX call GET /api/departments
@@ -71,13 +81,19 @@ $(document).ready(function () {
 			url: "/api/departments",
 			method: "GET"
 		}).done(function (response) {
-			$("#deptDefault").nextAll("option").remove();
+			var dept = response[0];
 
-			response.forEach(function (dept) {
-				var option = $("<option>").attr("value", dept.id).text(dept.name);
+			var rendered = template(dept);
 
-				$("#deptDropdown").append(option);
-			})
+			$("#testDiv").html(rendered);
+			
+			// $("#deptDefault").nextAll("option").remove();
+
+			// response.forEach(function (dept) {
+			// 	var option = $("<option>").attr("value", dept.id).text(dept.name);
+
+			// 	$("#deptDropdown").append(option);
+			// })
 		});
 	}
 
@@ -97,9 +113,6 @@ $(document).ready(function () {
 			})
 		});
 	}
-
-	// var test = Handlebars.compile("<div></div>");
-	// console.log(test);
 
 	function getQuestions() {
 		//AJAX call /api/questions/:id
