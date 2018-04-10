@@ -38,11 +38,10 @@ signUpButton.addEventListener('click', e => {
     e.preventDefault();
     const definedElements = [];
     inputElements.forEach( element => definedElements.push(element.value.trim()));
-<<<<<<< HEAD
-    [emailVal, firstNameVal, lastNameVal, addressVal, stateVal, cityVal, zipVal, homePhoneVal, passwordVal] = definedElements;
-=======
+
+    
     [emailVal, firstNameVal, lastNameVal, addressVal, stateVal, cityVal, zipVal, passwordVal] = definedElements;
->>>>>>> master
+
     
     const data = {
         emailVal,
@@ -131,11 +130,23 @@ signOutButton.addEventListener('click', e => {
 });
 
 firebase.auth().onAuthStateChanged(currentUser => {
-    const signOutLI = $("#SignOutListItem");
-    if (currentUser) {
-        signOutLI.show();
+
+ 
+    if (currentUser) {   
+        $("#navbarDropdown").text("This will display UserName from Firebase") 
+        $("#logIn").attr("style", "display:none");
+        $("#register").attr("style", "display:none");
+        $("#signOut").attr("style", "display:block");
+        $("#createTicket").attr("style", "display:block");
+       
+        console.log(currentUser);
+
     } else {
-        signOutLI.hide();
+        $("#navbarDropdown").text("Welcome Guest") 
+        $("#logIn").attr("style", "display:block");
+        $("#register").attr("style", "display:block");
+        $("#signOut").attr("style", "display:none");
+        $("#createTicket").attr("style", "display:none");
         console.log("firebaseUser not logged in");
     }
 });
