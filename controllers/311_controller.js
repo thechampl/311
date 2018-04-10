@@ -3,7 +3,7 @@ const express = require("express");
 const router = express.Router();
 const db = require("../models");
 
-const userId;
+let userId = "";
 // GET: index.handlebars
 router.get("/", (req,res) => res.render('index'));
 // GET: Departments
