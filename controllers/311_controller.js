@@ -48,17 +48,19 @@ router.get("/api/questions/:id", function (req, res) {
 // POST - User Data
 router.post("/userData", function (req, res) {
     // const userToAdd = req.body.
+    console.log("hi");
+    console.log(req.body);
     db.User.create({
         firstName: req.body.firstNameVal,
         lastName: req.body.lastNameVal,
         userType: req.body.userType,
         homePhone: req.body.homePhoneVal,
-        workPhone: req.body.workPhoneVal,
         email: req.body.emailVal,
-        street: req.body.streetVal,
+        street: req.body.addressVal,
         city: req.body.cityVal,
         state: req.body.stateVal,
-        zip: req.body.zipVal
+        zip: req.body.zipVal,
+        firebaseId: req.body.firebaseId
     }).then(res.redirect("/"))
 
 });
