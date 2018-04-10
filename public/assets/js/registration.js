@@ -30,7 +30,7 @@ const city = document.querySelector('#city');
 const zip = document.querySelector('#zip');
 const phone = document.querySelector('#phone');
 
-const inputElements = [email, firstName, lastName, address, state, city, zip, phone, password];
+const inputElements = [email, firstName, lastName, address, state, city, zip, password];
 
 
 // Sign up function works
@@ -38,7 +38,10 @@ signUpButton.addEventListener('click', e => {
     e.preventDefault();
     const definedElements = [];
     inputElements.forEach( element => definedElements.push(element.value.trim()));
-    [emailVal, firstNameVal, lastNameVal, addressVal, stateVal, cityVal, zipVal, phoneVal, passwordVal] = definedElements;
+
+    
+    [emailVal, firstNameVal, lastNameVal, addressVal, stateVal, cityVal, zipVal, passwordVal] = definedElements;
+
     
     const data = {
         emailVal,
@@ -47,8 +50,7 @@ signUpButton.addEventListener('click', e => {
         cityVal,
         addressVal,
         stateVal,
-        zipVal,
-        homePhoneVal
+        zipVal
     };
     console.log(data);
     registrationValidation(data, passwordVal);
@@ -80,6 +82,9 @@ function registrationValidation(dataObj, userPassword) {
     };
     const promise = auth.createUserWithEmailAndPassword(dataObj.emailVal, userPassword)
         .then(() => {
+            const currentUser = firebase.auth().currentUser;
+            const uId = currentUser.uid;
+            dataObj.firebaseId = uId;
             postUserInput(dataObj);
             $("#register-modal").modal("hide");
         });
@@ -89,6 +94,7 @@ function registrationValidation(dataObj, userPassword) {
 
 // Send user Data object to our server
 function postUserInput(data) {
+    console.log("sending data to server");
     const xhr = new XMLHttpRequest();
     xhr.open("POST", "/userData", true);
     xhr.onload = function () {
@@ -124,12 +130,25 @@ signOutButton.addEventListener('click', e => {
 });
 
 firebase.auth().onAuthStateChanged(currentUser => {
-    const signOutLI = $("#SignOutListItem");
-    if (currentUser) {
-        signOutLI.show();
+
+ 
+    if (currentUser) {   
+        $("#navbarDropdown").text("This will display UserName from Firebase") 
+        $("#logIn").attr("style", "display:none");
+        $("#register").attr("style", "display:none");
+        $("#signOut").attr("style", "display:block");
+        $("#createTicket").attr("style", "display:block");
+       
         console.log(currentUser);
+
     } else {
-        signOutLI.hide();
+        $("#navbarDropdown").text("Welcome Guest") 
+        $("#logIn").attr("style", "display:block");
+        $("#register").attr("style", "display:block");
+        $("#signOut").attr("style", "display:none");
+        $("#createTicket").attr("style", "display:none");
         console.log("firebaseUser not logged in");
     }
 });
+
+//
