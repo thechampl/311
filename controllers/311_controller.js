@@ -48,6 +48,8 @@ router.get("/api/questions/:id", function (req, res) {
 // POST - User Data
 router.post("/userData", function (req, res) {
     // const userToAdd = req.body.
+    console.log("hi");
+    console.log(req.body);
     db.User.create({
         firstName: req.body.firstNameVal,
         lastName: req.body.lastNameVal,
