@@ -1,3 +1,5 @@
+
+
 $(document).ready(function () {
   $("#sign-up").on("click", function () {
     $("#login-modal").modal("hide");
@@ -17,4 +19,5 @@ $(document).ready(function () {
     $("#login-modal").modal("hide");
     $("#reset-modal").modal("show");
   });
+ 
 });

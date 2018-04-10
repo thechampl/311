@@ -1,27 +1,55 @@
 <!-- navbar -->
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
   <div class="container">
-    <a class="navbar-brand" href="#">SIMPL311</a>
-
+    <a class="navbar-brand" href="#"><img src="/assets/img/simpl311.png" alt="SIMPL311 Logo" id="logo"></a>
     <ul class="navbar-nav ml-auto">
-      <li class="active">
-        <a class="nav-link" id="open-ticket" href="#" data-toggle="modal" data-target="#ticket-test">Test Ticket</a>
+ 
+      <li class="nav-item dropdown active">
+        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          
+        </a>
+        
+        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+          <ul>
+          
+        <a class="nav-link text-dark" id="open-ticket" href="#" data-toggle="modal" data-target="#ticket-test">Test Ticket</a>
+      
+      
+        <a class="nav-link text-dark"  href="#" data-toggle="modal" data-target="#ticket-modal" id="createTicket">Create Ticket</a>
+      
+     
+        
+      
+      
+        <a class="nav-link text-dark" href="#" data-toggle="modal" data-target="#login-modal" id="logIn">Log In</a>
+      
+      
+        <a class="nav-link text-dark" href="#" data-toggle="modal" data-target="#register-modal" id="register">Register</a>
+    
+          <div class="dropdown-divider"></div>
+         <a class="nav-link text-dark" href="#" data-toggle="modal" data-target="#signOut-modal" id="signOut">Sign Out</a>
+        </div>
       </li>
-      <li class="active">
-        <a class="nav-link" href="#" data-toggle="modal" data-target="#ticket-modal" id="createTicket">Create Ticket</a>
-      </li>
-      <li class="active">
-        <a class="nav-link" href="#" data-toggle="modal" data-target="#signOut-modal" id="signOutListItem">Sign Out</a>
-      </li>
-      <li class="active">
-        <a class="nav-link" href="#" data-toggle="modal" data-target="#login-modal">Log In</a>
-      </li>
-      <li class="active">
-        <a class="nav-link" href="#" data-toggle="modal" data-target="#register-modal">Register</a>
-      </li>
+      </ul>
     </ul>
   </div>
-</nav>
+  </div>
+  
+
+</nav> 
+
+
+
+
+<!-- Home Banner -->
+<div class="banner">
+  <div class="row">
+    <div class="col-sm-12 text-center">
+      <img src="/assets/img/simpl311.png" alt="SIMPL311 Logo" id="banner-logo">
+      <h3>Connecting Citizens to Cities</h3>
+    </div>
+  </div>
+</div>
 
 <!-- main page content -->
 <div class="container pt-5">
@@ -530,4 +558,4 @@
 <script type="text/javascript" src="assets/js/login.js"></script>
 <script type="text/javascript" src="assets/js/createTicket.js"></script>
 <script type="text/javascript" src="assets/js/map.js"></script>
-
+<script type="text/javascript" src="assets/js/app.js"></script>
