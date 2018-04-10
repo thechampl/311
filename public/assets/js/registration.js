@@ -84,8 +84,7 @@ function registrationValidation(dataObj, userPassword) {
             });
             postUserInput(dataObj);
             $("#register-modal").modal("hide");
-        });
-        promise.catch(e => $("#invalid-modal .modal-body p").text(e.message),$("#invalid-modal").modal("show"));
+    }).catch(e => {if(e){$("#invalid-modal .modal-body p").text(e.message),$("#invalid-modal").modal("show")}});
 };
 
 // Send user Data object to our server
