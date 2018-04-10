@@ -19,10 +19,5 @@ $(document).ready(function () {
     $("#login-modal").modal("hide");
     $("#reset-modal").modal("show");
   });
+ 
 });
-
-if (currentUser){
-  $("#createTicket").attr("style", "display:none");
-  
-
-}
