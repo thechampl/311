@@ -57,6 +57,7 @@ function registrationValidation(dataObj, userPassword) {
         // Validates that no symbols are in a property value
         if ( /[^a-zA-Z0-9@\-\/\s\.]/.test( dataObj[property] )) {
             console.log(dataObj[property], "alphanumeric error");
+            $("#invalid-modal .modal-body p").text("There appears to be an error with your input. Please make sure you have completed all of the input fields and you are not using symbols within your text.");
             $("#invalid-modal").modal("show");
             breakFlag = true;
             break;
@@ -64,6 +65,7 @@ function registrationValidation(dataObj, userPassword) {
         // Validates that all input fields contain some value
         if (dataObj[property] === "" || undefined) {
             console.log(dataObj[property], "value error");
+            $("#invalid-modal .modal-body p").text("There appears to be an error with your input. Please make sure you have completed all of the input fields and you are not using symbols within your text.");
             $("#invalid-modal").modal("show");
             breakFlag = true;
             break;
@@ -83,7 +85,7 @@ function registrationValidation(dataObj, userPassword) {
             postUserInput(dataObj);
             $("#register-modal").modal("hide");
         });
-    promise.catch(e => console.log(e.message));
+        promise.catch(e => $("#invalid-modal .modal-body p").text(e.message),$("#invalid-modal").modal("show"));
 };
 
 // Send user Data object to our server
