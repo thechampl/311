@@ -1,6 +1,7 @@
 const loginButton = document.querySelector("#loginButton");
 const loginEmail = document.querySelector("#loginEmail");
 const loginPassword = document.querySelector("#loginPassword");
+let user = firebase.auth().currentUser;
 
 loginButton.addEventListener('click', e => {
     e.preventDefault();

@@ -85,6 +85,9 @@ function registrationValidation(dataObj, userPassword) {
             const currentUser = firebase.auth().currentUser;
             const uId = currentUser.uid;
             dataObj.firebaseId = uId;
+            currentUser.updateProfile({
+                displayName: dataObj.firstNameVal
+            });
             postUserInput(dataObj);
             $("#register-modal").modal("hide");
         });

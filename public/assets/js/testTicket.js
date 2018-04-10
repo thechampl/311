@@ -57,7 +57,6 @@
 // make sure that users cannot submit symbols or other malicious characters that could inject our software
 
 $(document).ready(function () {
-
     $("#open-ticket").on("click", getDepts);
 
     $("#deptDropdown").on("change", getReqs);

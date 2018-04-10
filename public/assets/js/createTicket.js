@@ -1,11 +1,10 @@
 $(document).ready(function () {
-    // inputs
-    const ticketStreet = document.querySelector("#ticketStreet");
-    const ticketCity = document.querySelector("#ticketCity");
-    const ticketState = document.querySelector("#ticketState");
-    const ticketZip = document.querySelector("#ticketZip");
-    const ticketComments = document.querySelector("#ticketComments");
     const characters = document.querySelector("#remainingChars");
+    const ticketDept = document.querySelector("#deptDropdown");
+    const ticketRequest = document.querySelector("#reqDropdown");
+    const ticketQuestions = document.querySelector("#ticketQuestions");
+    const ticketComments = document.querySelector("#ticketComments");
+
 
 
     // submit button
@@ -13,7 +12,7 @@ $(document).ready(function () {
 
 
     // Events
-    ticketSubmit.addEventListener("click", nameLater);
+    ticketSubmit.addEventListener("click", ticketSubmitCallback);
     ticketComments.addEventListener("keyup", remainingChars);
 
 
@@ -106,14 +105,25 @@ $(document).ready(function () {
         });
     }
 
-    function nameLater() {
+    function ticketSubmitCallback() {
+        const department = ticketDept.options[ticketDept.selectedIndex].text;
+        const request = ticketRequest.options[ticketRequest.selectedIndex].text;
+        const questions = {};
+        const comments = ticketComments.value.trim();
+
+        for(let i = 0; i < ticketQuestions.childNodes.length; i++) {
+            let increment = i + 1;
+            questions["question " + increment] = ticketQuestions.childNodes[i].children[0].value;
+        }
+
         const ticketData = {
-            comments: ticketComments.value.trim(),
-            street: ticketStreet.value.trim(), 
-            city: ticketCity.value.trim(),
-            state: ticketState.value.trim(),
-            zip: ticketZip.value.trim()
+            department,
+            request,
+            questions,
+            comments
         };
+
+        console.log(ticketData);
         ticketValidation(ticketData);
     }
     
@@ -122,12 +132,14 @@ $(document).ready(function () {
         let breakFlag = null;
         for(let property in dataObj) {
             // Validates that no symbols are in a property value
-            if ( /[^a-zA-Z0-9\-\/\s\.]/.test( dataObj[property] )) {
-                console.log("alphanumeric error");
-                $("#invalid-modal").modal("show");
-                breakFlag = true;
-                break;
-            }; 
+            if (typeof(dataObj[property]) !== 'object'){
+                if ( /[^a-zA-Z0-9\-\/\s\.]/.test( dataObj[property] )) {
+                    console.log("alphanumeric error");
+                    $("#invalid-modal").modal("show");
+                    breakFlag = true;
+                    break;
+                }; 
+            }
             // Validates that all input fields contain some value
             if (dataObj[property] === "" || undefined) {
                 console.log("value error");
@@ -169,3 +181,46 @@ $(document).ready(function () {
     
 });
 
+
+
+// REfactoring this regex. Please don't touch!!!!!!
+// REfactoring this regex. Please don't touch!!!!!!
+// REfactoring this regex. Please don't touch!!!!!!
+
+
+// this error triggers because we pass an object as a value
+// Use and if statement to check the type of each property
+
+// function ticketValidation(dataObj) {  
+//     let breakFlag = null;
+//     for(let property in dataObj) {
+//         // Validates that no symbols are in a property value
+//         // this error triggers because we pass an object as a value
+//         // Use and if statement to check the type of each property
+//         if (typeof(dataObj[property]) == 'object') {
+//             console.log("object ran", dataObj[property]);
+//             if (/[^a-zA-Z0-9@:\-\/\s\.{}],*"*/.test( dataObj[property])) {
+//                 console.log("alphanumeric object error");
+//                 $("#invalid-modal").modal("show");
+//                 breakFlag = true;
+//                 break; 
+//             }
+//         } else if ( /[^a-zA-Z0-9\-\/\s\.]/.test( dataObj[property] )) {
+//             console.log("alphanumeric error");
+//             $("#invalid-modal").modal("show");
+//             breakFlag = true;
+//             break;
+//         }; 
+//         // Validates that all input fields contain some value
+//         if (dataObj[property] === "" || undefined) {
+//             console.log("value error");
+//             $("#invalid-modal").modal("show");
+//             breakFlag = true;
+//             break;
+//         };
+//     };
+//     if(breakFlag === true) {
+//         return;
+//     };
+//     postTicket(dataObj);
+// };
