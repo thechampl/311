@@ -2,7 +2,6 @@
 // need to make a function to validate that that passwordInput
 // and passwordConfirmation are ===
 
-
 const config = {
     apiKey: "AIzaSyDUKEzdKpJQ3aCrue8FDXIHolQV6iQC_EM",
     authDomain: "project2-d7753.firebaseapp.com",
@@ -15,7 +14,6 @@ firebase.initializeApp(config);
 
 const auth = firebase.auth();
 const currentUser = firebase.auth().currentUser;
-
 // const loginButton = document.querySelector("#loginButton");
 const signOutButton = document.querySelector("#signOutButton");
 const signUpButton = document.querySelector("#registerButton");
@@ -29,20 +27,14 @@ const state = document.querySelector('#state');
 const city = document.querySelector('#city');
 const zip = document.querySelector('#zip');
 const phone = document.querySelector('#phone');
-
 const inputElements = [email, firstName, lastName, address, state, city, zip, password];
-
 
 // Sign up function works
 signUpButton.addEventListener('click', e => {
     e.preventDefault();
     const definedElements = [];
     inputElements.forEach( element => definedElements.push(element.value.trim()));
-
-    
     [emailVal, firstNameVal, lastNameVal, addressVal, stateVal, cityVal, zipVal, passwordVal] = definedElements;
-
-    
     const data = {
         emailVal,
         firstNameVal,
@@ -65,6 +57,7 @@ function registrationValidation(dataObj, userPassword) {
         // Validates that no symbols are in a property value
         if ( /[^a-zA-Z0-9@\-\/\s\.]/.test( dataObj[property] )) {
             console.log(dataObj[property], "alphanumeric error");
+            $("#invalid-modal .modal-body p").text("There appears to be an error with your input. Please make sure you have completed all of the input fields and you are not using symbols within your text.");
             $("#invalid-modal").modal("show");
             breakFlag = true;
             break;
@@ -72,6 +65,7 @@ function registrationValidation(dataObj, userPassword) {
         // Validates that all input fields contain some value
         if (dataObj[property] === "" || undefined) {
             console.log(dataObj[property], "value error");
+            $("#invalid-modal .modal-body p").text("There appears to be an error with your input. Please make sure you have completed all of the input fields and you are not using symbols within your text.");
             $("#invalid-modal").modal("show");
             breakFlag = true;
             break;
@@ -85,11 +79,13 @@ function registrationValidation(dataObj, userPassword) {
             const currentUser = firebase.auth().currentUser;
             const uId = currentUser.uid;
             dataObj.firebaseId = uId;
+            currentUser.updateProfile({
+                displayName: dataObj.firstNameVal
+            });
             postUserInput(dataObj);
             $("#register-modal").modal("hide");
         });
-
-    promise.catch(e => console.log(e.message));
+        promise.catch(e => $("#invalid-modal .modal-body p").text(e.message),$("#invalid-modal").modal("show"));
 };
 
 // Send user Data object to our server
@@ -131,24 +127,37 @@ signOutButton.addEventListener('click', e => {
 
 firebase.auth().onAuthStateChanged(currentUser => {
 
+
  
-    if (currentUser) {   
+    if (currentUser) {  
+
         $("#navbarDropdown").text("This will display UserName from Firebase") 
         $("#logIn").attr("style", "display:none");
         $("#register").attr("style", "display:none");
         $("#signOut").attr("style", "display:block");
         $("#createTicket").attr("style", "display:block");
-       
+        $.ajax({
+            url: "/api/user/" + currentUser.uid,
+            method: "GET"
+        }).done(function (response) {
+            $("#navbarDropdown").text(`Welcome back, ${response.firstName} ${response.lastName}`);
+        });
+        $("#open-ticket").attr("style", "display:block");
+        $("#open-dash").attr("style", "display:block");
+        $("#my-profile").attr("style", "display:block");
+        $("#guest").attr("style", "display:none");
+        
         console.log(currentUser);
 
+
     } else {
-        $("#navbarDropdown").text("Welcome Guest") 
+        $("#navbarDropdown").attr("style", "display:none");       
         $("#logIn").attr("style", "display:block");
         $("#register").attr("style", "display:block");
         $("#signOut").attr("style", "display:none");
-        $("#createTicket").attr("style", "display:none");
+        $("#open-ticket").attr("style", "display:none");
+        $("#open-dash").attr("style", "display:none");
+        $("#my-profile").attr("style", "display:none");
         console.log("firebaseUser not logged in");
     }
 });
-
-//

@@ -38,6 +38,9 @@ module.exports = {
         zip: {
             type: Sequelize.STRING
         },
+        firebaseId: {
+            type: Sequelize.UUID
+        },
         createdAt: {
             allowNull: false,
             type: Sequelize.DATE
