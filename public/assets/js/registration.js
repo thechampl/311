@@ -132,21 +132,27 @@ signOutButton.addEventListener('click', e => {
 firebase.auth().onAuthStateChanged(currentUser => {
 
  
-    if (currentUser) {   
+    if (currentUser) {  
+        $("#navbarDropdown").attr("style", "display:block"); 
         $("#navbarDropdown").text("This will display UserName from Firebase") 
         $("#logIn").attr("style", "display:none");
         $("#register").attr("style", "display:none");
         $("#signOut").attr("style", "display:block");
-        $("#createTicket").attr("style", "display:block");
-       
+        $("#open-ticket").attr("style", "display:block");
+        $("#open-dash").attr("style", "display:block");
+        $("#my-profile").attr("style", "display:block");
+        $("#guest").attr("style", "display:none");
+        
         console.log(currentUser);
 
     } else {
-        $("#navbarDropdown").text("Welcome Guest") 
+        $("#navbarDropdown").attr("style", "display:none");       
         $("#logIn").attr("style", "display:block");
         $("#register").attr("style", "display:block");
         $("#signOut").attr("style", "display:none");
-        $("#createTicket").attr("style", "display:none");
+        $("#open-ticket").attr("style", "display:none");
+        $("#open-dash").attr("style", "display:none");
+        $("#my-profile").attr("style", "display:none");
         console.log("firebaseUser not logged in");
     }
 });
