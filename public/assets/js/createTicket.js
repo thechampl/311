@@ -106,20 +106,20 @@ $(document).ready(function () {
     }
 
     function ticketSubmitCallback() {
-        const department = ticketDept.options[ticketDept.selectedIndex].text;
-        const request = ticketRequest.options[ticketRequest.selectedIndex].text;
-        const questions = {};
+        //const department = ticketDept.options[ticketDept.selectedIndex].text;
+        const requestId = ticketRequest.selectedIndex; //ticketRequest.options[ticketRequest.selectedIndex];
+        const answers = [];
         const comments = ticketComments.value.trim();
-
         for(let i = 0; i < ticketQuestions.childNodes.length; i++) {
             let increment = i + 1;
-            questions["question " + increment] = ticketQuestions.childNodes[i].children[0].value;
+            answers.push({question: increment, answer: ticketQuestions.childNodes[i].children[0].value});
+            //answers["question " + increment] = ticketQuestions.childNodes[i].children[0].value;
         }
 
         const ticketData = {
-            department,
-            request,
-            questions,
+            //firebaseId,
+            requestId,
+            answers,
             comments
         };
 

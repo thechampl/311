@@ -48,7 +48,6 @@ router.get("/api/questions/:id", function (req, res) {
 // POST - User Data
 router.post("/userData", function (req, res) {
     // const userToAdd = req.body.
-    console.log("hi");
     console.log(req.body);
     db.User.create({
         firstName: req.body.firstNameVal,
@@ -60,37 +59,36 @@ router.post("/userData", function (req, res) {
         city: req.body.cityVal,
         state: req.body.stateVal,
         zip: req.body.zipVal,
-        firebaseId: req.body.firebaseId
+        //firebaseId: req.body.firebaseId
     }).then(res.redirect("/"))
 
 });
 
 router.post("/userTicket", function (req, res) {
     console.log(req.body);
-    db.Ticket.create({
-        createdAt: new Date(), updatedAt: 0,
-        comments: req.body.comments,
-        street: req.body.street,
-        city: req.body.city,
-        state: req.body.state,
-        zip: req.body.zip,
-        UserId: req.body.UserId,
-        RequestId: req.body.RequestId
-
-    }).then(function (data) {
-        var answers = req.body.answers;
-        console.log(answers);
-        answers.forEach(function (answer) {
-            db.Answer.create({
-                TicketId: data.id,
-                QuestionId: answer.question,
-                value: answer.answer
+    db.User.find({ where: { id: 1} }).then(function(userResults){
+        db.Ticket.create({
+            createdAt: new Date(), updatedAt: 0,
+            comments: req.body.comments,
+            street: userResults.street,
+            city: userResults.city,
+            state: userResults.state,
+            zip: userResults.zip,
+            status: "New",
+            UserId: 1, //req.body.UserId,
+            RequestId: req.body.requestId
+        }).then(function (data) {
+            var answers = req.body.answers;
+            answers.forEach(function (answer) {
+                db.Answer.create({
+                    TicketId: data.id,
+                    QuestionId: answer.question,
+                    value: answer.answer
+                })
             })
+            res.json(data);
         })
-
-        res.json(data);
-    })
-
+    });
 });
 
 
