@@ -15,12 +15,10 @@ module.exports = {
             type: Sequelize.STRING
         },
         userType: {
-            type: Sequelize.STRING
+            type: Sequelize.STRING,
+            defaultValue: "User"
         },
         homePhone: {
-            type: Sequelize.STRING
-        },
-        workPhone: {
             type: Sequelize.STRING
         },
         email: {
