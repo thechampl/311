@@ -12,7 +12,7 @@ function getCurrentLocation(event){
         $.ajax({
             url:`https://maps.googleapis.com/maps/api/geocode/json?latlng=${lat},${lng}&key=${key}`, 
             type:"GET"
-        }).done(function(results){
+        }).done(results => {
             $("#address").val(`${results.results[0].address_components[0].short_name} ${results.results[0].address_components[1].short_name}`);
             $("#city").val(results.results[0].address_components[3].short_name);
             $("#state").val(results.results[0].address_components[6].short_name);
@@ -20,7 +20,7 @@ function getCurrentLocation(event){
         });
     }
     function error(err){
-        //console.log(err)
+        // DO SOMETHING
     }
 }
 $("#currentLocation").on("click", getCurrentLocation);

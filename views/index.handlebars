@@ -37,12 +37,7 @@
       </ul>
     </div>
   </div>
-
-
 </nav>
-
-
-
 
 <!-- Home Banner -->
 <div class="banner">
@@ -222,45 +217,7 @@
       </div>
     </div>
   </div>
-
-  {{!-- Ticket Modal --}} {{!--
-  <div class="modal fade" id="ticket-modal" tabindex="-1" role="dialog" aria-labelledby="ticket-modal-title" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered" role="document">
-      <div class="modal-content">
-        <div class="modal-header bg-dark">
-          <h5 class="modal-title text-light" id="login-modal-title">Create a Ticket</h5>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
-        </div>
-
-        <div class="modal-body">
-          <form>
-            <div class="form-group">
-              <input type="text" class="form-control" id="ticketStreet" placeholder="Street">
-            </div>
-            <div class="form-group">
-              <input type="text" class="form-control" id="ticketCity" placeholder="City">
-            </div>
-            <div class="form-group">
-              <input type="text" class="form-control" id="ticketState" placeholder="State">
-            </div>
-            <div class="form-group">
-              <input type="text" class="form-control" id="ticketZip" placeholder="Zip Code">
-            </div>
-            <textarea name="" id="ticketComments" cols="30" rows="10" placeholder="Explain your ticket request" style="height: 100%; width: 100%;"></textarea>
-            <p>Characters Remaining
-              <span id="remainingChars">254</span>
-            </p>
-          </form>
-          <button id="ticketSubmit" type="button" class="btn btn-dark btn-block">Submit Ticket</button>
-        </div>
-
-        <div class="modal-footer">
-        </div>
-      </div>
-    </div>
-  </div> --}} {{!-- Will's ticket modal --}}
+{{!-- Will's ticket modal --}}
   <div class="modal fade" id="ticket-test" tabindex="-1" role="dialog" aria-labelledby="ticket-modal-title" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered" role="document">
       <div class="modal-content">
@@ -386,15 +343,6 @@
           </form>
           <button id="passwordResetButton" type="button" class="btn btn-dark btn-block">Reset Password</button>
         </div>
-
-        {{!--
-        <div class="modal-footer">
-          <div class="mx-auto">
-            <span>Don't Have An Account?
-              <a href="#" id="sign-up">Sign Up</a>
-            </span>
-          </div>
-        </div> --}}
       </div>
     </div>
   </div>
@@ -413,15 +361,6 @@
         <div class="modal-body">
           <button id="signOutButton" type="button" class="btn btn-dark btn-block">Sign Out</button>
         </div>
-
-        {{!--
-        <div class="modal-footer">
-          <div class="mx-auto">
-            <span>Don't Have An Account?
-              <a href="#" id="sign-up">Sign Up</a>
-            </span>
-          </div>
-        </div> --}}
       </div>
     </div>
   </div>
@@ -436,45 +375,44 @@
             <span aria-hidden="true">&times;</span>
           </button>
         </div>
-
         <div class="modal-body">
           <form>
             <div class="form-row">
               <div class="form-group col-md-6">
 
-                <input type="text" class="form-control" id="firstName" aria-describedby="emailHelp" placeholder="First Name">
+                <input required type="text" class="form-control" id="firstName" aria-describedby="emailHelp" placeholder="First Name">
               </div>
 
               <div class="form-group col-md-6">
-                <input type="text" class="form-control" id="lastName" aria-describedby="emailHelp" placeholder="Last Name">
+                <input required type="text" class="form-control" id="lastName" aria-describedby="emailHelp" placeholder="Last Name">
 
               </div>
             </div>
 
             <div class="form-group">
-              <input type="email" class="form-control" id="emailInput" aria-describedby="emailHelp" placeholder="Email Address">
+              <input required type="email" class="form-control" id="emailInput" aria-describedby="emailHelp" placeholder="Email Address">
             </div>
 
             <div class="form-group">
-              <input type="password" class="form-control" id="passwordInput" placeholder="Password">
+              <input required type="password" class="form-control" id="passwordInput" placeholder="Password">
             </div>
 
             <div class="form-group">
-              <input type="password" class="form-control" id="passwordConfirmation" placeholder="Confirm Password">
+              <input required type="password" class="form-control" id="passwordConfirmation" placeholder="Confirm Password">
             </div>
 
             <div class="form-group">
-              <input type="text" class="form-control" id="address" placeholder="Address">
+              <input required type="text" class="form-control" id="address" placeholder="Address">
 
             </div>
 
             <div class="form-row">
               <div class="form-group col-md-5">
-                <input type="text" class="form-control" id="city" aria-describedby="emailHelp" placeholder="City">
+                <input required type="text" class="form-control" id="city" aria-describedby="emailHelp" placeholder="City">
               </div>
 
               <div class="form-group col-md-3">
-                <select id="state" class="form-control">
+                <select required id="state" class="form-control">
                   <option selected>State</option>
 
                   <option value="AK">AK</option>
@@ -532,7 +470,7 @@
               </div>
 
               <div class="form-group col-md-2">
-                <input type="text" class="form-control" id="zip" aria-describedby="emailHelp" placeholder="ZIP">
+                <input required type="number" maxlength="5" class="form-control" id="zip" aria-describedby="emailHelp" placeholder="ZIP">
               </div>
               <div class="form-group col-md-2">
                 <button id="currentLocation" class="btn btn-outline-info" type="button">
@@ -542,7 +480,7 @@
             </div>
 
             <div class="form-group">
-              <input type="text" class="form-control" id="phone" placeholder="Phone Number">
+              <input required type="tel" class="form-control" id="phone" placeholder="Phone Number">
             </div>
           </form>
 
