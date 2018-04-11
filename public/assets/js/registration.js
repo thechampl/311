@@ -27,14 +27,14 @@ const state = document.querySelector('#state');
 const city = document.querySelector('#city');
 const zip = document.querySelector('#zip');
 const phone = document.querySelector('#phone');
-const inputElements = [email, firstName, lastName, address, state, city, zip, password];
+const inputElements = [email, firstName, lastName, address, state, city, zip, phone, password];
 
 // Sign up function works
 signUpButton.addEventListener('click', e => {
     e.preventDefault();
     const definedElements = [];
     inputElements.forEach( element => definedElements.push(element.value.trim()));
-    [emailVal, firstNameVal, lastNameVal, addressVal, stateVal, cityVal, zipVal, passwordVal] = definedElements;
+    [emailVal, firstNameVal, lastNameVal, addressVal, stateVal, cityVal, zipVal, homePhoneVal, passwordVal] = definedElements;
     const data = {
         emailVal,
         firstNameVal,
@@ -42,7 +42,8 @@ signUpButton.addEventListener('click', e => {
         cityVal,
         addressVal,
         stateVal,
-        zipVal
+        zipVal,
+        homePhoneVal,
     };
     console.log(data);
     registrationValidation(data, passwordVal);
@@ -82,6 +83,7 @@ function registrationValidation(dataObj, userPassword) {
             currentUser.updateProfile({
                 displayName: dataObj.firstNameVal
             });
+            console.log(dataObj)
             postUserInput(dataObj);
             $("#register-modal").modal("hide");
     }).catch(e => {if(e){$("#invalid-modal .modal-body p").text(e.message),$("#invalid-modal").modal("show")}});
@@ -125,11 +127,7 @@ signOutButton.addEventListener('click', e => {
 });
 
 firebase.auth().onAuthStateChanged(currentUser => {
-
-
- 
     if (currentUser) {  
-
         $("#navbarDropdown").text("This will display UserName from Firebase") 
         $("#logIn").attr("style", "display:none");
         $("#register").attr("style", "display:none");
@@ -139,6 +137,7 @@ firebase.auth().onAuthStateChanged(currentUser => {
             url: "/api/user/" + currentUser.uid,
             method: "GET"
         }).done(function (response) {
+            console.log(response);
             $("#navbarDropdown").text(`Welcome back, ${response.firstName} ${response.lastName}`);
         });
         $("#open-ticket").attr("style", "display:block");
@@ -147,7 +146,6 @@ firebase.auth().onAuthStateChanged(currentUser => {
         $("#guest").attr("style", "display:none");
         
         console.log(currentUser);
-
 
     } else {
         $("#navbarDropdown").attr("style", "display:none");       
