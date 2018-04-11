@@ -67,7 +67,7 @@ router.post("/userData", function (req, res) {
         city: req.body.cityVal,
         state: req.body.stateVal,
         zip: req.body.zipVal,
-        //firebaseId: req.body.firebaseId
+        firebaseId: req.body.firebaseId
     }).then(res.redirect("/"))
 
 });

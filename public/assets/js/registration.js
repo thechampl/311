@@ -131,7 +131,7 @@ firebase.auth().onAuthStateChanged(currentUser => {
  
     if (currentUser) {  
 
-        $("#navbarDropdown").text("This will display UserName from Firebase") 
+        $("#navbarDropdown").attr("style", "display:block"); 
         $("#logIn").attr("style", "display:none");
         $("#register").attr("style", "display:none");
         $("#signOut").attr("style", "display:block");
