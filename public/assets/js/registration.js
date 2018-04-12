@@ -110,23 +110,19 @@ signOutButton.addEventListener('click', e => {
 });
 // ON AUTH STATE CHANGED
 firebase.auth().onAuthStateChanged(currentUser => {
-
-    if (currentUser) {   
+    if(currentUser) {   
         $("#logIn").attr("style", "display:none");
         $("#register").attr("style", "display:none");
         $("#signOut").attr("style", "display:block").text("Sign Out");
         $("#createTicket").attr("style", "display:block").text("Create Ticket");
       $.ajax({ url: `/api/user/${currentUser.uid}`, method: "GET" }).done(response => {
             $("#navbarDropdown").text(`Welcome back, ${response.firstName} ${response.lastName}`);
-    
-        $("#open-ticket").attr("style", "display:block").text("New Ticket");
-        $("#open-dash").attr("style", "display:block").text("Dashboard");
-        $("#my-profile").attr("style", "display:block").text("Profile");
-        
+            $("#open-ticket").attr("style", "display:block").text("New Ticket");
+            $("#open-dash").attr("style", "display:block").text("Dashboard");
+            $("#my-profile").attr("style", "display:block").text("Profile");
       });
-      
-
-    } else {
+    } 
+    else {
         $("#navbarDropdown").attr("style", "display:none");       
         $("#logIn").attr("style", "display:block").text("Log In");
         $("#register").attr("style", "display:block").text("Register");

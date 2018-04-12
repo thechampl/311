@@ -2,9 +2,10 @@
 const express = require("express");
 const router = express.Router();
 const db = require("../models");
-// User ID
-let userId = "";
-
+// User Info
+let user_Id = "";
+let user_Type = "User";
+let user_DeptId;
 /// ROUTES
 // GET: index.handlebars
 router.get("/", (req,res) => res.render('index'));
@@ -26,9 +27,13 @@ router.get("/api/questions/:id", (req,res) => {
 router.get("/api/user/:uid", (req,res) => {
     db.User.find({ include:[{ model: db.Admin }],
     where: { firebaseId: req.params.uid } }).then((data) => {
-        userId = data.id;
-        if(data.Admins.length > 0 && data.userType !== "Admin"){
-            db.User.update( { userType: "Admin"},{ where: { id: userId } })
+        user_Id = data.id;
+        if(data.Admins.length > 0){
+            user_Type = "Admin";
+            user_DeptId = data.Admins[0].dataValues.DepartmentId;
+            if(data.userType !== "Admin"){
+                db.User.update( { userType: "Admin"},{ where: { id: user_Id } })
+            }
         }
         res.json(data);
     });
@@ -36,26 +41,32 @@ router.get("/api/user/:uid", (req,res) => {
 
 //GET: User's Ticket Data
 router.get("/api/tickets/", (req, res) => {
-    db.Ticket.findAll({
-        where: {
-            userId: userId
-        },
-        include: [{ 
-            model: db.Answer,
-            include: [{
-                model: db.Question
-            }]
-        }, { 
-            model: db.Request,
-            include: [{
-                model: db.Department
-            }]
-        }, {
-            model: db.User
-        }]
-    }).then(function(data) {      
-        res.json(data);
-    })
+    if(user_Type === "User"){
+        db.Ticket.findAll({ where: { userId: user_Id },
+            include: [{ model: db.Answer, 
+            include: [{ model: db.Question }]}, { model: db.Request, 
+            include: [{ model: db.Department }] }, { model: db.User }]
+        }).then(function(data) {      
+            res.json(data);
+        })
+    }
+    else if(user_Type === "Admin"){
+        db.Request.findAll({ 
+            where: { departmentId: user_DeptId }
+        }).then(function(data){
+            const requestIds = [];
+            for(var i = 0; i < data.length; i++){
+                requestIds.push(data[i].id);
+            }
+            db.Ticket.findAll({ where: { requestId: requestIds }, 
+                include: [{ model: db.Answer, include: [{ model: db.Question }]}, 
+                { model: db.Request, include: [{ model: db.Department }] }, { model: db.User }]
+            }).then(function(data) {     
+                res.json(data);
+                console.log(data)
+            })
+        })
+    }
 });
 
 // POST: User Data
@@ -75,7 +86,7 @@ router.post("/userData", (req,res) => {
 });
 // POST: User Ticket
 router.post("/userTicket", (req,res) => {
-    db.User.find({ where: { id: userId} }).then((userResults) => {
+    db.User.find({ where: { id: user_Id} }).then((userResults) => {
         db.Ticket.create({
             createdAt: new Date(), 
             updatedAt: 0,
