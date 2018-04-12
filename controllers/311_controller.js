@@ -33,15 +33,27 @@ router.get("/api/questions/:id", function (req, res) {
         res.json(data);
     });
 });
-// Get Question Id
+// Get User Id
 router.get("/api/user/:uid", function (req, res) {
     db.User.find({
         where: {
             firebaseId: req.params.uid
-        }
+        },
+        include:[{ model: db.Admin }]
     }).then(function (data) {
         userId = data.id;
         res.json(data);
+        if(data.Admins.length > 0 && data.userType !== "Admin"){
+        db.User.update(
+            {
+                userType: "Admin"
+            },
+            {
+            where: {
+                id: userId
+            }
+            })
+        }
     });
 });
 
@@ -126,7 +138,7 @@ router.put("/userData", function (req, res) {
         {
             firstName: req.body.firstNameval,
             lastName: req.body.lastNameVal,
-            userType: "Citizen",
+            userType: "User",
             homePhone: req.body.phoneNumVal,
             workPhone: req.body.workPhoneVal,
             email: req.body.emailVal,

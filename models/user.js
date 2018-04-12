@@ -4,7 +4,10 @@ module.exports = (sequelize, DataTypes) => {
     var User = sequelize.define("User", {
         firstName: DataTypes.STRING,
         lastName: DataTypes.STRING,
-        userType: DataTypes.STRING,
+        userType: {
+            type: DataTypes.STRING,
+            defaultValue: "User"
+        },
         homePhone: DataTypes.INTEGER,
         email: DataTypes.STRING,
         street: DataTypes.STRING,
