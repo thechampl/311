@@ -9,7 +9,6 @@
       <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
-
       <ul class="navbar-nav ml-auto">
         {{!-- create ticket --}}
         <a class="nav-link text-white" id="open-ticket" href="#" data-toggle="modal" data-target="#ticket-test"></a>
@@ -18,32 +17,25 @@
         {{!-- register --}}
         <a class="nav-link text-white" href="#" data-toggle="modal" data-target="#register-modal" id="register"></a>
         {{!-- login --}}
-        <a class="nav-link text-white" href="#" data-toggle="modal" data-target="#login-modal" id="logIn"></a>
+
+        <a class="nav-link text-white" href="#" data-toggle="modal" data-target="#login-modal" id="logIn">Log In</a>
       
-
         <li class="nav-item dropdown active" >
-          <a class="nav-link dropdown-toggle" href="#" role="button" id="navbarDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          </a>
-
-          <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-            <ul>
-              {{!-- in drop down --}} {{!-- my profile --}}
-              <a class="nav-link text-dark" id="my-profile" href="#"></a>
-              <div class="dropdown-divider"></div>
-              {{!-- sign out --}}
-              <a class="nav-link text-dark" href="#" data-toggle="modal" data-target="#signOut-modal" id="signOut"></a>
-          </div>
+            <a class="nav-link dropdown-toggle" href="#" role="button" id="navbarDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></a>
+            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                <ul>
+                {{!-- in drop down --}} {{!-- my profile --}}
+                <a class="nav-link text-dark" id="my-profile" href="#">My Profile</a>
+                <div class="dropdown-divider"></div>
+                {{!-- sign out --}}
+                <a class="nav-link text-dark" href="#" data-toggle="modal" data-target="#signOut-modal" id="signOut">Sign Out</a>
+            </div>
         </li>
         </ul>
       </ul>
     </div>
   </div>
-
-
 </nav>
-
-
-
 
 <!-- Home Banner -->
 <div class="banner">
@@ -56,135 +48,13 @@
 </div>
 
 <!-- main page content -->
-<div class="container pt-5">
-  <ul class="nav nav-tabs">
-    <li class="nav-item">
-      <a class="nav-link active" data-toggle="tab" href="#nearby">Requests Nearby</a>
-    </li>
-    <li class="nav-item">
-      <a class="nav-link" data-toggle="tab" href="#dashboard">Dashboard</a>
-    </li>
-    <li class="nav-item">
-      <a class="nav-link" data-toggle="tab" href="#profile">Profile</a>
-    </li>
-    <li class="nav-item">
-      <a class="nav-link" data-toggle="tab" href="#admin">Admin</a>
-    </li>
-  </ul>
-
-  <div id="myTabContent" class="tab-content">
-    <div class="tab-pane fade show active" id="nearby">
-      <div id="accordion1">
-        <div class="card">
-          <div class="card-header" id="heading11">
-            <h5 class="mb-0">
-              <button class="btn btn-link" data-toggle="collapse" data-target="#collapse11" aria-expanded="true" aria-controls="collapse11">
-                Collapsible Group Item #1
-              </button>
-            </h5>
-          </div>
-          <div id="collapse11" class="collapse" aria-labelledby="heading11" data-parent="#accordion1">
-            <div class="card-body">
-              Test ticket 1
-            </div>
-          </div>
-        </div>
-
-        <div class="card">
-          <div class="card-header" id="heading12">
-            <h5 class="mb-0">
-              <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapse12" aria-expanded="false" aria-controls="collapse12">
-                Collapsible Group Item #2
-              </button>
-            </h5>
-          </div>
-          <div id="collapse12" class="collapse" aria-labelledby="heading12" data-parent="#accordion1">
-            <div class="card-body">
-              Test ticket 2
-            </div>
-          </div>
-        </div>
-
-        <div class="card">
-          <div class="card-header" id="heading13">
-            <h5 class="mb-0">
-              <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapse13" aria-expanded="false" aria-controls="collapse13">
-                Collapsible Group Item #3
-              </button>
-            </h5>
-          </div>
-          <div id="collapse13" class="collapse" aria-labelledby="heading13" data-parent="#accordion1">
-            <div class="card-body">
-              Test ticket 3
-            </div>
-          </div>
-        </div>
-
-      </div>
+  <div class="container">
+    <div id="mainContent">
+      
     </div>
+  </div>
 
-    <div class="tab-pane fade" id="dashboard">
-      <div id="accordion2">
-        <div class="card">
-          <div class="card-header" id="heading21">
-            <h5 class="mb-0">
-              <button class="btn btn-link" data-toggle="collapse" data-target="#collapse21" aria-expanded="true" aria-controls="collapse21">
-                Collapsible Group Item #1
-              </button>
-            </h5>
-          </div>
-
-          <div id="collapse21" class="collapse" aria-labelledby="heading21" data-parent="#accordion2">
-            <div class="card-body">
-              My ticket 1
-            </div>
-          </div>
-        </div>
-        <div class="card">
-          <div class="card-header" id="heading22">
-            <h5 class="mb-0">
-              <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapse22" aria-expanded="false" aria-controls="collapse22">
-                Collapsible Group Item #2
-              </button>
-            </h5>
-          </div>
-          <div id="collapse22" class="collapse" aria-labelledby="heading22" data-parent="#accordion2">
-            <div class="card-body">
-              My ticket 2
-            </div>
-          </div>
-        </div>
-        <div class="card">
-          <div class="card-header" id="heading23">
-            <h5 class="mb-0">
-              <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapse23" aria-expanded="false" aria-controls="collapse23">
-                Collapsible Group Item #3
-              </button>
-            </h5>
-          </div>
-          <div id="collapse23" class="collapse" aria-labelledby="heading23" data-parent="#accordion2">
-            <div class="card-body">
-              My ticket 3
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <div class="tab-pane fade" id="profile">
-      Profile info here
-    </div>
-
-    <div class="tab-pane fade" id="admin">
-      <div id="accordion4">
-        <div class="card">
-          <div class="card-header" id="heading41">
-            <h5 class="mb-0">
-              <button class="btn btn-link" data-toggle="collapse" data-target="#collapse41" aria-expanded="true" aria-controls="collapse41">
-                Collapsible Group Item #1
-              </button>
-            </h5>
-          </div>
+    
 
           <div id="collapse41" class="collapse" aria-labelledby="heading41" data-parent="#accordion4">
             <div class="card-body">
@@ -223,45 +93,7 @@
       </div>
     </div>
   </div>
-
-  {{!-- Ticket Modal --}} {{!--
-  <div class="modal fade" id="ticket-modal" tabindex="-1" role="dialog" aria-labelledby="ticket-modal-title" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered" role="document">
-      <div class="modal-content">
-        <div class="modal-header bg-dark">
-          <h5 class="modal-title text-light" id="login-modal-title">Create a Ticket</h5>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
-        </div>
-
-        <div class="modal-body">
-          <form>
-            <div class="form-group">
-              <input type="text" class="form-control" id="ticketStreet" placeholder="Street">
-            </div>
-            <div class="form-group">
-              <input type="text" class="form-control" id="ticketCity" placeholder="City">
-            </div>
-            <div class="form-group">
-              <input type="text" class="form-control" id="ticketState" placeholder="State">
-            </div>
-            <div class="form-group">
-              <input type="text" class="form-control" id="ticketZip" placeholder="Zip Code">
-            </div>
-            <textarea name="" id="ticketComments" cols="30" rows="10" placeholder="Explain your ticket request" style="height: 100%; width: 100%;"></textarea>
-            <p>Characters Remaining
-              <span id="remainingChars">254</span>
-            </p>
-          </form>
-          <button id="ticketSubmit" type="button" class="btn btn-dark btn-block">Submit Ticket</button>
-        </div>
-
-        <div class="modal-footer">
-        </div>
-      </div>
-    </div>
-  </div> --}} {{!-- Will's ticket modal --}}
+{{!-- Will's ticket modal --}}
   <div class="modal fade" id="ticket-test" tabindex="-1" role="dialog" aria-labelledby="ticket-modal-title" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered" role="document">
       <div class="modal-content">
@@ -387,15 +219,6 @@
           </form>
           <button id="passwordResetButton" type="button" class="btn btn-dark btn-block">Reset Password</button>
         </div>
-
-        {{!--
-        <div class="modal-footer">
-          <div class="mx-auto">
-            <span>Don't Have An Account?
-              <a href="#" id="sign-up">Sign Up</a>
-            </span>
-          </div>
-        </div> --}}
       </div>
     </div>
   </div>
@@ -414,15 +237,6 @@
         <div class="modal-body">
           <button id="signOutButton" type="button" class="btn btn-dark btn-block">Sign Out</button>
         </div>
-
-        {{!--
-        <div class="modal-footer">
-          <div class="mx-auto">
-            <span>Don't Have An Account?
-              <a href="#" id="sign-up">Sign Up</a>
-            </span>
-          </div>
-        </div> --}}
       </div>
     </div>
   </div>
@@ -437,45 +251,44 @@
             <span aria-hidden="true">&times;</span>
           </button>
         </div>
-
         <div class="modal-body">
           <form>
             <div class="form-row">
               <div class="form-group col-md-6">
 
-                <input type="text" class="form-control" id="firstName" aria-describedby="emailHelp" placeholder="First Name">
+                <input required type="text" class="form-control" id="firstName" aria-describedby="emailHelp" placeholder="First Name">
               </div>
 
               <div class="form-group col-md-6">
-                <input type="text" class="form-control" id="lastName" aria-describedby="emailHelp" placeholder="Last Name">
+                <input required type="text" class="form-control" id="lastName" aria-describedby="emailHelp" placeholder="Last Name">
 
               </div>
             </div>
 
             <div class="form-group">
-              <input type="email" class="form-control" id="emailInput" aria-describedby="emailHelp" placeholder="Email Address">
+              <input required type="email" class="form-control" id="emailInput" aria-describedby="emailHelp" placeholder="Email Address">
             </div>
 
             <div class="form-group">
-              <input type="password" class="form-control" id="passwordInput" placeholder="Password">
+              <input required type="password" class="form-control" id="passwordInput" placeholder="Password">
             </div>
 
             <div class="form-group">
-              <input type="password" class="form-control" id="passwordConfirmation" placeholder="Confirm Password">
+              <input required type="password" class="form-control" id="passwordConfirmation" placeholder="Confirm Password">
             </div>
 
             <div class="form-group">
-              <input type="text" class="form-control" id="address" placeholder="Address">
+              <input required type="text" class="form-control" id="address" placeholder="Address">
 
             </div>
 
             <div class="form-row">
               <div class="form-group col-md-5">
-                <input type="text" class="form-control" id="city" aria-describedby="emailHelp" placeholder="City">
+                <input required type="text" class="form-control" id="city" aria-describedby="emailHelp" placeholder="City">
               </div>
 
               <div class="form-group col-md-3">
-                <select id="state" class="form-control">
+                <select required id="state" class="form-control">
                   <option selected>State</option>
 
                   <option value="AK">AK</option>
@@ -533,7 +346,7 @@
               </div>
 
               <div class="form-group col-md-2">
-                <input type="text" class="form-control" id="zip" aria-describedby="emailHelp" placeholder="ZIP">
+                <input required type="text" maxlength="5" class="form-control" id="zip" aria-describedby="emailHelp" placeholder="ZIP">
               </div>
               <div class="form-group col-md-2">
                 <button id="currentLocation" class="btn btn-outline-info" type="button">
@@ -543,7 +356,7 @@
             </div>
 
             <div class="form-group">
-              <input type="text" class="form-control" id="phone" placeholder="Phone Number">
+              <input required type="tel" class="form-control" id="phone" placeholder="Phone Number">
             </div>
           </form>
 
