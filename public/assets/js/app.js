@@ -11,20 +11,24 @@
 // $(card).append(cardHeader);
 // $("#mainContent").append(card);}
 
-
-//   // $("#dashboard").onclick(function(){
-//     "#mainContent".empty()
-//       if(ticket is from user){
-//         for (each ticket){
-//           // $(cardTitle).text(TicketHeader).append(cardText)
-// // $(cardBody).text(TicketInfo).append(cardTitle)
-// // $(cardHeader).append(cardBody);
-// // $(card).append(cardHeader);
-//   // $("#mainContent").append(card);}
-//         }
-//       }
-//     }
-//   })
+$.ajax({
+  url: "./api/tickets",
+  method: "GET"
+}).done(function(data) {
+  $("#open-dash").on("click", function(){    
+    console.log(data)
+    $("#mainContent").empty();
+        for (i=0; i< data.length; i++){
+  $(cardText).text(data[i].answers.label + data[i].value);
+ $(cardTitle).text(data[i].status).append(cardText)
+$(cardBody).append(cardTitle)
+$(cardHeader).text(data[i].votes).append(cardBody);
+$(card).append(cardHeader);
+  $("#mainContent").append(card)}
+        });
+      });
+    
+  
 
 
 $(document).ready(function () {
