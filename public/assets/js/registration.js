@@ -48,14 +48,14 @@ function registrationValidation(dataObj, userPassword){
     let breakFlag = null;
     for(let property in dataObj){
         // INVALID: Special Characters
-        if ( /[^a-zA-Z0-9@\-\/\s\.]/.test(dataObj[property])){
+        if(/[^a-zA-Z0-9@\-\/\s\.]/.test(dataObj[property])){
             $("#invalid-modal .modal-body p").text("There appears to be an error with your input. Please make sure you have completed all of the input fields and you are not using symbols within your text.");
             $("#invalid-modal").modal("show");
             breakFlag = true;
             break;
         }; 
         // INVALID: Undefined
-        if (dataObj[property] === "" || undefined){
+        if(dataObj[property] === "" || undefined){
             $("#invalid-modal .modal-body p").text("There appears to be an error with your input. Please make sure you have completed all of the input fields and you are not using symbols within your text.");
             $("#invalid-modal").modal("show");
             breakFlag = true;
@@ -98,7 +98,7 @@ passwordResetButton.addEventListener('click', e => {
         auth.sendPasswordResetEmail(emailVal).then(() => {
             alert(`A reset email has been sent to ${emailVal}`);
             $("#reset-modal").modal("hide");
-        }).catch(function (error) {
+        }).catch(error => {
             alert(error);
         })
     );
@@ -114,7 +114,7 @@ firebase.auth().onAuthStateChanged(currentUser => {
         $("#logIn,#register,#guest").hide();
         $("#navbarDropdown,#signOut,#open-ticket,#open-dash,#my-profile").show();
         $("#signOut,#createTicket,#open-ticket,#open-dash,#my-profile").css("display","block");
-        $.ajax({ url: `/api/user/${currentUser.uid}`, method: "GET" }).done(function(response){
+        $.ajax({ url: `/api/user/${currentUser.uid}`, method: "GET" }).done(response => {
             $("#navbarDropdown").text(`Welcome back, ${response.firstName} ${response.lastName}`);
         });
     } 

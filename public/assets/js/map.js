@@ -8,7 +8,7 @@ function getCurrentLocation(event){
     function success(position){
         var lat = position.coords.latitude;
         var lng = position.coords.longitude;
-        var key = "AIzaSyADJYcm4Ea5xC6QebdDDc_PEjr_iKuW-s4";
+        var key = "AIzaSyBxZmnFh3oQnm6_7lwt2vb7G1adlR__Poo";
         $.ajax({
             url:`https://maps.googleapis.com/maps/api/geocode/json?latlng=${lat},${lng}&key=${key}`, 
             type:"GET"
