@@ -15,7 +15,7 @@ $(document).ready(() => {
     $("#deptDropdown").on("change", getReqs);
     $("#reqDropdown").on("change", getQuestions);
 // GET: Departments /api/departments
-    function getDepts() {
+    function getDepts(){
         $.ajax({ url: "/api/departments", method: "GET" }).done(response => {
             $("#deptDefault").nextAll("option").remove();
             response.forEach(dept => {
@@ -36,7 +36,7 @@ $(document).ready(() => {
         });
     }
 // GET: Questions /api/questions/:id
-    function getQuestions() {
+    function getQuestions(){
         $.ajax({ url: `/api/questions/${this.value}`, method: "GET" }).done(response => {
             var ticketQuestions = $("#ticketQuestions");
             ticketQuestions.empty();
@@ -75,6 +75,7 @@ $(document).ready(() => {
         const requestId = ticketRequest.selectedIndex;
         const answers = [];
         const comments = ticketComments.value.trim();
+        console.log()
         for(let i = 0; i < ticketQuestions.childNodes.length; i++){
             let increment = i + 1;
             answers.push({

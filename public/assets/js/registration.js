@@ -39,7 +39,7 @@ signUpButton.addEventListener('click', e => {
         addressVal,
         stateVal,
         zipVal,
-        homePhoneVal,
+        homePhoneVal
     };
     registrationValidation(data,passwordVal);
 });
