@@ -35,7 +35,7 @@ router.get("/api/user/:uid", (req,res) => {
 });
 
 //GET: User's Ticket Data
-router.get("/api/tickets/", function(req, res) {
+router.get("/api/tickets/", (req, res) => {
     db.Ticket.findAll({
         where: {
             userId: userId
