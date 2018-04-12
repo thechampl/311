@@ -29,7 +29,7 @@ module.exports = {
             { RequestId: 8, createdAt: new Date(), updatedAt: new Date(), label: "Is it located on private property?", type: "select", choices: "Yes,No,Don't Know", required: true },
             { RequestId: 8, createdAt: new Date(), updatedAt: new Date(), label: "If on Interstate (e.g. I-485), what exits is it between?", type: "text", choices: "", required: false },
             { RequestId: 8, createdAt: new Date(), updatedAt: new Date(), label: "Is the graffiti located on a building, sidewalk, sign, etc.?", type: "text", choices: "", required: true },
-            { RequestId: 8, createdAt: new Date(), updatedAt: new Date(), label: "Is profanity in the graffiti?", type: "text", choices: "Yes,No,Don't Know", required: true },
+            { RequestId: 8, createdAt: new Date(), updatedAt: new Date(), label: "Is profanity in the graffiti?", type: "select", choices: "Yes,No,Don't Know", required: true },
             { RequestId: 13, createdAt: new Date(), updatedAt: new Date(), label: "In City Limits?", type: "select", choices: "Yes,No,Don't Know", required: false },
             { RequestId: 13, createdAt: new Date(), updatedAt: new Date(), label: "Is the obstruction on the sidewalk?", type: "select", choices: "Yes,No,Don't Know", required: true },
             { RequestId: 13, createdAt: new Date(), updatedAt: new Date(), label: "What is the obstruction?", type: "select", choices: "Roll-out Container,Recyling Bin", required: true },

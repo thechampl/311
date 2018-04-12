@@ -38,7 +38,7 @@ router.get("/api/user/:uid", (req,res) => {
 router.get("/api/tickets/", function(req, res) {
     db.Ticket.findAll({
         where: {
-            userId: req.params.uid
+            userId: userId
         },
         include: [{ 
             model: db.Answer,
