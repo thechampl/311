@@ -110,17 +110,34 @@ signOutButton.addEventListener('click', e => {
 });
 // ON AUTH STATE CHANGED
 firebase.auth().onAuthStateChanged(currentUser => {
-    if(currentUser){  
-        $("#logIn,#register,#guest").hide();
-        $("#navbarDropdown,#signOut,#open-ticket,#open-dash,#my-profile").show();
-        $("#signOut,#createTicket,#open-ticket,#open-dash,#my-profile").css("display","block");
-        $.ajax({ url: `/api/user/${currentUser.uid}`, method: "GET" }).done(response => {
+
+    if (currentUser) {  
+        $("#navbarDropdown").text("This will display UserName from Firebase") 
+        $("#logIn").attr("style", "display:none");
+        $("#register").attr("style", "display:none");
+        $("#signOut").attr("style", "display:block").text("Sign Out");
+        $("#createTicket").attr("style", "display:block").text("Create Ticket");
+      $.ajax({ url: `/api/user/${currentUser.uid}`, method: "GET" }).done(response => {
             $("#navbarDropdown").text(`Welcome back, ${response.firstName} ${response.lastName}`);
         });
     } 
-    else{
-        $("#navbarDropdown,#signOut,#open-ticket,#open-dash,#my-profile").hide(); 
-        $("#logIn,#register,#guest").show();    
-        $("#logIn,#register").css("display","block");
+        });
+        $("#open-ticket").attr("style", "display:block").text("New Ticket");
+        $("#open-dash").attr("style", "display:block").text("Dashboard");
+        $("#my-profile").attr("style", "display:block").text("Profile");
+        
+        
+        console.log(currentUser);
+
+    } else {
+        $("#navbarDropdown").attr("style", "display:none");       
+        $("#logIn").attr("style", "display:block").text("Log In");
+        $("#register").attr("style", "display:block").text("Register");
+        $("#signOut").attr("style", "display:none");
+        $("#open-ticket").attr("style", "display:none");
+        $("#open-dash").attr("style", "display:none");
+        $("#my-profile").attr("style", "display:none");
+        console.log("firebaseUser not logged in");
+
     }
 });
