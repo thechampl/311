@@ -9,10 +9,5 @@ loginButton.addEventListener('click', e => {
     const passwordVal = loginPassword.value.trim();
     const promise = auth.signInWithEmailAndPassword(emailVal, passwordVal);
     promise.catch(e => console.log(e.message));
-    // firebase.auth().setPersistence(firebase.auth.Auth.Persistence.LOCAL).then(() => {
-    //     return firebase.auth().signInWithEmailAndPassword(emailVal, passwordVal);
-    // }).catch((error) => {
-    //     // DO SOMETHING
-    // });
     $("#login-modal").modal("hide");
 });
