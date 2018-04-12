@@ -65,8 +65,6 @@ $(document).ready(() => {
                         questionField.append(dropField);
                     })
                 }
-                console.log(dropField)
-                console.log(questionField)
                 formGroup.append(questionField);
                 ticketQuestions.append(formGroup);
             })
@@ -77,11 +75,9 @@ $(document).ready(() => {
         const requestId = ticketRequest.selectedIndex;
         const answers = [];
         const comments = ticketComments.value.trim();
-        console.log()
         for(let i = 0; i < ticketQuestions.childNodes.length; i++){
-            let increment = i + 1;
             answers.push({
-                question: increment, 
+                question: ticketQuestions.childNodes[i].children[0].getAttribute("data-question"), 
                 answer: ticketQuestions.childNodes[i].children[0].value
             });
         }

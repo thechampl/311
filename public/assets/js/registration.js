@@ -118,9 +118,9 @@ firebase.auth().onAuthStateChanged(currentUser => {
             $("#navbarDropdown").text(`Welcome back, ${response.firstName} ${response.lastName}`);
         });
     } 
-    // else{
-    //     $("#navbarDropdown,#signOut,#open-ticket,#open-dash,#my-profile").hide(); 
-    //     $("#logIn,#register,#guest").show();    
-    //     $("#logIn,#register").css("display","block");
-    // }
+    else{
+        $("#navbarDropdown,#signOut,#open-ticket,#open-dash,#my-profile").hide(); 
+        $("#logIn,#register,#guest").show();    
+        $("#logIn,#register").css("display","block");
+    }
 });
