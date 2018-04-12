@@ -52,7 +52,6 @@ $(document).ready(function () {
             url: "/api/questions/" + this.value,
             method: "GET"
         }).done(function (response) {
-            var ticketQuestions = $("#ticketQuestions");
             ticketQuestions.empty();
             response.forEach(function (question) {
                 var formGroup = $("<div>").addClass("form-group");

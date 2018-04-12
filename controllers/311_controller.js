@@ -57,14 +57,29 @@ router.get("/api/user/:uid", function (req, res) {
     });
 });
 
-// MADDIE: ARE THESE ROUTES COMMENTED OUT BELOW STILL NEEDED?
-// router.get("/register", (req, res) => res.render('registrationForm'));
-// GET - Landing Page
-// router.get("/", (req, res) => res.render('index'));
-// GET - Dashboard
-// router.get("/dashboard", (req,res) => res.render('dashboard'));
-// GET - SETTINGS
-// router.get("/settings", (req,res) => res.render('settings'));
+//GET: User's Ticket Data
+router.get("/api/tickets/:uid", function(req, res) {
+    db.Ticket.findAll({
+        where: {
+            userId: req.params.uid
+        },
+        include: [{ 
+            model: db.Answer,
+            include: [{
+                model: db.Question
+            }]
+        }, { 
+            model: db.Request,
+            include: [{
+                model: db.Department
+            }]
+        }, {
+            model: db.User
+        }]
+    }).then(function(data) {      
+        res.json(data);
+    })
+});
 
 // POST: User Data
 router.post("/userData", function (req, res) {
