@@ -65,6 +65,8 @@ $(document).ready(() => {
                         questionField.append(dropField);
                     })
                 }
+                console.log(dropField)
+                console.log(questionField)
                 formGroup.append(questionField);
                 ticketQuestions.append(formGroup);
             })
