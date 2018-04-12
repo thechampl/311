@@ -35,13 +35,10 @@ $(document).ready(() => {
             })
         });
     }
-    function getQuestions() {
-        //AJAX call /api/questions/:id
-        $.ajax({
-            url: "/api/questions/" + this.value,
-            method: "GET"
-        }).done(function (response) {
-
+// GET: Questions /api/questions/:id
+    function getQuestions(){
+        $.ajax({ url: `/api/questions/${this.value}`, method: "GET" }).done(response => {
+            var ticketQuestions = $("#ticketQuestions");
             ticketQuestions.empty();
             response.forEach(question => {
                 var formGroup = $("<div>").addClass("form-group");
