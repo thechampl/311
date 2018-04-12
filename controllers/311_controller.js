@@ -37,7 +37,7 @@ router.get("/api/questions/:id", function (req, res) {
 router.get("/api/user/:uid", function (req, res) {
     db.User.find({
         where: {
-            firebaseId: req.params.uid
+            firebaseId: userId
         },
         include:[{ model: db.Admin }]
     }).then(function (data) {
@@ -58,7 +58,7 @@ router.get("/api/user/:uid", function (req, res) {
 });
 
 //GET: User's Ticket Data
-router.get("/api/tickets/:uid", function(req, res) {
+router.get("/api/tickets/", function(req, res) {
     db.Ticket.findAll({
         where: {
             userId: req.params.uid
