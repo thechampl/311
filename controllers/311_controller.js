@@ -22,10 +22,15 @@ router.get("/api/questions/:id", (req,res) => {
     db.Question.findAll({ 
     where: { requestId: req.params.id } }).then((data) => res.json(data));
 });
-// GET: User ID
-router.get("/api/user/:uid", (req,res) => {
-    db.User.find({ include:[{ model: db.Admin }],
-    where: { firebaseId: req.params.uid } }).then((data) => {
+
+// Get User Id
+router.get("/api/user/:uid", function (req, res) {
+    db.User.find({
+        where: {
+            firebaseId: userId
+        },
+        include:[{ model: db.Admin }]
+    }).then(function (data) {
         userId = data.id;
         if(data.Admins.length > 0 && data.userType !== "Admin"){
             db.User.update( { userType: "Admin"},{ where: { id: userId } })
@@ -33,6 +38,33 @@ router.get("/api/user/:uid", (req,res) => {
         res.json(data);
     });
 });
+
+
+//GET: User's Ticket Data
+router.get("/api/tickets/", function(req, res) {
+    db.Ticket.findAll({
+        where: {
+            userId: req.params.uid
+        },
+        include: [{ 
+            model: db.Answer,
+            include: [{
+                model: db.Question
+            }]
+        }, { 
+            model: db.Request,
+            include: [{
+                model: db.Department
+            }]
+        }, {
+            model: db.User
+        }]
+    }).then(function(data) {      
+        res.json(data);
+    })
+});
+
+
 // POST: User Data
 router.post("/userData", (req,res) => {
     db.User.create({
