@@ -1,4 +1,4 @@
-#logo {
+.navbar .logo {
   width: 15rem;
 }
 
@@ -8,6 +8,7 @@
   background: cover;
   height: 33rem;
   padding: 5rem 10rem;
+  margin-bottom: 4rem;
 }
 
 .banner #banner-logo {
@@ -24,4 +25,20 @@
 
 #invalid-modal {
   z-index: 2000;
+}
+
+#footer {
+  background: #353A3F;
+  height: 8rem;
+  padding: 2rem;
+  margin-top: 4rem;
+  color: #ffffff;
+}
+
+#footer .logo {
+  width: 20%;
+}
+
+#footer .footer-link{
+  color: #919aa1;
 }
