@@ -17,17 +17,18 @@
         {{!-- login --}}
 
         <a class="nav-link text-white" href="#" data-toggle="modal" data-target="#login-modal" id="logIn">Log In</a>
-      
-        <li class="nav-item dropdown active" >
-            <a class="nav-link dropdown-toggle" href="#" role="button" id="navbarDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></a>
-            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                <ul>
-                {{!-- in drop down --}} {{!-- my profile --}}
-                <a class="nav-link text-dark" id="my-profile" href="#">My Profile</a>
-                <div class="dropdown-divider"></div>
-                {{!-- sign out --}}
-                <a class="nav-link text-dark" href="#" data-toggle="modal" data-target="#signOut-modal" id="signOut">Sign Out</a>
-            </div>
+
+        <li class="nav-item dropdown active">
+          <a class="nav-link dropdown-toggle" href="#" role="button" id="navbarDropdown" data-toggle="dropdown" aria-haspopup="true"
+            aria-expanded="false"></a>
+          <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+            <ul>
+              {{!-- in drop down --}} {{!-- my profile --}}
+              <a class="nav-link text-dark" id="my-profile" href="#">My Profile</a>
+              <div class="dropdown-divider"></div>
+              {{!-- sign out --}}
+              <a class="nav-link text-dark" href="#" data-toggle="modal" data-target="#signOut-modal" id="signOut">Sign Out</a>
+          </div>
         </li>
         </ul>
       </ul>
@@ -46,331 +47,314 @@
 </div>
 
 <!-- main page content -->
-  <div class="container">
-    <div id="mainContent">
-      
-    </div>
+<div class="container">
+  <div id="mainContent">
+
   </div>
+</div>
 
-    
-
-          <div id="collapse41" class="collapse" aria-labelledby="heading41" data-parent="#accordion4">
-            <div class="card-body">
-              All tickets 1
-            </div>
-          </div>
-        </div>
-        <div class="card">
-          <div class="card-header" id="heading42">
-            <h5 class="mb-0">
-              <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapse42" aria-expanded="false" aria-controls="collapse42">
-                Collapsible Group Item #2
-              </button>
-            </h5>
-          </div>
-          <div id="collapse42" class="collapse" aria-labelledby="heading42" data-parent="#accordion4">
-            <div class="card-body">
-              All tickets 2
-            </div>
-          </div>
-        </div>
-        <div class="card">
-          <div class="card-header" id="heading43">
-            <h5 class="mb-0">
-              <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapse43" aria-expanded="false" aria-controls="collapse43">
-                Collapsible Group Item #3
-              </button>
-            </h5>
-          </div>
-          <div id="collapse43" class="collapse" aria-labelledby="heading43" data-parent="#accordion4">
-            <div class="card-body">
-              All tickets 3
-            </div>
-          </div>
-        </div>
+<div id="accordion">
+  {{#each data}}
+  <div class="card">
+    <div class="card-header" id="card-heading">
+      <h5 class="mb-0">
+        <button class="btn btn-link" data-toggle="collapse" data-target="#card-collapse-{{id}}" aria-expanded="true" aria-controls="card-collapse">
+          Ticket #{{id}} - {{Request.Department.name}} - {{Request.name}}
+        </button>
+      </h5>
+    </div>
+    <div id="card-collapse-{{id}}" class="collapse" aria-labelledby="card-body" data-parent="#accordion">
+      <div class="card-body">
+        {{#each Answers}}
+        <p class="font-weight-bold text-dark">{{Question.label}}</p>
+        <p>{{value}}</p>
+        {{/each}}
+        <p class="font-weight-bold text-dark">Comments</p>
+        <p>{{comments}}</p>
       </div>
     </div>
   </div>
+  {{/each}}
+</div>
+
 {{!-- Will's ticket modal --}}
-  <div class="modal fade" id="ticket-test" tabindex="-1" role="dialog" aria-labelledby="ticket-modal-title" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered" role="document">
-      <div class="modal-content">
-        <div class="modal-header bg-dark">
-          <h5 class="modal-title text-light" id="login-modal-title">Create a Ticket</h5>
-          <button type="button" class="close text-light" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
-        </div>
+<div class="modal fade" id="ticket-test" tabindex="-1" role="dialog" aria-labelledby="ticket-modal-title" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header bg-dark">
+        <h5 class="modal-title text-light" id="login-modal-title">Create a Ticket</h5>
+        <button type="button" class="close text-light" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
 
-        <div class="modal-body">
-          <form>
-            <div class="form-group">
-              <select class="form-control" id="deptDropdown">
-                <option id="deptDefault" value="" selected>Choose Department</option>
+      <div class="modal-body">
+        <form>
+          <div class="form-group">
+            <select class="form-control" id="deptDropdown">
+              <option id="deptDefault" value="" selected>Choose Department</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <select class="form-control" id="reqDropdown" disabled>
+              <option id="reqDefault" value="" selected>Choose Request</option>
+            </select>
+          </div>
+          <div class="form-group" id="ticketQuestions"></div>
+
+          <textarea name="" class="w-100" id="ticketComments" rows="10" placeholder="Explain your ticket request"></textarea>
+          <p>Characters Remaining
+            <span id="remainingChars">255</span>
+          </p>
+        </form>
+        <button id="ticketSubmit" type="button" class="btn btn-dark btn-block">Submit Ticket</button>
+      </div>
+
+      <div class="modal-footer">
+      </div>
+    </div>
+  </div>
+</div>
+
+{{!-- Invalid Input Modal --}}
+
+<div class="modal fade" id="invalid-modal" tabindex="-1" role="dialog" aria-labelledby="ticket-modal-title" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header bg-dark">
+        <h5 class="modal-title text-light" id="login-modal-title">
+          <i class="fas fa-exclamation-circle"></i> Invalid Input</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+
+      <div class="modal-body">
+        <p>There appears to be an error with your input. Please make sure you have completed all of the input fields and you
+          are not using symbols within your text.</p>
+      </div>
+
+      <div class="modal-footer">
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- login modal -->
+<div class="modal fade" id="login-modal" tabindex="-1" role="dialog" aria-labelledby="login-modal-title" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header bg-dark">
+        <h5 class="modal-title text-light" id="login-modal-title">Log In</h5>
+        <button type="button" class="close text-light" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+
+      <div class="modal-body">
+        <form>
+          <div class="form-group">
+            <input type="email" class="form-control" id="loginEmail" aria-describedby="emailHelp" placeholder="Email Address">
+          </div>
+
+          <div class="form-group">
+            <input type="password" class="form-control" id="loginPassword" placeholder="Password">
+
+          </div>
+        </form>
+
+        <button id="loginButton" type="button" class="btn btn-dark btn-block">Log In</button>
+
+        <div class="mt-3 text-center">
+          <a href="#" id="resetPassword">Forgot Password?</a>
+        </div>
+      </div>
+
+      <div class="modal-footer">
+        <div class="mx-auto">
+          <span>Don't Have An Account?
+            <a href="#" id="sign-up">Sign Up</a>
+          </span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+{{!-- Reset Password Modal --}}
+<div class="modal fade" id="reset-modal" tabindex="-1" role="dialog" aria-labelledby="login-modal-title" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header bg-dark">
+        <h5 class="modal-title text-light" id="reset-modal-title">Reset Your Password</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+
+      <div class="modal-body">
+        <p>An Email will be sent to you so that you can reset your password.</p>
+        <form>
+          <div class="form-group">
+            <input type="email" class="form-control" id="resetPasswordEmail" aria-describedby="emailHelp" placeholder="Email Address">
+          </div>
+        </form>
+        <button id="passwordResetButton" type="button" class="btn btn-dark btn-block">Reset Password</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+{{!-- Sign Out Modal --}}
+<div class="modal fade" id="signOut-modal" tabindex="-1" role="dialog" aria-labelledby="login-modal-title" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header bg-dark">
+        <h5 class="modal-title text-light" id="signOut-modal-title">Sign Out</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+
+      <div class="modal-body">
+        <button id="signOutButton" type="button" class="btn btn-dark btn-block">Sign Out</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- registration modal -->
+<div class="modal fade" id="register-modal" tabindex="-1" role="dialog" aria-labelledby="register-modal-title" aria-hidden="true">
+  <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header bg-dark">
+        <h5 class="modal-title text-light" id="register-modal-title">Register</h5>
+        <button type="button" class="close text-light" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form>
+          <div class="form-row">
+            <div class="form-group col-md-6">
+
+              <input required type="text" class="form-control" id="firstName" aria-describedby="emailHelp" placeholder="First Name">
+            </div>
+
+            <div class="form-group col-md-6">
+              <input required type="text" class="form-control" id="lastName" aria-describedby="emailHelp" placeholder="Last Name">
+
+            </div>
+          </div>
+
+          <div class="form-group">
+            <input required type="email" class="form-control" id="emailInput" aria-describedby="emailHelp" placeholder="Email Address">
+          </div>
+
+          <div class="form-group">
+            <input required type="password" class="form-control" id="passwordInput" placeholder="Password">
+          </div>
+
+          <div class="form-group">
+            <input required type="password" class="form-control" id="passwordConfirmation" placeholder="Confirm Password">
+          </div>
+
+          <div class="form-group">
+            <input required type="text" class="form-control" id="address" placeholder="Address">
+
+          </div>
+
+          <div class="form-row">
+            <div class="form-group col-md-5">
+              <input required type="text" class="form-control" id="city" aria-describedby="emailHelp" placeholder="City">
+            </div>
+
+            <div class="form-group col-md-3">
+              <select required id="state" class="form-control">
+                <option selected>State</option>
+
+                <option value="AK">AK</option>
+                <option value="AL">AL</option>
+                <option value="AR">AR</option>
+                <option value="AZ">AZ</option>
+                <option value="CA">CA</option>
+                <option value="CO">CO</option>
+                <option value="CT">CT</option>
+                <option value="DC">DC</option>
+                <option value="DE">DE</option>
+                <option value="FL">FL</option>
+                <option value="GA">GA</option>
+                <option value="HI">HI</option>
+                <option value="IA">IA</option>
+                <option value="ID">ID</option>
+                <option value="IL">IL</option>
+                <option value="IN">IN</option>
+                <option value="KS">KS</option>
+                <option value="KY">KY</option>
+                <option value="LA">LA</option>
+                <option value="MA">MA</option>
+                <option value="MD">MD</option>
+                <option value="ME">ME</option>
+                <option value="MI">MI</option>
+                <option value="MN">MN</option>
+                <option value="MO">MO</option>
+                <option value="MS">MS</option>
+                <option value="MT">MT</option>
+                <option value="NC">NC</option>
+                <option value="ND">ND</option>
+                <option value="NE">NE</option>
+                <option value="NH">NH</option>
+                <option value="NJ">NJ</option>
+                <option value="NM">NM</option>
+                <option value="NV">NV</option>
+                <option value="NY">NY</option>
+                <option value="OH">OH</option>
+                <option value="OK">OK</option>
+                <option value="OR">OR</option>
+                <option value="PA">PA</option>
+                <option value="RI">RI</option>
+                <option value="SC">SC</option>
+                <option value="SD">SD</option>
+                <option value="TN">TN</option>
+                <option value="TX">TX</option>
+                <option value="UT">UT</option>
+                <option value="VA">VA</option>
+                <option value="VT">VT</option>
+                <option value="WA">WA</option>
+                <option value="WI">WI</option>
+                <option value="WV">WV</option>
+                <option value="WY">WY</option>
               </select>
             </div>
-            <div class="form-group">
-              <select class="form-control" id="reqDropdown" disabled>
-                <option id="reqDefault" value="" selected>Choose Request</option>
-              </select>
+
+            <div class="form-group col-md-2">
+              <input required type="text" maxlength="5" class="form-control" id="zip" aria-describedby="emailHelp" placeholder="ZIP">
             </div>
-            <div class="form-group" id="ticketQuestions">
-
+            <div class="form-group col-md-2">
+              <button id="currentLocation" class="btn btn-outline-info" type="button">
+                <i class="fas fa-location-arrow"></i>
+              </button>
             </div>
-
-            <textarea name="" class="w-100" id="ticketComments" rows="10" placeholder="Explain your ticket request"></textarea>
-            <p>Characters Remaining
-              <span id="remainingChars">254</span>
-            </p>
-          </form>
-          <button id="ticketSubmit" type="button" class="btn btn-dark btn-block">Submit Ticket</button>
-        </div>
-
-        <div class="modal-footer">
-        </div>
-      </div>
-    </div>
-  </div>
-
-  {{!-- Invalid Input Modal --}}
-
-  <div class="modal fade" id="invalid-modal" tabindex="-1" role="dialog" aria-labelledby="ticket-modal-title" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered" role="document">
-      <div class="modal-content">
-        <div class="modal-header bg-dark">
-          <h5 class="modal-title text-light" id="login-modal-title">
-            <i class="fas fa-exclamation-circle"></i> Invalid Input</h5>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
-        </div>
-
-        <div class="modal-body">
-          <p>There appears to be an error with your input. Please make sure you have completed all of the input fields and you
-            are not using symbols within your text.</p>
-        </div>
-
-        <div class="modal-footer">
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- login modal -->
-  <div class="modal fade" id="login-modal" tabindex="-1" role="dialog" aria-labelledby="login-modal-title" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered" role="document">
-      <div class="modal-content">
-        <div class="modal-header bg-dark">
-          <h5 class="modal-title text-light" id="login-modal-title">Log In</h5>
-          <button type="button" class="close text-light" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
-        </div>
-
-        <div class="modal-body">
-          <form>
-            <div class="form-group">
-              <input type="email" class="form-control" id="loginEmail" aria-describedby="emailHelp" placeholder="Email Address">
-            </div>
-
-            <div class="form-group">
-              <input type="password" class="form-control" id="loginPassword" placeholder="Password">
-
-            </div>
-          </form>
-
-          <button id="loginButton" type="button" class="btn btn-dark btn-block">Log In</button>
-
-          <div class="mt-3 text-center">
-            <a href="#" id="resetPassword">Forgot Password?</a>
           </div>
-        </div>
 
-        <div class="modal-footer">
-          <div class="mx-auto">
-            <span>Don't Have An Account?
-              <a href="#" id="sign-up">Sign Up</a>
-            </span>
+          <div class="form-group">
+            <input required type="tel" class="form-control" id="phone" placeholder="Phone Number">
           </div>
+        </form>
+
+        <button id="registerButton" type="button" class="btn btn-dark btn-block">Submit</button>
+      </div>
+
+      <div class="modal-footer">
+        <div class="mx-auto">
+          <span>Already Have An Account?
+            <a href="#" id="login">Log In</a>
+          </span>
         </div>
       </div>
     </div>
   </div>
-
-  {{!-- Reset Password Modal --}}
-  <div class="modal fade" id="reset-modal" tabindex="-1" role="dialog" aria-labelledby="login-modal-title" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered" role="document">
-      <div class="modal-content">
-        <div class="modal-header bg-dark">
-          <h5 class="modal-title text-light" id="reset-modal-title">Reset Your Password</h5>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
-        </div>
-
-        <div class="modal-body">
-          <p>An Email will be sent to you so that you can reset your password.</p>
-          <form>
-            <div class="form-group">
-              <input type="email" class="form-control" id="resetPasswordEmail" aria-describedby="emailHelp" placeholder="Email Address">
-            </div>
-          </form>
-          <button id="passwordResetButton" type="button" class="btn btn-dark btn-block">Reset Password</button>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  {{!-- Sign Out Modal --}}
-  <div class="modal fade" id="signOut-modal" tabindex="-1" role="dialog" aria-labelledby="login-modal-title" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered" role="document">
-      <div class="modal-content">
-        <div class="modal-header bg-dark">
-          <h5 class="modal-title text-light" id="signOut-modal-title">Sign Out</h5>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
-        </div>
-
-        <div class="modal-body">
-          <button id="signOutButton" type="button" class="btn btn-dark btn-block">Sign Out</button>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- registration modal -->
-  <div class="modal fade" id="register-modal" tabindex="-1" role="dialog" aria-labelledby="register-modal-title" aria-hidden="true">
-    <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
-      <div class="modal-content">
-        <div class="modal-header bg-dark">
-          <h5 class="modal-title text-light" id="register-modal-title">Register</h5>
-          <button type="button" class="close text-light" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
-        </div>
-        <div class="modal-body">
-          <form>
-            <div class="form-row">
-              <div class="form-group col-md-6">
-
-                <input required type="text" class="form-control" id="firstName" aria-describedby="emailHelp" placeholder="First Name">
-              </div>
-
-              <div class="form-group col-md-6">
-                <input required type="text" class="form-control" id="lastName" aria-describedby="emailHelp" placeholder="Last Name">
-
-              </div>
-            </div>
-
-            <div class="form-group">
-              <input required type="email" class="form-control" id="emailInput" aria-describedby="emailHelp" placeholder="Email Address">
-            </div>
-
-            <div class="form-group">
-              <input required type="password" class="form-control" id="passwordInput" placeholder="Password">
-            </div>
-
-            <div class="form-group">
-              <input required type="password" class="form-control" id="passwordConfirmation" placeholder="Confirm Password">
-            </div>
-
-            <div class="form-group">
-              <input required type="text" class="form-control" id="address" placeholder="Address">
-
-            </div>
-
-            <div class="form-row">
-              <div class="form-group col-md-5">
-                <input required type="text" class="form-control" id="city" aria-describedby="emailHelp" placeholder="City">
-              </div>
-
-              <div class="form-group col-md-3">
-                <select required id="state" class="form-control">
-                  <option selected>State</option>
-
-                  <option value="AK">AK</option>
-                  <option value="AL">AL</option>
-                  <option value="AR">AR</option>
-                  <option value="AZ">AZ</option>
-                  <option value="CA">CA</option>
-                  <option value="CO">CO</option>
-                  <option value="CT">CT</option>
-                  <option value="DC">DC</option>
-                  <option value="DE">DE</option>
-                  <option value="FL">FL</option>
-                  <option value="GA">GA</option>
-                  <option value="HI">HI</option>
-                  <option value="IA">IA</option>
-                  <option value="ID">ID</option>
-                  <option value="IL">IL</option>
-                  <option value="IN">IN</option>
-                  <option value="KS">KS</option>
-                  <option value="KY">KY</option>
-                  <option value="LA">LA</option>
-                  <option value="MA">MA</option>
-                  <option value="MD">MD</option>
-                  <option value="ME">ME</option>
-                  <option value="MI">MI</option>
-                  <option value="MN">MN</option>
-                  <option value="MO">MO</option>
-                  <option value="MS">MS</option>
-                  <option value="MT">MT</option>
-                  <option value="NC">NC</option>
-                  <option value="ND">ND</option>
-                  <option value="NE">NE</option>
-                  <option value="NH">NH</option>
-                  <option value="NJ">NJ</option>
-                  <option value="NM">NM</option>
-                  <option value="NV">NV</option>
-                  <option value="NY">NY</option>
-                  <option value="OH">OH</option>
-                  <option value="OK">OK</option>
-                  <option value="OR">OR</option>
-                  <option value="PA">PA</option>
-                  <option value="RI">RI</option>
-                  <option value="SC">SC</option>
-                  <option value="SD">SD</option>
-                  <option value="TN">TN</option>
-                  <option value="TX">TX</option>
-                  <option value="UT">UT</option>
-                  <option value="VA">VA</option>
-                  <option value="VT">VT</option>
-                  <option value="WA">WA</option>
-                  <option value="WI">WI</option>
-                  <option value="WV">WV</option>
-                  <option value="WY">WY</option>
-                </select>
-              </div>
-
-              <div class="form-group col-md-2">
-                <input required type="text" maxlength="5" class="form-control" id="zip" aria-describedby="emailHelp" placeholder="ZIP">
-              </div>
-              <div class="form-group col-md-2">
-                <button id="currentLocation" class="btn btn-outline-info" type="button">
-                  <i class="fas fa-location-arrow"></i>
-                </button>
-              </div>
-            </div>
-
-            <div class="form-group">
-              <input required type="tel" class="form-control" id="phone" placeholder="Phone Number">
-            </div>
-          </form>
-
-          <button id="registerButton" type="button" class="btn btn-dark btn-block">Submit</button>
-        </div>
-
-        <div class="modal-footer">
-          <div class="mx-auto">
-            <span>Already Have An Account?
-              <a href="#" id="login">Log In</a>
-            </span>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
+</div>
 </div>
 <script type="text/javascript" src="assets/js/registration.js"></script>
 <script type="text/javascript" src="assets/js/login.js"></script>
