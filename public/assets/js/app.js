@@ -14,22 +14,20 @@
 $.ajax({
   url: "./api/tickets",
   method: "GET"
-}).done(function(data) {
-  $("#open-dash").on("click", function(){    
+}).done(function (data) {
+  $("#open-dash").on("click", function () {
     console.log(data)
     $("#mainContent").empty();
-        for (i=0; i< data.length; i++){
-  $(cardText).text(data[i].answers.label + data[i].value);
- $(cardTitle).text(data[i].status).append(cardText)
-$(cardBody).append(cardTitle)
-$(cardHeader).text(data[i].votes).append(cardBody);
-$(card).append(cardHeader);
-  $("#mainContent").append(card)}
-        });
-      });
-    
-  
-
+    for (i = 0; i < data.length; i++) {
+      $(cardText).text(data[i].answers.label + data[i].value);
+      $(cardTitle).text(data[i].status).append(cardText)
+      $(cardBody).append(cardTitle)
+      $(cardHeader).text(data[i].votes).append(cardBody);
+      $(card).append(cardHeader);
+      $("#mainContent").append(card)
+    }
+  });
+});
 
 $(document).ready(function () {
   $("#sign-up").on("click", function () {
@@ -50,9 +48,4 @@ $(document).ready(function () {
     $("#login-modal").modal("hide");
     $("#reset-modal").modal("show");
   });
-
-
-
 });
-
-
