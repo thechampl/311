@@ -83,30 +83,6 @@ router.get("/api/questions/:id", (req, res) => {
   }).then((data) => res.json(data));
 });
 
-<<<<<<< HEAD
-//GET: User's Ticket Data
-router.get("/api/tickets/", function(req, res) {
-    db.Ticket.findAll({
-        where: {
-            userId: userId
-        },
-        include: [{ 
-            model: db.Answer,
-            include: [{
-                model: db.Question
-            }]
-        }, { 
-            model: db.Request,
-            include: [{
-                model: db.Department
-            }]
-        }, {
-            model: db.User
-        }]
-    }).then(function(data) {      
-        res.json(data);
-    })
-=======
 // GET: User ID
 router.get("/api/user/:uid", (req, res) => {
   db.User.find({
@@ -123,7 +99,6 @@ router.get("/api/user/:uid", (req, res) => {
     }
     res.json(data);
   });
->>>>>>> origin/master
 });
 
 // POST: User Data

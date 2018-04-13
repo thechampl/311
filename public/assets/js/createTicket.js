@@ -22,7 +22,6 @@ $(document).ready(() => {
   function getDepts() {
     $.ajax({ url: "/api/departments", method: "GET" }).done(response => {
       $("#deptDefault").nextAll("option").remove();
-      $("#ticketQuestions").empty();
       response.forEach(dept => {
         var option = $("<option>").attr("value", dept.id).text(dept.name);
         $("#deptDropdown").append(option);
@@ -35,7 +34,6 @@ $(document).ready(() => {
     $.ajax({ url: `/api/departments/${this.value}`, method: "GET" }).done(response => {
       $("#reqDropdown").removeAttr("disabled");
       $("#reqDefault").nextAll("option").remove();
-      $("#ticketQuestions").empty();
       response.Requests.forEach(function (req) {
         var option = $("<option>").attr("value", req.id).text(req.name);
         $("#reqDropdown").append(option);
