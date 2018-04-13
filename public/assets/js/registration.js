@@ -10,10 +10,12 @@ const config = {
 firebase.initializeApp(config);
 const auth = firebase.auth();
 const currentUser = firebase.auth().currentUser;
+
 // Constants: Buttons
 const signOutButton = document.querySelector("#signOutButton");
 const signUpButton = document.querySelector("#registerButton");
 const passwordResetButton = document.querySelector("#passwordResetButton");
+
 // Constants: Input Fields
 const email = document.querySelector('#emailInput');
 const password = document.querySelector("#passwordInput");
@@ -25,6 +27,7 @@ const city = document.querySelector('#city');
 const zip = document.querySelector('#zip');
 const phone = document.querySelector('#phone');
 const inputElements = [email, firstName, lastName, address, state, city, zip, phone, password];
+
 // ON SIGN UP BUTTON CLICK: Sign Up
 signUpButton.addEventListener('click', e => {
   e.preventDefault();
@@ -43,6 +46,7 @@ signUpButton.addEventListener('click', e => {
   };
   registrationValidation(data, passwordVal);
 });
+
 // Registration Validation
 function registrationValidation(dataObj, userPassword) {
   let breakFlag = null;
@@ -54,6 +58,7 @@ function registrationValidation(dataObj, userPassword) {
       breakFlag = true;
       break;
     };
+
     // INVALID: Undefined
     if (dataObj[property] === "" || undefined) {
       $("#invalid-modal .modal-body p").text("There appears to be an error with your input. Please make sure you have completed all of the input fields and you are not using symbols within your text.");
@@ -81,6 +86,7 @@ function registrationValidation(dataObj, userPassword) {
     }
   });
 };
+
 // POST: User Input /userData
 function postUserInput(data) {
   const xhr = new XMLHttpRequest();
@@ -88,6 +94,7 @@ function postUserInput(data) {
   xhr.setRequestHeader("Content-type", "application/json");
   xhr.send(JSON.stringify(data));
 };
+
 // ON PASSWORD RESET BUTTON CLICK: Submit Email
 passwordResetButton.addEventListener('click', e => {
   e.preventDefault();
@@ -103,11 +110,13 @@ passwordResetButton.addEventListener('click', e => {
     })
   );
 });
+
 // ON SIGN OUT BUTTON CLICK: Sign Out
 signOutButton.addEventListener('click', e => {
   firebase.auth().signOut();
   $("#signOut-modal").modal("hide");
 });
+
 // ON AUTH STATE CHANGED
 firebase.auth().onAuthStateChanged(currentUser => {
 
@@ -124,8 +133,6 @@ firebase.auth().onAuthStateChanged(currentUser => {
       $("#my-profile").attr("style", "display:block").text("Profile");
 
     });
-
-
   } else {
     $("#navbarDropdown").attr("style", "display:none");
     $("#logIn").attr("style", "display:block").text("Log In");
