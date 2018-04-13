@@ -22,5 +22,5 @@ app.use("/", routes);
 const PORT = process.env.PORT || 8080;
 const db = require("./models");
 db.sequelize.sync().then(() =>
-    app.listen(PORT, () => console.log(`Server Listening on Port ${PORT}`))
+  app.listen(PORT, () => console.log(`Server Listening on Port ${PORT}`))
 );
