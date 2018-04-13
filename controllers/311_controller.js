@@ -4,32 +4,61 @@ const router = express.Router();
 const db = require("../models");
 // User ID
 let userId = "";
+let userType = "User";
+let userDeptId;
 
 /// ROUTES
 // GET: index.handlebars
-// router.get("/", (req,res) => res.render('index'));
-router.get("/", function (req, res) {
-	db.Ticket.findAll({
-		include: [{
-			model: db.User
-		},
-		{
-			model: db.Request,
-			include: [{
-				model: db.Department
-			}]
-		},
-		{
-			model: db.Answer,
-			include: [{
-				model: db.Question
-			}]
-		}
-		]
-	}).then(function (data) {
-		var hbsObject = { data };
-		res.render("index", hbsObject);
-	});
+router.get("/", (req,res) => res.render('index'));
+router.get("/dashboard", function (req, res) {
+    if(userType === "Admin"){
+    db.Request.findAll({ 
+        where: { departmentId: userDeptId }
+    }).then(function(data){
+        const requestIds = [];
+        for(var i = 0; i < data.length; i++){
+            requestIds.push(data[i].id);
+        }
+        db.Ticket.findAll({ where: { requestId: requestIds }, 
+            include: [{ model: db.Answer, include: [{ model: db.Question }]}, 
+            { model: db.Request, include: [{ model: db.Department }] }, { model: db.User }]
+        }).then(function(data) {     
+            var hbsObject = { data };
+            res.render("dashboard", hbsObject);
+        })
+    })
+    }
+    else{
+        db.Ticket.findAll({ where: { userId: userId },
+            include: [{ model: db.Answer, 
+            include: [{ model: db.Question }]}, { model: db.Request, 
+            include: [{ model: db.Department }] }, { model: db.User }]
+        }).then(function(data) {      
+            var hbsObject = { data };
+            res.render("dashboard", hbsObject);
+        })
+    }
+	// db.Ticket.findAll({
+	// 	include: [{
+	// 		model: db.User
+	// 	},
+	// 	{
+	// 		model: db.Request,
+	// 		include: [{
+	// 			model: db.Department
+	// 		}]
+	// 	},
+	// 	{
+	// 		model: db.Answer,
+	// 		include: [{
+	// 			model: db.Question
+	// 		}]
+	// 	}
+	// 	]
+	// }).then(function (data) {
+	// 	var hbsObject = { data };
+	// 	res.render("dashboard", hbsObject);
+	// });
 });
 // Test
 router.get("/test", function (req, res) {
@@ -73,17 +102,19 @@ router.get("/api/questions/:id", (req, res) => {
 	}).then((data) => res.json(data));
 });
 // GET: User ID
-router.get("/api/user/:uid", (req, res) => {
-	db.User.find({
-		include: [{ model: db.Admin }],
-		where: { firebaseId: req.params.uid }
-	}).then((data) => {
-		userId = data.id;
-		if (data.Admins.length > 0 && data.userType !== "Admin") {
-			db.User.update({ userType: "Admin" }, { where: { id: userId } })
-		}
-		res.json(data);
-	});
+router.get("/api/user/:uid", (req,res) => {
+    db.User.find({ include:[{ model: db.Admin }],
+    where: { firebaseId: req.params.uid } }).then((data) => {
+        userId = data.id;
+        if(data.Admins.length > 0){
+            userType = "Admin";
+            userDeptId = data.Admins[0].dataValues.DepartmentId;
+            if(data.userType !== "Admin"){
+                db.User.update( { userType: "Admin"},{ where: { id: userId } })
+            }
+        }
+        res.json(data);
+    });
 });
 
 //GET: User's Ticket Data
@@ -123,7 +154,7 @@ router.post("/userData", (req, res) => {
 		state: req.body.stateVal,
 		zip: req.body.zipVal,
 		firebaseId: req.body.firebaseId
-	}).then(res.redirect("/"));
+	}).then(res.redirect("/dashboard"));
 });
 // POST: User Ticket
 router.post("/userTicket", (req, res) => {
@@ -148,7 +179,8 @@ router.post("/userTicket", (req, res) => {
 					value: answer.answer
 				});
 			});
-			res.json(data);
+            res.json(data);
+            res.redirect("/dashboard");
 		})
 	});
 });
