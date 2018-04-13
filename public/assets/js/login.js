@@ -11,4 +11,5 @@ loginButton.addEventListener('click', e => {
   const promise = auth.signInWithEmailAndPassword(emailVal, passwordVal);
   promise.catch(e => console.log(e.message));
   $("#login-modal").modal("hide");
+  //location.reload();
 });
