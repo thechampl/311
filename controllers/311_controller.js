@@ -28,7 +28,7 @@ router.get("/dashboard", function (req, res) {
         })
     })
     }
-    else{
+    else if(userType === "User"){
         db.Ticket.findAll({ where: { userId: userId },
             include: [{ model: db.Answer, 
             include: [{ model: db.Question }]}, { model: db.Request, 
@@ -38,27 +38,9 @@ router.get("/dashboard", function (req, res) {
             res.render("dashboard", hbsObject);
         })
     }
-	// db.Ticket.findAll({
-	// 	include: [{
-	// 		model: db.User
-	// 	},
-	// 	{
-	// 		model: db.Request,
-	// 		include: [{
-	// 			model: db.Department
-	// 		}]
-	// 	},
-	// 	{
-	// 		model: db.Answer,
-	// 		include: [{
-	// 			model: db.Question
-	// 		}]
-	// 	}
-	// 	]
-	// }).then(function (data) {
-	// 	var hbsObject = { data };
-	// 	res.render("dashboard", hbsObject);
-	// });
+    else{
+        res.redirect("/");
+    }
 });
 // Test
 router.get("/test", function (req, res) {
@@ -103,18 +85,24 @@ router.get("/api/questions/:id", (req, res) => {
 });
 // GET: User ID
 router.get("/api/user/:uid", (req,res) => {
-    db.User.find({ include:[{ model: db.Admin }],
-    where: { firebaseId: req.params.uid } }).then((data) => {
-        userId = data.id;
-        if(data.Admins.length > 0){
-            userType = "Admin";
-            userDeptId = data.Admins[0].dataValues.DepartmentId;
-            if(data.userType !== "Admin"){
-                db.User.update( { userType: "Admin"},{ where: { id: userId } })
+    if(req.params.uid){
+        db.User.find({ include:[{ model: db.Admin }],
+        where: { firebaseId: req.params.uid } }).then((data) => {
+            userId = data.id;
+            if(data.Admins.length > 0){
+                userType = "Admin";
+                userDeptId = data.Admins[0].dataValues.DepartmentId;
+                if(data.userType !== "Admin"){
+                    db.User.update( { userType: "Admin"},{ where: { id: userId } })
+                }
             }
-        }
-        res.json(data);
-    });
+            res.json(data);
+        });
+    }
+    else{
+        userType = "";
+        userDeptId = "";
+    }
 });
 
 //GET: User's Ticket Data
