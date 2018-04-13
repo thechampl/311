@@ -5,13 +5,12 @@ const db = require("../models");
 
 // User ID
 let userId = "";
-let userType = "User";
+let userType = "";
 let userDeptId;
 
 /// ROUTES
 // GET: index.handlebars
-router.get("/", (req, res) => res.render('index'));
-router.get("/dashboard", function (req, res) {
+router.get("/", function (req, res) {
   if (userType === "Admin") {
     db.Request.findAll({
       where: { departmentId: userDeptId }
@@ -26,13 +25,13 @@ router.get("/dashboard", function (req, res) {
         { model: db.Request, include: [{ model: db.Department }] }, { model: db.User }]
       }).then(function (data) {
         var hbsObject = { data };
-        res.render("dashboard", hbsObject);
+        res.render("index", hbsObject);
       })
     })
   }
-  else {
+  else if (userType === "User") {
     db.Ticket.findAll({
-      where: { userId: userId },
+      where: { userId: userId, $or: [{requestId: [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,26]}] },
       include: [{
         model: db.Answer,
         include: [{ model: db.Question }]
@@ -42,55 +41,29 @@ router.get("/dashboard", function (req, res) {
       }, { model: db.User }]
     }).then(function (data) {
       var hbsObject = { data };
-      res.render("dashboard", hbsObject);
+      res.render("index", hbsObject);
     })
   }
-  // db.Ticket.findAll({
-  // 	include: [{
-  // 		model: db.User
-  // 	},
-  // 	{
-  // 		model: db.Request,
-  // 		include: [{
-  // 			model: db.Department
-  // 		}]
-  // 	},
-  // 	{
-  // 		model: db.Answer,
-  // 		include: [{
-  // 			model: db.Question
-  // 		}]
-  // 	}
-  // 	]
-  // }).then(function (data) {
-  // 	var hbsObject = { data };
-  // 	res.render("dashboard", hbsObject);
-  // });
+  else{
+    db.Ticket.findAll({
+        where: { requestId: [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,26] },
+        include: [{
+          model: db.Answer,
+          include: [{ model: db.Question }]
+        }, {
+          model: db.Request,
+          include: [{ model: db.Department }]
+        }, { model: db.User }]
+      }).then(function (data) {
+        var hbsObject = { data };
+        res.render("index", hbsObject);
+      })
+  }
 });
-
-// Test
-router.get("/test", function (req, res) {
-  db.Ticket.findAll({
-    include: [{
-      model: db.User
-    },
-    {
-      model: db.Request,
-      include: [{
-        model: db.Department
-      }]
-    },
-    {
-      model: db.Answer,
-      include: [{
-        model: db.Question
-      }]
-    }
-    ]
-  }).then(function (data) {
-    var hbsObject = { data };
-    res.json(hbsObject);
-  });
+// GET: Sign Out
+router.get("/signOut", (req, res) => {
+    userType = "";
+    res.redirect("/");
 });
 
 // GET: Departments
@@ -120,8 +93,8 @@ router.get("/api/user/:uid", (req, res) => {
     where: { firebaseId: req.params.uid }
   }).then((data) => {
     userId = data.id;
+    userType = data.userType;
     if (data.Admins.length > 0) {
-      userType = "Admin";
       userDeptId = data.Admins[0].dataValues.DepartmentId;
       if (data.userType !== "Admin") {
         db.User.update({ userType: "Admin" }, { where: { id: userId } })
@@ -129,30 +102,6 @@ router.get("/api/user/:uid", (req, res) => {
     }
     res.json(data);
   });
-});
-
-//GET: User's Ticket Data
-router.get("/api/tickets/", function (req, res) {
-  db.Ticket.findAll({
-    where: {
-      userId: userId
-    },
-    include: [{
-      model: db.Answer,
-      include: [{
-        model: db.Question
-      }]
-    }, {
-      model: db.Request,
-      include: [{
-        model: db.Department
-      }]
-    }, {
-      model: db.User
-    }]
-  }).then(function (data) {
-    res.json(data);
-  })
 });
 
 // POST: User Data
@@ -168,7 +117,7 @@ router.post("/userData", (req, res) => {
     state: req.body.stateVal,
     zip: req.body.zipVal,
     firebaseId: req.body.firebaseId
-  }).then(res.redirect("/dashboard"));
+  }).then(res.redirect("/"));
 });
 
 // POST: User Ticket
@@ -195,7 +144,7 @@ router.post("/userTicket", (req, res) => {
         });
       });
       res.json(data);
-      res.redirect("/dashboard");
+      res.redirect("/");
     })
   });
 });

@@ -1,7 +1,7 @@
 <!-- navbar -->
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
   <div class="container">
-    <a class="navbar-brand" href="#">SIMPL311</a>
+    <a class="navbar-brand" href="/">SIMPL311</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo01" aria-controls="navbarTogglerDemo01"
       aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
@@ -9,22 +9,22 @@
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav ml-auto">
         {{!-- create ticket --}}
-        <a class="nav-link text-white" id="open-ticket" href="#" data-toggle="modal" data-target="#ticket-test"></a>
+        <a class="nav-link text-white" id="open-ticket" href="/" data-toggle="modal" data-target="#ticket-test"></a>
         {{!-- dashboard --}}
-        <a class="nav-link text-white" id="open-dash" href="/dashboard"></a>
+        <a class="nav-link text-white" id="open-dash" href="/"></a>
         {{!-- register --}}
-        <a class="nav-link text-white" href="#" data-toggle="modal" data-target="#register-modal" id="register"></a>
+        <a class="nav-link text-white" href="/" data-toggle="modal" data-target="#register-modal" id="register"></a>
         {{!-- login --}}
 
-        <a class="nav-link text-white" href="#" data-toggle="modal" data-target="#login-modal" id="logIn">Log In</a>
+        <a class="nav-link text-white" href="/" data-toggle="modal" data-target="#login-modal" id="logIn">Log In</a>
 
         <li class="nav-item dropdown active">
-          <a class="nav-link dropdown-toggle" href="#" role="button" id="navbarDropdown" data-toggle="dropdown" aria-haspopup="true"
+          <a class="nav-link dropdown-toggle" href="/" role="button" id="navbarDropdown" data-toggle="dropdown" aria-haspopup="true"
             aria-expanded="false"></a>
           <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
             <ul>
               {{!-- in drop down --}} {{!-- my profile --}}
-              <a class="nav-link text-dark" id="my-profile" href="#">My Profile</a>
+              <a class="nav-link text-dark" id="my-profile" href="/">My Profile</a>
               <div class="dropdown-divider"></div>
               {{!-- sign out --}}
               <a class="nav-link text-dark" href="/" data-toggle="modal" data-target="#signOut-modal" id="signOut">Sign Out</a>
@@ -51,6 +51,30 @@
   <div id="mainContent">
 
   </div>
+</div>
+
+<div id="accordion">
+  {{#each data}}
+  <div class="card">
+    <div class="card-header" id="card-heading">
+      <h5 class="mb-0">
+        <button class="btn btn-link" data-toggle="collapse" data-target="#card-collapse-{{id}}" aria-expanded="true" aria-controls="card-collapse">
+          Ticket #{{id}} - {{Request.Department.name}} - {{Request.name}}
+        </button>
+      </h5>
+    </div>
+    <div id="card-collapse-{{id}}" class="collapse" aria-labelledby="card-body" data-parent="#accordion">
+      <div class="card-body">
+        {{#each Answers}}
+        <p class="font-weight-bold text-dark">{{Question.label}}</p>
+        <p>{{value}}</p>
+        {{/each}}
+        <p class="font-weight-bold text-dark">Comments</p>
+        <p>{{comments}}</p>
+      </div>
+    </div>
+  </div>
+  {{/each}}
 </div>
 
 {{!-- Will's ticket modal --}}
@@ -83,7 +107,7 @@
             <span id="remainingChars">255</span>
           </p>
         </form>
-        <button href="/" id="ticketSubmit" type="button" class="btn btn-dark btn-block">Submit Ticket</button>
+        <button id="ticketSubmit" type="button" class="btn btn-dark btn-block">Submit Ticket</button>
       </div>
 
       <div class="modal-footer">
@@ -142,14 +166,14 @@
         <button id="loginButton" type="button" class="btn btn-dark btn-block">Log In</button>
 
         <div class="mt-3 text-center">
-          <a href="#" id="resetPassword">Forgot Password?</a>
+          <a href="/" id="resetPassword">Forgot Password?</a>
         </div>
       </div>
 
       <div class="modal-footer">
         <div class="mx-auto">
           <span>Don't Have An Account?
-            <a href="#" id="sign-up">Sign Up</a>
+            <a href="/" id="sign-up">Sign Up</a>
           </span>
         </div>
       </div>
@@ -324,7 +348,7 @@
       <div class="modal-footer">
         <div class="mx-auto">
           <span>Already Have An Account?
-            <a href="#" id="login">Log In</a>
+            <a href="/" id="login">Log In</a>
           </span>
         </div>
       </div>

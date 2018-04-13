@@ -107,10 +107,15 @@ passwordResetButton.addEventListener('click', e => {
 signOutButton.addEventListener('click', e => {
   firebase.auth().signOut();
   $("#signOut-modal").modal("hide");
+  $.ajax({
+    url: "/signOut",
+    method: "GET"
+  }).done(data => {
+    location.reload();
+  });
 });
 // ON AUTH STATE CHANGED
 firebase.auth().onAuthStateChanged(currentUser => {
-
   if (currentUser) {
     $("#logIn").attr("style", "display:none");
     $("#register").attr("style", "display:none");
@@ -118,14 +123,10 @@ firebase.auth().onAuthStateChanged(currentUser => {
     $("#createTicket").attr("style", "display:block").text("Create Ticket");
     $.ajax({ url: `/api/user/${currentUser.uid}`, method: "GET" }).done(response => {
       $("#navbarDropdown").text(`Welcome back, ${response.firstName} ${response.lastName}`);
-
       $("#open-ticket").attr("style", "display:block").text("New Ticket");
       $("#open-dash").attr("style", "display:block").text("Dashboard");
       $("#my-profile").attr("style", "display:block").text("Profile");
-
     });
-
-
   } else {
     $("#navbarDropdown").attr("style", "display:none");
     $("#logIn").attr("style", "display:block").text("Log In");
@@ -134,7 +135,5 @@ firebase.auth().onAuthStateChanged(currentUser => {
     $("#open-ticket").attr("style", "display:none");
     $("#open-dash").attr("style", "display:none");
     $("#my-profile").attr("style", "display:none");
-    console.log("firebaseUser not logged in");
-
   }
 });
