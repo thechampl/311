@@ -53,6 +53,30 @@
   </div>
 </div>
 
+<div id="accordion">
+  {{#each data}}
+  <div class="card">
+    <div class="card-header" id="card-heading">
+      <h5 class="mb-0">
+        <button class="btn btn-link" data-toggle="collapse" data-target="#card-collapse-{{id}}" aria-expanded="true" aria-controls="card-collapse">
+          Ticket #{{id}} - {{Request.Department.name}} - {{Request.name}}
+        </button>
+      </h5>
+    </div>
+    <div id="card-collapse-{{id}}" class="collapse" aria-labelledby="card-body" data-parent="#accordion">
+      <div class="card-body">
+        {{#each Answers}}
+        <p class="font-weight-bold text-dark">{{Question.label}}</p>
+        <p>{{value}}</p>
+        {{/each}}
+        <p class="font-weight-bold text-dark">Comments</p>
+        <p>{{comments}}</p>
+      </div>
+    </div>
+  </div>
+  {{/each}}
+</div>
+
 {{!-- Will's ticket modal --}}
 <div class="modal fade" id="ticket-test" tabindex="-1" role="dialog" aria-labelledby="ticket-modal-title" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered" role="document">
@@ -83,7 +107,7 @@
             <span id="remainingChars">255</span>
           </p>
         </form>
-        <button href="/" id="ticketSubmit" type="button" class="btn btn-dark btn-block">Submit Ticket</button>
+        <button id="ticketSubmit" type="button" class="btn btn-dark btn-block">Submit Ticket</button>
       </div>
 
       <div class="modal-footer">
