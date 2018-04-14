@@ -9,10 +9,6 @@ $(document).ready(function () {
     $("#login-modal").modal("show");
   });
 
-  $("#createTicket").on('click', () => {
-    $("#ticket-modal").modal("show");
-  });
-
   $("#resetPassword").on("click", function () {
     $("#login-modal").modal("hide");
     $("#reset-modal").modal("show");

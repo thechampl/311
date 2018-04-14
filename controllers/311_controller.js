@@ -22,9 +22,6 @@ router.get("/", function (req, res) {
     res.render("index", hbsObject);
   });
 
-
-
-
   // if (userType === "Admin") {
   //   db.Request.findAll({
   //     where: { departmentId: userDeptId }
@@ -65,15 +62,6 @@ router.get("/", function (req, res) {
   //     res.render("index", hbsObject);
   //   });
   // }
-});
-
-router.get("/test", function (req, res) {
-  db.Ticket.findAll({
-    include: [{ model: db.Answer, include: [{ model: db.Question }] }, { model: db.Request, include: [{ model: db.Department }] }, { model: db.User }]
-  }).then(function (data) {
-    var hbsObject = { data };
-    res.json(hbsObject);
-  });
 });
 
 // GET: Sign Out
@@ -159,7 +147,6 @@ router.post("/userTicket", (req, res) => {
           value: answer.answer
         });
       });
-      // res.json(data);
       res.redirect("/");
     })
   });

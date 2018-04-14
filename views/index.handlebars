@@ -64,7 +64,8 @@
 <div class="container">
   <div id="mainContent">
     <div id="accordion">
-      {{#each data as |data.status new|}}
+      {{#each data}}
+      {{#eq status "new"}}
       <div class="card">
         <div class="card-header" id="card-heading">
           <h5 class="mb-0">
@@ -86,6 +87,7 @@
           </div>
         </div>
       </div>
+      {{/eq}}
       {{/each}}
     </div>
   </div>

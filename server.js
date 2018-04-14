@@ -10,8 +10,14 @@ app.use(bodyparser.urlencoded({ extended: false }));
 app.use(bodyparser.json());
 
 // Setup Handlebars Engine
-const exphandbars = require("express-handlebars");
-app.engine("handlebars", exphandbars({ defaultLayout: "main" }));
+const exphbs = require("express-handlebars");
+const helpers = require("handlebars-helpers")();
+const hbs = exphbs.create({
+  defaultLayout: "main",
+  helpers: helpers
+});
+
+app.engine("handlebars", hbs.engine);
 app.set("view engine", "handlebars");
 
 // Import Routes

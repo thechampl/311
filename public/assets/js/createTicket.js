@@ -154,16 +154,13 @@ $(document).ready(() => {
     };
     xhr.setRequestHeader("Content-type", "application/json");
     xhr.send(JSON.stringify(data));
-    setTimeout(testFunc, 1000)
-    function testFunc() {
-      location.reload();
-    }
+
+    setTimeout(pageReload, 1000)
     // $("#ticket-modal").modal("hide");
   }
 });
 
 const closeTickets = document.querySelectorAll(".closeTicket");
-// console.log(closeTickets);
 
 closeTickets.forEach((button) => {
   button.addEventListener("click", closeTicket);
@@ -191,4 +188,10 @@ function ticketStatusUpdate(ticketUpdate) {
   xhr.open("PUT", "/userTicketsUpdate", true);
   xhr.setRequestHeader("Content-type", "application/json");
   xhr.send(JSON.stringify(ticketUpdate));
+
+  setTimeout(pageReload, 1000)
+}
+
+function pageReload() {
+  location.reload();
 }
