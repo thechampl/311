@@ -15,53 +15,53 @@ let userDeptId;
 /// ROUTES
 // GET: index.handlebars
 router.get("/", function (req, res) {
-  db.Ticket.findAll({
-    include: [{ model: db.Answer, include: [{ model: db.Question }] }, { model: db.Request, include: [{ model: db.Department }] }, { model: db.User }]
-  }).then(function (data) {
-    var hbsObject = { data };
-    res.render("index", hbsObject);
-  });
+  // db.Ticket.findAll({
+  //   include: [{ model: db.Answer, include: [{ model: db.Question }] }, { model: db.Request, include: [{ model: db.Department }] }, { model: db.User }]
+  // }).then(function (data) {
+  //   var hbsObject = { data };
+  //   res.render("index", hbsObject);
+  // });
 
-  // if (userType === "Admin") {
-  //   db.Request.findAll({
-  //     where: { departmentId: userDeptId }
-  //   }).then(function (data) {
-  //     const requestIds = [];
-  //     for (var i = 0; i < data.length; i++) {
-  //       requestIds.push(data[i].id);
-  //     }
-  //     db.Ticket.findAll({
-  //       where: { requestId: requestIds },
-  //       include: [{ model: db.Answer, include: [{ model: db.Question }] },
-  //       { model: db.Request, include: [{ model: db.Department }] }, { model: db.User }]
-  //     }).then(function (data) {
-  //       var hbsObject = { data };
-  //       res.render("index", hbsObject);
-  //     });
-  //   });
-  // }
-  // else if (userType === "User") {
-  //   db.Ticket.findAll({
-  //     // where: { 
-  //     //     $or: [
-  //     //         { requestId: [ 1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,26 ] },
-  //     //         { userId: userId }]
-  //     // },
-  //     include: [{ model: db.Answer, include: [{ model: db.Question }] }, { model: db.Request, include: [{ model: db.Department }] }, { model: db.User }]
-  //   }).then(function (data) {
-  //     var hbsObject = { data };
-  //     res.render("index", hbsObject);
-  //   });
-  // }
-  // else {
-  //   db.Ticket.findAll({
-  //     where: { requestId: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 26] },
-  //     include: [{ model: db.Answer, include: [{ model: db.Question }] }, { model: db.Request, include: [{ model: db.Department }] }, { model: db.User }]
-  //   }).then(function (data) {
-  //     var hbsObject = { data };
-  //     res.render("index", hbsObject);
-  //   });
-  // }
+  if (userType === "Admin") {
+    db.Request.findAll({
+      where: { departmentId: userDeptId }
+    }).then(function (data) {
+      const requestIds = [];
+      for (var i = 0; i < data.length; i++) {
+        requestIds.push(data[i].id);
+      }
+      db.Ticket.findAll({
+        where: { requestId: requestIds },
+        include: [{ model: db.Answer, include: [{ model: db.Question }] },
+        { model: db.Request, include: [{ model: db.Department }] }, { model: db.User }]
+      }).then(function (data) {
+        var hbsObject = { data };
+        res.render("index", hbsObject);
+      });
+    });
+  }
+  else if (userType === "User") {
+    db.Ticket.findAll({
+      where: { 
+          $or: [
+              { requestId: [ 1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,26 ] },
+              { userId: userId }]
+      },
+      include: [{ model: db.Answer, include: [{ model: db.Question }] }, { model: db.Request, include: [{ model: db.Department }] }, { model: db.User }]
+    }).then(function (data) {
+      var hbsObject = { data };
+      res.render("index", hbsObject);
+    });
+  }
+  else {
+    db.Ticket.findAll({
+      where: { requestId: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 26] },
+      include: [{ model: db.Answer, include: [{ model: db.Question }] }, { model: db.Request, include: [{ model: db.Department }] }, { model: db.User }]
+    }).then(function (data) {
+      var hbsObject = { data };
+      res.render("index", hbsObject);
+    });
+  }
 });
 
 // GET: Sign Out
