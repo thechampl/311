@@ -170,9 +170,8 @@ function closeTicket() {
     const textNumber = /\d+/g;
     const ticketId = ticketText.match(textNumber);
 
-    // values to pass
-    console.log(ticketId);   
-    console.log(ticketText); 
+    const ticketToggleButton = document.querySelector(`#ticket-${ticketId}-toggle-button`);
+    ticketToggleButton.disabled = true;
 
     const statusUpdate = {
         ticketText,
@@ -180,6 +179,8 @@ function closeTicket() {
         status: "closed"
     };
     
+
+
     ticketStatusUpdate(statusUpdate);
 }
 
