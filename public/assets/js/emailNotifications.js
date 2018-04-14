@@ -17,7 +17,7 @@ module.exports = function (email, user, ticket) {
       <h1>Hello ${user}</h1>
       <p>We have successfully resolved your ticket request</p>
       <h3>${ticket}</h3>
-      <p>Signature message</p>
+      <p>- 311 Adminstration</p>
       `
   }
   // Send Email
