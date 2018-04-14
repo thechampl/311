@@ -13,7 +13,6 @@ loginButton.addEventListener('click', e => {
     passwordVal
   }
   loginValidation(loginObj);
-  $("#login-modal").modal("hide");
 });
 
 function loginValidation(dataObj) {
@@ -39,4 +38,5 @@ function loginValidation(dataObj) {
   };
   const promise = auth.signInWithEmailAndPassword(dataObj.emailVal, dataObj.passwordVal);
   promise.catch(e => console.log(e.message));
+  $("#login-modal").modal("hide");
 };
