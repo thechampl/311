@@ -144,12 +144,11 @@ router.post("/userTicket", (req, res) => {
         });
       });
       res.json(data);
-      res.redirect("/");
+    //   res.redirect("/");
     })
   });
 });
 
-// PUT: User Tickets (Admin)
 // PUT: User Tickets (Admin)
 router.put("/userTicketsUpdate", (req, res) => {
     // successfully sending status, id, and text to this route from front end
