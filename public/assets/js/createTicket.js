@@ -78,7 +78,9 @@ $(document).ready(() => {
   }
 
   // Ticket Submit Callback
-  function ticketSubmitCallback() {
+  function ticketSubmitCallback(e) {
+    e.preventDefault();
+
     const requestId = ticketRequest.value;
     const answers = [];
     const comments = ticketComments.value.trim();
@@ -90,8 +92,6 @@ $(document).ready(() => {
           question: ticketQuestions.childNodes[i].children[0][selIndex].getAttribute("data-question"),
           answer: ticketQuestions.childNodes[i].children[0][selIndex].value
         });
-
-
       } else {
         answers.push({
           question: ticketQuestions.childNodes[i].children[0].getAttribute("data-question"),
@@ -148,8 +148,8 @@ $(document).ready(() => {
     xhr.open("POST", "/userTicket", true);
     xhr.onload = function () {
       if (this.status === 200) {
-        $("#ticket-test form")[0].reset();
-        $("#ticket-test").modal("hide");
+        $("#createTicket form")[0].reset();
+        $("#createTicket").modal("hide");
       };
     };
     xhr.setRequestHeader("Content-type", "application/json");
@@ -162,30 +162,30 @@ const closeTickets = document.querySelectorAll(".closeTicket");
 console.log(closeTickets);
 
 closeTickets.forEach((button) => {
-    button.addEventListener("click", closeTicket);
+  button.addEventListener("click", closeTicket);
 });
 
 function closeTicket() {
-    const ticketText = this.parentElement.parentElement.previousElementSibling.innerText;
-    const textNumber = /\d+/g;
-    const ticketId = ticketText.match(textNumber);
+  const ticketText = this.parentElement.parentElement.previousElementSibling.innerText;
+  const textNumber = /\d+/g;
+  const ticketId = ticketText.match(textNumber);
 
-    // values to pass
-    console.log(ticketId);   
-    console.log(ticketText); 
+  // values to pass
+  console.log(ticketId);
+  console.log(ticketText);
 
-    const statusUpdate = {
-        ticketText,
-        id: ticketId,
-        status: "closed"
-    };
-    
-    ticketStatusUpdate(statusUpdate);
+  const statusUpdate = {
+    ticketText,
+    id: ticketId,
+    status: "closed"
+  };
+
+  ticketStatusUpdate(statusUpdate);
 }
 
 function ticketStatusUpdate(ticketUpdate) {
-    const xhr = new XMLHttpRequest();
-    xhr.open("PUT", "/userTicketsUpdate", true);
-    xhr.setRequestHeader("Content-type", "application/json");
-    xhr.send(JSON.stringify(ticketUpdate));
+  const xhr = new XMLHttpRequest();
+  xhr.open("PUT", "/userTicketsUpdate", true);
+  xhr.setRequestHeader("Content-type", "application/json");
+  xhr.send(JSON.stringify(ticketUpdate));
 }

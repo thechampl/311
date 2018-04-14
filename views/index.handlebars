@@ -11,7 +11,7 @@
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav ml-auto">
         {{!-- create ticket --}}
-        <a class="nav-link text-white" id="open-ticket" href="/" data-toggle="modal" data-target="#ticket-test"></a>
+        <a class="nav-link text-white" id="open-ticket" href="/" data-toggle="modal" data-target="#createTicket"></a>
         {{!-- dashboard --}}
         <a class="nav-link text-white" id="open-dash" href="/"></a>
         {{!-- register --}}
@@ -69,7 +69,7 @@
             {{/each}}
             <p class="font-weight-bold text-dark">Comments</p>
             <p>{{comments}}</p>
-            <button class="btn btn-dark closeTicket">Close Ticket</button>
+            <button class="btn btn-secondary closeTicket">Close Ticket</button>
           </div>
         </div>
       </div>
@@ -87,7 +87,7 @@
 
 
 {{!-- Will's ticket modal --}}
-<div class="modal fade" id="ticket-test" tabindex="-1" role="dialog" aria-labelledby="ticket-modal-title" aria-hidden="true">
+<div class="modal fade" id="createTicket" tabindex="-1" role="dialog" aria-labelledby="ticket-modal-title" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered" role="document">
     <div class="modal-content">
       <div class="modal-header bg-dark">
@@ -112,7 +112,7 @@
           <div class="form-group" id="ticketQuestions"></div>
 
           <div class="form-group">
-            <input type="text" class="form-control" id="ticketComments" placeholder="Any additional comments?">
+            <input type="text" class="form-control" id="ticketComments" placeholder="Please explain your request">
           </div>
 
           {{!--
@@ -140,7 +140,7 @@
       <div class="modal-header bg-dark">
         <h5 class="modal-title text-light" id="login-modal-title">
           <i class="fas fa-exclamation-circle"></i> Invalid Input</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+        <button type="button" class="close text-light" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
