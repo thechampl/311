@@ -15,13 +15,6 @@ let userDeptId;
 /// ROUTES
 // GET: index.handlebars
 router.get("/", function (req, res) {
-  // db.Ticket.findAll({
-  //   include: [{ model: db.Answer, include: [{ model: db.Question }] }, { model: db.Request, include: [{ model: db.Department }] }, { model: db.User }]
-  // }).then(function (data) {
-  //   var hbsObject = { data };
-  //   res.render("index", hbsObject);
-  // });
-
   if (userType === "Admin") {
     db.Request.findAll({
       where: { departmentId: userDeptId }
