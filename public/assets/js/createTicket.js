@@ -157,3 +157,35 @@ $(document).ready(() => {
     $("#ticket-modal").modal("hide");
   }
 });
+
+const closeTickets = document.querySelectorAll(".closeTicket");
+console.log(closeTickets);
+
+closeTickets.forEach((button) => {
+    button.addEventListener("click", closeTicket);
+});
+
+function closeTicket() {
+    const ticketText = this.parentElement.parentElement.previousElementSibling.innerText;
+    const textNumber = /\d+/g;
+    const ticketId = ticketText.match(textNumber);
+
+    // values to pass
+    console.log(ticketId);   
+    console.log(ticketText); 
+
+    const statusUpdate = {
+        ticketText,
+        id: ticketId,
+        status: "closed"
+    };
+    
+    ticketStatusUpdate(statusUpdate);
+}
+
+function ticketStatusUpdate(ticketUpdate) {
+    const xhr = new XMLHttpRequest();
+    xhr.open("PUT", "/userTicketsUpdate", true);
+    xhr.setRequestHeader("Content-type", "application/json");
+    xhr.send(JSON.stringify(ticketUpdate));
+}

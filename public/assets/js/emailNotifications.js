@@ -1,24 +1,27 @@
 'use strict';
 const nodemailer = require("nodemailer");
-var smtpTransport = nodemailer.createTransport({
-  service: "Gmail",
-  auth: {
-    user: "311Sender@gmail.com",
-    pass: "rootroot"
+
+module.exports = function (email, user, ticket) {  
+  const smtpTransport = nodemailer.createTransport({
+    service: "Gmail",
+    auth: {
+      user: "311Sender@gmail.com",
+      pass: "rootroot"
+    }
+  });
+  const mailOptions = {
+    from: "311 Tech Team<311Sender@gmail.com",
+    to: email,
+    subject: "311 Ticket Resolved",
+    html: `
+      <h1>Hello ${user}</h1>
+      <p>We have successfully resolved your ticket request</p>
+      <h3>${ticket}</h3>
+      <p>Signature message</p>
+      `
   }
-});
-var mailOptions = {
-  from: "Node Server<311Sender@gmail.com",
-  to: "akharri8@ncsu.edu",
-  subject: "Hello",
-  html: `
-    <h1>Hello {User}</h1>
-    <p>We have successfully resolved the {thing} at {address}</p>
-    <p>Image here</p>
-    <p>Signature message</p>
-    `
+  // Send Email
+  smtpTransport.sendMail(mailOptions, (error, response) => {
+    // DO SOMETHING
+  });
 }
-// Send Email
-smtpTransport.sendMail(mailOptions, (error, response) => {
-  // DO SOMETHING
-});
