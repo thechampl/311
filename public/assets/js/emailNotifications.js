@@ -3,7 +3,7 @@ const nodemailer = require("nodemailer");
 // const image = require("/assets/img/simpl311.png");
 
 const Module = require('module');
-const fs     = require('fs');
+const fs = require('fs');
 
 // Module._extensions['.png'] = function(module, fn) {
 //   const base64 = fs.readFileSync(fn).toString('base64');
@@ -14,7 +14,7 @@ const fs     = require('fs');
 
 // var image = require("../img/simpl311.png");
 
-module.exports = function (email, user, ticket) {  
+module.exports = function (email, user, ticket) {
   const smtpTransport = nodemailer.createTransport({
     service: "Gmail",
     auth: {
@@ -32,7 +32,7 @@ module.exports = function (email, user, ticket) {
       <h3>${ticket}</h3>
       <p>- 311 Adminstration</p>
       `
-    }
+  }
   // Send Email
   smtpTransport.sendMail(mailOptions, (error, response) => {
     // DO SOMETHING
