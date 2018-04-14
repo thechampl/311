@@ -16,7 +16,6 @@ loginButton.addEventListener('click', e => {
   $("#login-modal").modal("hide");
 });
 
-
 function loginValidation(dataObj) {
   let breakFlag = null;
   for (let property in dataObj) {
