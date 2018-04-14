@@ -17,11 +17,14 @@ $(document).ready(() => {
   // ON CHANGE: Department/Request Dropdowns
   $("#deptDropdown").on("change", getReqs);
   $("#reqDropdown").on("change", getQuestions);
+  $("#addDrop").on("change", ticketAddress);
 
   // GET: Departments /api/departments
   function getDepts() {
+    $("#ticketQuestions").empty();
+    $("#reqDefault").nextAll("option").remove();
     $.ajax({ url: "/api/departments", method: "GET" }).done(response => {
-      $("#deptDefault").nextAll("option").remove();
+        $("#deptDefault").nextAll("option").remove();
       response.forEach(dept => {
         var option = $("<option>").attr("value", dept.id).text(dept.name);
         $("#deptDropdown").append(option);
@@ -31,6 +34,7 @@ $(document).ready(() => {
 
   // GET: Requests /api/departments
   function getReqs() {
+    $("#ticketQuestions").empty();
     $.ajax({ url: `/api/departments/${this.value}`, method: "GET" }).done(response => {
       $("#reqDropdown").removeAttr("disabled");
       $("#reqDefault").nextAll("option").remove();
@@ -75,6 +79,26 @@ $(document).ready(() => {
         ticketQuestions.append(formGroup);
       })
     });
+    
+    $("#addDrop").removeAttr("hidden");
+    $("#addDrop").append($("<option>").prop({
+            "disabled": true,
+            "selected": true
+            }).text("Is this request for your saved home address?")) 
+        .append($("<option>").prop({
+            "value": "yes"
+        }).text("yes"))
+        .append($("<option>").prop({
+            "value": "no"
+        }).text("no"));
+  }
+
+  function ticketAddress() {
+    const currentUser = firebase.auth().currentUser;
+    console.log(currentUser.uid);
+    $.ajax({ url: `/api/user/${currentUser.uid}`, method: "GET" }).done(response => {
+        console.log(response);
+    });
   }
 
   // Ticket Submit Callback
@@ -98,7 +122,7 @@ $(document).ready(() => {
           answer: ticketQuestions.childNodes[i].children[0].value
         });
       }
-    }
+    }  
 
     const ticketData = {
       requestId,

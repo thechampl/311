@@ -40,7 +40,7 @@
 <div class="banner">
   <div class="row">
     <div class="col-sm-12 text-center">
-      <img src="/assets/img/simpl311.png" alt="SIMPL311 Logo" id="banner-logo">
+      <img src="/assets/img/simpl311.png" alt="SIMPL311 Logo" id="banner-logo" class="animated fadeInDown">
       <h3>Connecting Citizens to Cities</h3>
     </div>
   </div>
@@ -109,12 +109,15 @@
             </select>
           </div>
           <div class="form-group" id="ticketQuestions"></div>
+          <div class="form-group" id="ticketAddress">
+            <select name="" id="addDrop" hidden class="form-control"></select>
+          </div>
           {{!--
           <div class="form-group">
             <input type="submit" class="form-control" id="ticketComments" placeholder="Any additional comments?">
           </div> --}}
 
-          <textarea name="ticket-comments" class="w-100" id="ticketComments" rows="10" placeholder="Explain your ticket request"></textarea>
+          <textarea name="ticket-comments" class="w-100" id="ticketComments" rows="10" placeholder="Additional Comments"></textarea>
           <p>Characters Remaining
             <span id="remainingChars">255</span>
           </p>
