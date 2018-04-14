@@ -158,7 +158,6 @@ $(document).ready(() => {
     $("#ticket-modal").modal("hide");
   }
 });
-<<<<<<< HEAD
 
 const closeTickets = document.querySelectorAll(".closeTicket");
 console.log(closeTickets);
@@ -194,5 +193,3 @@ function ticketStatusUpdate(ticketUpdate) {
 
     xhr.send(JSON.stringify(ticketUpdate));
 }
-=======
->>>>>>> master
