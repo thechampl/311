@@ -12,7 +12,7 @@ $(document).ready(() => {
   ticketComments.addEventListener("keyup", remainingChars);
 
   // ON CLICK: Open Ticket
-  $("#open-ticket").on("click", getDepts);
+  $(".open-ticket").on("click", getDepts);
 
   // ON CHANGE: Department/Request Dropdowns
   $("#deptDropdown").on("change", getReqs);

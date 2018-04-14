@@ -131,18 +131,19 @@ firebase.auth().onAuthStateChanged(currentUser => {
     $("#signOut").attr("style", "display:block").text("Sign Out");
     $("#createTicket").attr("style", "display:block").text("Create Ticket");
     $.ajax({ url: `/api/user/${currentUser.uid}`, method: "GET" }).done(response => {
-      $("#navbarDropdown").text(`Welcome back, ${response.firstName} ${response.lastName}`);
-      $("#open-ticket").attr("style", "display:block").text("New Ticket");
-      $("#open-dash").attr("style", "display:block").text("Dashboard");
-      $("#my-profile").attr("style", "display:block").text("Profile");
+      // $("#navbarDropdown").text(`Welcome back, ${response.firstName} ${response.lastName}`);
+      $("#navbarDropdown").attr("style", "display:block").text(`Welcome back, ${response.firstName}`);
+      $(".open-ticket").attr("style", "display:block").text("New Ticket");
+      $(".open-dash").attr("style", "display:block").text("Dashboard");
+      // $("#my-profile").attr("style", "display:block").text("Profile");
     });
   } else {
     $("#navbarDropdown").attr("style", "display:none");
     $("#logIn").attr("style", "display:block").text("Log In");
     $("#register").attr("style", "display:block").text("Register");
     $("#signOut").attr("style", "display:none");
-    $("#open-ticket").attr("style", "display:none");
-    $("#open-dash").attr("style", "display:none");
-    $("#my-profile").attr("style", "display:none");
+    $(".open-ticket").attr("style", "display:none");
+    $(".open-dash").attr("style", "display:none");
+    // $("#my-profile").attr("style", "display:none");
   }
 });
