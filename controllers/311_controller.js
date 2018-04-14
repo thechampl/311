@@ -147,7 +147,7 @@ router.post("/userTicket", (req, res) => {
         });
       });
       res.json(data);
-    //   res.redirect("/");
+      //   res.redirect("/");
     })
   });
 });

@@ -148,13 +148,13 @@ $(document).ready(() => {
     xhr.open("POST", "/userTicket", true);
     xhr.onload = function () {
       if (this.status === 200) {
-        $("#createTicket form")[0].reset();
-        $("#createTicket").modal("hide");
+        $("#ticket-modal form")[0].reset();
+        $("#ticket-modal").modal("hide");
       };
     };
     xhr.setRequestHeader("Content-type", "application/json");
     xhr.send(JSON.stringify(data));
-    $("#ticket-modal").modal("hide");
+    // $("#ticket-modal").modal("hide");
   }
 });
 
