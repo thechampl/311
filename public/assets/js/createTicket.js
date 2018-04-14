@@ -34,6 +34,7 @@ $(document).ready(() => {
     $.ajax({ url: `/api/departments/${this.value}`, method: "GET" }).done(response => {
       $("#reqDropdown").removeAttr("disabled");
       $("#reqDefault").nextAll("option").remove();
+      $("#ticketQuestions").empty();
       response.Requests.forEach(function (req) {
         var option = $("<option>").attr("value", req.id).text(req.name);
         $("#reqDropdown").append(option);

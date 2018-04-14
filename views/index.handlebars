@@ -10,13 +10,13 @@
 
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
     <ul class="navbar-nav">
-      {{!-- create ticket --}}
-      <li>
-        <a class="nav-link text-white open-ticket" href="#" data-toggle="modal" data-target="#ticket-modal"></a>
-      </li>
       {{!-- dashboard --}}
       <li>
         <a class="nav-link text-white open-dash" href="#"></a>
+      </li>
+      {{!-- create ticket --}}
+      <li>
+        <a class="nav-link text-white open-ticket" href="#" data-toggle="modal" data-target="#ticket-modal"></a>
       </li>
     </ul>
 
@@ -35,10 +35,10 @@
           aria-expanded="false"></a>
         <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
           <ul>
-            {{!-- create ticket --}}
-            <a class="nav-link text-dark open-ticket" href="#" data-toggle="modal" data-target="#ticket-modal"></a>
             {{!-- dashboard --}}
             <a class="nav-link text-dark open-dash" href="#"></a>
+            {{!-- create ticket --}}
+            <a class="nav-link text-dark open-ticket" href="#" data-toggle="modal" data-target="#ticket-modal"></a>
             {{!-- divider --}}
             <div class="dropdown-divider"></div>
             {{!-- sign out --}}
@@ -55,7 +55,7 @@
   <div class="row">
     <div class="col-sm-12 text-center">
       <img src="/assets/img/simpl311.png" alt="SIMPL311 Logo" id="banner-logo">
-      <h3>Connecting Citizens to Cities</h3>
+      <h3>Connecting Citizens To Cities</h3>
     </div>
   </div>
 </div>
@@ -64,8 +64,7 @@
 <div class="container">
   <div id="mainContent">
     <div id="accordion">
-      {{#each data}}
-      {{#eq status "new"}}
+      {{#each data}} {{#eq status "new"}}
       <div class="card">
         <div class="card-header" id="card-heading">
           <h5 class="mb-0">
@@ -87,8 +86,7 @@
           </div>
         </div>
       </div>
-      {{/eq}}
-      {{/each}}
+      {{/eq}} {{/each}}
     </div>
   </div>
 </div>
