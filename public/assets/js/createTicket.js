@@ -154,12 +154,16 @@ $(document).ready(() => {
     };
     xhr.setRequestHeader("Content-type", "application/json");
     xhr.send(JSON.stringify(data));
+    setTimeout(testFunc, 1000)
+    function testFunc() {
+      location.reload();
+    }
     // $("#ticket-modal").modal("hide");
   }
 });
 
 const closeTickets = document.querySelectorAll(".closeTicket");
-console.log(closeTickets);
+// console.log(closeTickets);
 
 closeTickets.forEach((button) => {
   button.addEventListener("click", closeTicket);

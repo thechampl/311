@@ -44,18 +44,12 @@ router.get("/", function (req, res) {
     }).then(function (data) {
       var hbsObject = { data };
       res.render("index", hbsObject);
-    })
+    });
   }
   else {
     db.Ticket.findAll({
       where: { requestId: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 26] },
-      include: [{
-        model: db.Answer,
-        include: [{ model: db.Question }]
-      }, {
-        model: db.Request,
-        include: [{ model: db.Department }]
-      }, { model: db.User }]
+      include: [{ model: db.Answer, include: [{ model: db.Question }] }, { model: db.Request, include: [{ model: db.Department }] }, { model: db.User }]
     }).then(function (data) {
       var hbsObject = { data };
       res.render("index", hbsObject);
@@ -146,8 +140,8 @@ router.post("/userTicket", (req, res) => {
           value: answer.answer
         });
       });
-      res.json(data);
-      //   res.redirect("/");
+      // res.json(data);
+      res.redirect("/");
     })
   });
 });
