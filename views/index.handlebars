@@ -10,7 +10,6 @@
     </button>
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav ml-auto">
-        </li>
         {{!-- create ticket --}}
         <a class="nav-link text-white" id="open-ticket" href="#" data-toggle="modal" data-target="#ticket-modal"></a>
         {{!-- dashboard --}}
@@ -24,8 +23,8 @@
           <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-toggle="dropdown" aria-haspopup="true"
             aria-expanded="false"></a>
           <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-            {{!--
-            <ul> --}} {{!-- in drop down --}} {{!-- my profile --}}
+            <ul>
+              {{!-- in drop down --}} {{!-- my profile --}}
               <a class="nav-link text-dark" id="my-profile" href="#">My Profile</a>
               <div class="dropdown-divider"></div>
               {{!-- sign out --}}
@@ -35,6 +34,7 @@
         </li>
       </ul>
     </div>
+  </div>
 </nav>
 
 <!-- Home Banner -->
@@ -69,7 +69,7 @@
             {{/each}}
             <p class="font-weight-bold text-dark">Comments</p>
             <p>{{comments}}</p>
-            <button class="btn btn-dark closeTicket" data-toggle="collapse" data-target="#card-collapse-{{id}}">Close Ticket</button>
+            <button class="btn btn-secondary closeTicket" data-toggle="collapse" data-target="#card-collapse-{{id}}">Close Ticket</button>
           </div>
         </div>
       </div>
@@ -349,9 +349,6 @@
             <input type="submit" class="btn btn-secondary btn-block" id="registerButton" value="Submit">
           </div>
         </form>
-
-        {{!--
-        <button id="registerButton" type="button" class="btn btn-secondary btn-block">Submit</button> --}}
       </div>
 
       <div class="modal-footer">
