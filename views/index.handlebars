@@ -1,37 +1,51 @@
 <!-- navbar -->
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-  <div class="container">
-    <a class="navbar-brand" href="/"><img src="/assets/img/simpl311.png" class="logo" alt=""></a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo01" aria-controls="navbarTogglerDemo01"
-      aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-      <ul class="navbar-nav ml-auto">
-        {{!-- create ticket --}}
-        <a class="nav-link text-white" id="open-ticket" href="/" data-toggle="modal" data-target="#ticket-test"></a>
-        {{!-- dashboard --}}
-        <a class="nav-link text-white" id="open-dash" href="/"></a>
-        {{!-- register --}}
-        <a class="nav-link text-white" href="/" data-toggle="modal" data-target="#register-modal" id="register"></a>
-        {{!-- login --}}
+  <a class="navbar-brand" href="/">
+    <img src="/assets/img/simpl311.png" class="logo" alt="">
+  </a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+    aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
 
-        <a class="nav-link text-white" href="/" data-toggle="modal" data-target="#login-modal" id="logIn">Log In</a>
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav">
+      {{!-- dashboard --}}
+      <li>
+        <a class="nav-link text-white open-dash" href="#"></a>
+      </li>
+      {{!-- create ticket --}}
+      <li>
+        <a class="nav-link text-white open-ticket" href="#" data-toggle="modal" data-target="#ticket-modal"></a>
+      </li>
+    </ul>
 
-        <li class="nav-item dropdown active">
-          <a class="nav-link dropdown-toggle" href="/" role="button" id="navbarDropdown" data-toggle="dropdown" aria-haspopup="true"
-            aria-expanded="false"></a>
-          <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-            <ul>
-              {{!-- in drop down --}} {{!-- my profile --}}
-              <a class="nav-link text-dark" id="my-profile" href="/">My Profile</a>
-              <div class="dropdown-divider"></div>
-              {{!-- sign out --}}
-              <a class="nav-link text-dark" href="/" data-toggle="modal" data-target="#signOut-modal" id="signOut">Sign Out</a>
-          </div>
-        </li>
-        </ul>
-      </ul>
+    <ul class="navbar-nav ml-auto">
+      {{!-- register --}}
+      <li>
+        <a class="nav-link text-white" id="register" href="#" data-toggle="modal" data-target="#register-modal"></a>
+      </li>
+      {{!-- login --}}
+      <li>
+        <a class="nav-link text-white" id="logIn" href="#" data-toggle="modal" data-target="#login-modal"></a>
+      </li>
+      {{!-- drop down --}}
+      <li class="nav-item dropdown active">
+        <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-toggle="dropdown" aria-haspopup="true"
+          aria-expanded="false"></a>
+        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+          <ul>
+            {{!-- dashboard --}}
+            <a class="nav-link text-dark open-dash" href="#"></a>
+            {{!-- create ticket --}}
+            <a class="nav-link text-dark open-ticket" href="#" data-toggle="modal" data-target="#ticket-modal"></a>
+            {{!-- divider --}}
+            <div class="dropdown-divider"></div>
+            {{!-- sign out --}}
+            <a class="nav-link text-dark" id="signOut" href="#" data-toggle="modal" data-target="#signOut-modal">Sign Out</a>
+          </ul>
+        </div>
+      </li>
     </ul>
   </div>
 </nav>
@@ -41,7 +55,7 @@
   <div class="row">
     <div class="col-sm-12 text-center">
       <img src="/assets/img/simpl311.png" alt="SIMPL311 Logo" id="banner-logo">
-      <h3>Connecting Citizens to Cities</h3>
+      <h3>Connecting Citizens To Cities</h3>
     </div>
   </div>
 </div>
@@ -49,14 +63,13 @@
 <!-- main page content -->
 <div class="container">
   <div id="mainContent">
-
-  
     <div id="accordion">
-      {{#each data}}
+      {{#each data}} {{#eq status "new"}}
       <div class="card">
-        <div class="card-header" id="card-heading">
+        <div class="card-header bg-light" id="card-heading">
           <h5 class="mb-0">
-            <button class="btn btn-link" data-toggle="collapse" data-target="#card-collapse-{{id}}" aria-expanded="true" aria-controls="card-collapse">
+            <button id="ticket-{{id}}-toggle-button" class="btn btn-link" data-toggle="collapse" data-target="#card-collapse-{{id}}"
+              aria-expanded="true" aria-controls="card-collapse">
               Ticket #{{id}} - {{Request.Department.name}} - {{Request.name}}
             </button>
           </h5>
@@ -69,24 +82,25 @@
             {{/each}}
             <p class="font-weight-bold text-dark">Comments</p>
             <p>{{comments}}</p>
-            <button class="btn btn-dark closeTicket">Close Ticket</button>
+            <button class="btn btn-secondary closeTicket" data-toggle="collapse" data-target="#card-collapse-{{id}}">Close Ticket</button>
           </div>
         </div>
       </div>
-      {{/each}}
+      {{/eq}} {{/each}}
     </div>
-
   </div>
 </div>
 
 <div id="footer" class="text-center">
-  <img src="/assets/img/simpl311.png" class= "logo" alt="">
-  <a href="https://github.com/thechampl/311" class="footer-link" target="_blank"><p>Github</p></a>
+  <img src="/assets/img/simpl311.png" class="logo" alt="">
+  <a href="https://github.com/thechampl/311" class="footer-link" target="_blank">
+    <p>Github</p>
+  </a>
 </div>
 
 
-{{!-- Will's ticket modal --}}
-<div class="modal fade" id="ticket-test" tabindex="-1" role="dialog" aria-labelledby="ticket-modal-title" aria-hidden="true">
+{{!-- ticket modal --}}
+<div class="modal fade" id="ticket-modal" tabindex="-1" role="dialog" aria-labelledby="ticket-modal-title" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered" role="document">
     <div class="modal-content">
       <div class="modal-header bg-dark">
@@ -109,22 +123,17 @@
             </select>
           </div>
           <div class="form-group" id="ticketQuestions"></div>
-          {{!--
-          <div class="form-group">
-            <input type="submit" class="form-control" id="ticketComments" placeholder="Any additional comments?">
-          </div> --}}
 
-          <textarea name="ticket-comments" class="w-100" id="ticketComments" rows="10" placeholder="Explain your ticket request"></textarea>
+          <div class="form-group">
+            <input type="text" class="form-control" id="ticketComments" placeholder="Please explain your request">
+          </div>
+
           <p>Characters Remaining
             <span id="remainingChars">255</span>
           </p>
 
-          <input href="/" id="ticketSubmit" type="submit" class="btn btn-dark btn-block" value="fuck">
+          <input type="submit" class="btn btn-secondary btn-block" id="ticketSubmit" value="Submit Ticket">
         </form>
-        <button id="ticketSubmit" type="button" class="btn btn-secondary btn-block">Submit Ticket</button>
-      </div>
-
-      <div class="modal-footer">
       </div>
     </div>
   </div>
@@ -137,7 +146,7 @@
       <div class="modal-header bg-dark">
         <h5 class="modal-title text-light" id="login-modal-title">
           <i class="fas fa-exclamation-circle"></i> Invalid Input</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+        <button type="button" class="close text-light" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
@@ -145,9 +154,6 @@
       <div class="modal-body">
         <p>There appears to be an error with your input. Please make sure you have completed all of the input fields and you
           are not using symbols within your text.</p>
-      </div>
-
-      <div class="modal-footer">
       </div>
     </div>
   </div>
@@ -172,21 +178,22 @@
 
           <div class="form-group">
             <input type="password" class="form-control" id="loginPassword" placeholder="Password">
+          </div>
 
+          <div class="form-group">
+            <input type="submit" class="btn btn-secondary btn-block" id="loginButton" value="Log In">
           </div>
         </form>
 
-        <button id="loginButton" type="button" class="btn btn-secondary btn-block">Log In</button>
-
         <div class="mt-3 text-center">
-          <a href="/" id="resetPassword">Forgot Password?</a>
+          <a href="#" id="resetPassword" data-toggle="modal" data-target="reset-modal">Forgot Password?</a>
         </div>
       </div>
 
       <div class="modal-footer">
         <div class="mx-auto">
           <span>Don't Have An Account?
-            <a href="/" id="sign-up">Sign Up</a>
+            <a href="#" id="sign-up" data-toggle="modal" data-target="#register-modal">Sign Up</a>
           </span>
         </div>
       </div>
@@ -200,7 +207,7 @@
     <div class="modal-content">
       <div class="modal-header bg-dark">
         <h5 class="modal-title text-light" id="reset-modal-title">Reset Your Password</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+        <button type="button" class="close text-light" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
@@ -224,13 +231,22 @@
     <div class="modal-content">
       <div class="modal-header bg-dark">
         <h5 class="modal-title text-light" id="signOut-modal-title">Sign Out</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+        <button type="button" class="close text-light" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
 
       <div class="modal-body">
-        <button id="signOutButton" type="button" class="btn btn-secondary btn-block">Sign Out</button>
+        <div class="container">
+          <div class="row">
+            <div class="col-6">
+              <button id="signOutButton" type="button" class="btn btn-secondary btn-block">Yes</button>
+            </div>
+            <div class="col-6">
+              <button type="button" class="btn btn-dark btn-block" data-dismiss="modal" >No</button>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </div>
@@ -350,15 +366,17 @@
           <div class="form-group">
             <input required type="tel" class="form-control" id="phone" placeholder="Phone Number">
           </div>
-        </form>
 
-        <button id="registerButton" type="button" class="btn btn-secondary btn-block">Submit</button>
+          <div class="form-group">
+            <input type="submit" class="btn btn-secondary btn-block" id="registerButton" value="Submit">
+          </div>
+        </form>
       </div>
 
       <div class="modal-footer">
         <div class="mx-auto">
           <span>Already Have An Account?
-            <a href="/" id="login">Log In</a>
+            <a href="#" id="login" data-toggle="modal" data-target="#login-modal">Log In</a>
           </span>
         </div>
       </div>

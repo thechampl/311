@@ -12,7 +12,7 @@ $(document).ready(() => {
   ticketComments.addEventListener("keyup", remainingChars);
 
   // ON CLICK: Open Ticket
-  $("#open-ticket").on("click", getDepts);
+  $(".open-ticket").on("click", getDepts);
 
   // ON CHANGE: Department/Request Dropdowns
   $("#deptDropdown").on("change", getReqs);
@@ -34,6 +34,7 @@ $(document).ready(() => {
     $.ajax({ url: `/api/departments/${this.value}`, method: "GET" }).done(response => {
       $("#reqDropdown").removeAttr("disabled");
       $("#reqDefault").nextAll("option").remove();
+      $("#ticketQuestions").empty();
       response.Requests.forEach(function (req) {
         var option = $("<option>").attr("value", req.id).text(req.name);
         $("#reqDropdown").append(option);
@@ -78,7 +79,9 @@ $(document).ready(() => {
   }
 
   // Ticket Submit Callback
-  function ticketSubmitCallback() {
+  function ticketSubmitCallback(e) {
+    e.preventDefault();
+
     const requestId = ticketRequest.value;
     const answers = [];
     const comments = ticketComments.value.trim();
@@ -90,8 +93,6 @@ $(document).ready(() => {
           question: ticketQuestions.childNodes[i].children[0][selIndex].getAttribute("data-question"),
           answer: ticketQuestions.childNodes[i].children[0][selIndex].value
         });
-
-
       } else {
         answers.push({
           question: ticketQuestions.childNodes[i].children[0].getAttribute("data-question"),
@@ -148,44 +149,50 @@ $(document).ready(() => {
     xhr.open("POST", "/userTicket", true);
     xhr.onload = function () {
       if (this.status === 200) {
-        $("#ticket-test form")[0].reset();
-        $("#ticket-test").modal("hide");
+        $("#ticket-modal form")[0].reset();
+        $("#ticket-modal").modal("hide");
       };
     };
     xhr.setRequestHeader("Content-type", "application/json");
     xhr.send(JSON.stringify(data));
-    $("#ticket-modal").modal("hide");
+
+    setTimeout(pageReload, 1000)
+    // $("#ticket-modal").modal("hide");
   }
 });
 
 const closeTickets = document.querySelectorAll(".closeTicket");
-console.log(closeTickets);
 
 closeTickets.forEach((button) => {
-    button.addEventListener("click", closeTicket);
+  button.addEventListener("click", closeTicket);
 });
 
 function closeTicket() {
-    const ticketText = this.parentElement.parentElement.previousElementSibling.innerText;
-    const textNumber = /\d+/g;
-    const ticketId = ticketText.match(textNumber);
+  const ticketText = this.parentElement.parentElement.previousElementSibling.innerText;
+  const textNumber = /\d+/g;
+  const ticketId = ticketText.match(textNumber);
 
-    // values to pass
-    console.log(ticketId);   
-    console.log(ticketText); 
+  const ticketToggleButton = document.querySelector(`#ticket-${ticketId}-toggle-button`);
+  ticketToggleButton.disabled = true;
 
-    const statusUpdate = {
-        ticketText,
-        id: ticketId,
-        status: "closed"
-    };
-    
-    ticketStatusUpdate(statusUpdate);
+  const statusUpdate = {
+    ticketText,
+    id: ticketId,
+    status: "closed"
+  };
+
+  ticketStatusUpdate(statusUpdate);
 }
 
 function ticketStatusUpdate(ticketUpdate) {
-    const xhr = new XMLHttpRequest();
-    xhr.open("PUT", "/userTicketsUpdate", true);
-    xhr.setRequestHeader("Content-type", "application/json");
-    xhr.send(JSON.stringify(ticketUpdate));
+  const xhr = new XMLHttpRequest();
+  xhr.open("PUT", "/userTicketsUpdate", true);
+  xhr.setRequestHeader("Content-type", "application/json");
+  xhr.send(JSON.stringify(ticketUpdate));
+
+  setTimeout(pageReload, 1000)
+}
+
+function pageReload() {
+  location.reload();
 }
