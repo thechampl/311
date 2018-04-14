@@ -30,11 +30,11 @@ router.get("/", function (req, res) {
   }
   else if (userType === "User") {
     db.Ticket.findAll({
-        where: { 
-            $or: [
-                { requestId: [ 1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,26 ] },
-                { userId: userId }]
-        },
+        // where: { 
+        //     $or: [
+        //         { requestId: [ 1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,26 ] },
+        //         { userId: userId }]
+        // },
         include: [{model: db.Answer,include: [{ model: db.Question }]}, {model: db.Request,include: [{ model: db.Department }]}, { model: db.User }]
     }).then(function (data) {
       var hbsObject = { data };
@@ -57,6 +57,7 @@ router.get("/", function (req, res) {
       })
   }
 });
+
 // GET: Sign Out
 router.get("/signOut", (req, res) => {
     userType = "";

@@ -1,7 +1,9 @@
 <!-- navbar -->
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
   <div class="container">
-    <a class="navbar-brand" href="/"><img src="/assets/img/simpl311.png" class="logo" alt=""></a>
+    <a class="navbar-brand" href="/">
+      <img src="/assets/img/simpl311.png" class="logo" alt="">
+    </a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo01" aria-controls="navbarTogglerDemo01"
       aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
@@ -32,8 +34,8 @@
         </li>
         </ul>
       </ul>
-    </ul>
-  </div>
+      </ul>
+    </div>
 </nav>
 
 <!-- Home Banner -->
@@ -49,8 +51,6 @@
 <!-- main page content -->
 <div class="container">
   <div id="mainContent">
-
-  
     <div id="accordion">
       {{#each data}}
       <div class="card">
@@ -74,13 +74,14 @@
       </div>
       {{/each}}
     </div>
-
   </div>
 </div>
 
 <div id="footer" class="text-center">
-  <img src="/assets/img/simpl311.png" class= "logo" alt="">
-  <a href="https://github.com/thechampl/311" class="footer-link" target="_blank"><p>Github</p></a>
+  <img src="/assets/img/simpl311.png" class="logo" alt="">
+  <a href="https://github.com/thechampl/311" class="footer-link" target="_blank">
+    <p>Github</p>
+  </a>
 </div>
 
 
@@ -108,23 +109,25 @@
             </select>
           </div>
           <div class="form-group" id="ticketQuestions"></div>
-          {{!--
-          <div class="form-group">
-            <input type="submit" class="form-control" id="ticketComments" placeholder="Any additional comments?">
-          </div> --}}
 
-          <textarea name="ticket-comments" class="w-100" id="ticketComments" rows="10" placeholder="Explain your ticket request"></textarea>
+          <div class="form-group">
+            <input type="text" class="form-control" id="ticketComments" placeholder="Any additional comments?">
+          </div>
+
+          {{!--
+          <textarea name="ticket-comments" class="w-100" id="ticketComments" rows="10" placeholder="Explain your ticket request"></textarea> --}}
           <p>Characters Remaining
             <span id="remainingChars">255</span>
           </p>
 
-          <input href="/" id="ticketSubmit" type="submit" class="btn btn-dark btn-block" value="fuck">
+          <input href="/" id="ticketSubmit" type="submit" class="btn btn-secondary btn-block" value="Submit Ticket">
         </form>
-        <button id="ticketSubmit" type="button" class="btn btn-secondary btn-block">Submit Ticket</button>
+        {{!--
+        <button id="ticketSubmit" type="button" class="btn btn-secondary btn-block">Submit Ticket</button> --}}
       </div>
 
-      <div class="modal-footer">
-      </div>
+      {{!--
+      <div class="modal-footer"></div> --}}
     </div>
   </div>
 </div>
@@ -146,8 +149,8 @@
           are not using symbols within your text.</p>
       </div>
 
-      <div class="modal-footer">
-      </div>
+      {{!--
+      <div class="modal-footer"></div> --}}
     </div>
   </div>
 </div>
