@@ -2,9 +2,6 @@
 const express = require("express");
 const router = express.Router();
 const db = require("../models");
-// Email Imports
-const nodemailer = require("nodemailer");
-const email = require("../public/assets/js/emailNotifications");
 // User ID
 let userId = "";
 let userType = "";
@@ -150,24 +147,10 @@ router.post("/userTicket", (req, res) => {
 });
 
 // PUT: User Tickets (Admin)
-router.put("/userTicketsUpdate", (req, res) => {
-  // successfully sending status, id, and text to this route from front end
-  const ticket = req.body.ticketText;
+router.put("/userTickets", (req, res) => {
   db.Ticket.update(
     { status: req.body.status, updatedAt: new Date() },
     { where: { id: req.body.id } }).then((data) => res.json(data));
-
-    db.Ticket.find({
-        where: { id: req.body.id }
-      }).then((data) => {
-        db.User.find({
-            where: {id: data.UserId}
-        }).then(userData => {
-            const usersEmail = userData.email;
-            const userName = userData.firstName;
-            email(usersEmail, userName, ticket);
-        })
-      })
 });
 
 // PUT: User Tickets (Non-Admin)
