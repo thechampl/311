@@ -1,8 +1,10 @@
 // Setup Controller
 const express = require("express");
 const router = express.Router();
+// Sequelize
 const db = require("../models");
-
+const Sequelize = require('sequelize');
+const Op = Sequelize.Op;
 // Email Imports
 const nodemailer = require("nodemailer");
 const email = require("../public/assets/js/emailNotifications");
@@ -14,11 +16,15 @@ let userDeptId;
 
 /// ROUTES
 // GET: index.handlebars
+<<<<<<< HEAD
 router.get("/", function (req, res) {
+=======
+router.get("/", (req,res) => {
+>>>>>>> f4a11911fd26307996c8dc64c9775a156e48fcd4
   if (userType === "Admin") {
     db.Request.findAll({
       where: { departmentId: userDeptId }
-    }).then(function (data) {
+    }).then(data => {
       const requestIds = [];
       for (var i = 0; i < data.length; i++) {
         requestIds.push(data[i].id);
@@ -27,7 +33,7 @@ router.get("/", function (req, res) {
         where: { requestId: requestIds },
         include: [{ model: db.Answer, include: [{ model: db.Question }] },
         { model: db.Request, include: [{ model: db.Department }] }, { model: db.User }]
-      }).then(function (data) {
+      }).then(data => {
         var hbsObject = { data };
         res.render("index", hbsObject);
       });
@@ -35,22 +41,21 @@ router.get("/", function (req, res) {
   }
   else if (userType === "User") {
     db.Ticket.findAll({
-      where: { 
-          $or: [
-              { requestId: [ 1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,26 ] },
-              { userId: userId }]
-      },
-      include: [{ model: db.Answer, include: [{ model: db.Question }] }, { model: db.Request, include: [{ model: db.Department }] }, { model: db.User }]
-    }).then(function (data) {
+      where: {
+        [Op.or]: [
+          { requestId: [ 1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,26 ] }, 
+          { userId: userId }
+        ]}, include: [{ model: db.Answer, include: [{ model: db.Question }] }, { model: db.Request, include: [{ model: db.Department }] }, { model: db.User }]
+    }).then(data => {
       var hbsObject = { data };
       res.render("index", hbsObject);
     });
   }
   else {
     db.Ticket.findAll({
-      where: { requestId: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 26] },
+      where: { requestId: [ 1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,26 ] },
       include: [{ model: db.Answer, include: [{ model: db.Question }] }, { model: db.Request, include: [{ model: db.Department }] }, { model: db.User }]
-    }).then(function (data) {
+    }).then(data => {
       var hbsObject = { data };
       res.render("index", hbsObject);
     });
@@ -147,7 +152,6 @@ router.post("/userTicket", (req, res) => {
 
 // PUT: User Tickets (Admin)
 router.put("/userTicketsUpdate", (req, res) => {
-  // successfully sending status, id, and text to this route from front end
   const ticket = req.body.ticketText;
   db.Ticket.update(
     { status: req.body.status, updatedAt: new Date() },
